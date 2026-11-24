@@ -7,6 +7,10 @@
   `c/`) was audited separately on 2026-11-24; see [Decision lab audit](#decision-lab-audit). It
   adds a Ruff `S603` exception for `tools/conformance.py`, which runs the CLI command its user
   passes in.
+- On 2026-11-24, after this audit, the public history was rewritten so that only the 2026
+  modernization commits remain. Commits earlier than 2026 are no longer in any branch or tag,
+  although GitHub may still serve them by direct commit hash until it purges unreferenced
+  objects. Treat anything that was ever published in that history as compromised.
 
 ## Method
 

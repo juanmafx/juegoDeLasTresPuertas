@@ -6,7 +6,7 @@
 
   <groupId>io.github.juanmafx</groupId>
   <artifactId>monty-lab</artifactId>
-  <version>3.0.0</version>
+  <version>3.0.1</version>
   <packaging>jar</packaging>
   <name>monty-lab (Java)</name>
   <description>Generalized Monty Hall decision lab, Java implementation of the shared spec/ contract.</description>

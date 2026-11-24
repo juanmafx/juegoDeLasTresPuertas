@@ -181,7 +181,7 @@ Persistence is **optional**, and there are two schemas.
 
   ```bash
   c/build/monty-lab simulate --seed 7 --trials 1000 > run.json
-  python3 -I tools/record_run.py --db lab.sqlite3 --implementation c --implementation-version 3.0.0 run.json
+  python3 -I tools/record_run.py --db lab.sqlite3 --implementation c --implementation-version 3.0.1 run.json
   ```
 
 - [python/db/schema.sql](python/db/schema.sql) belongs to the original `monty-hall` tool. It is

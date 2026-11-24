@@ -3,9 +3,16 @@
 This project follows [Semantic Versioning](https://semver.org/). The original script had no version
 number and is treated as 1.0.0.
 
-## [3.0.0] - Unreleased
+## [3.0.1] - 2026-11-24
 
-Prepared, not tagged. See [RELEASE_NOTES.md](RELEASE_NOTES.md).
+Documentation corrections only. No change in code behaviour.
+
+### Changed
+
+- The changelog, release notes and security audit now reflect the published 3.0.0 release and
+  the 2026-11-24 history rewrite.
+
+## [3.0.0] - 2026-11-24
 
 ### Breaking changes
 
@@ -114,7 +121,7 @@ Prepared, not tagged. See [RELEASE_NOTES.md](RELEASE_NOTES.md).
 
 ### Removed
 
-- **Breaking:** `MontyHall.py`, replaced by the `monty-hall` command. It remains in Git history.
+- **Breaking:** `MontyHall.py`, replaced by the `monty-hall` command.
 
 ## [1.0.0] - 2019-09-25
 

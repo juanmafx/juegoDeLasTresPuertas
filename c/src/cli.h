@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 
-#define MH_VERSION "3.0.0"
+#define MH_VERSION "3.0.1"
 #define MH_EXIT_OK 0
 #define MH_EXIT_USAGE 2
 #define MH_EXIT_BROKEN_PIPE 141
