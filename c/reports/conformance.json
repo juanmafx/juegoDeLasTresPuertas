@@ -1,0 +1,41 @@
+{
+  "cli": "c/build/monty-lab",
+  "sections": {
+    "prng": {
+      "passed": 105,
+      "failures": []
+    },
+    "exact": {
+      "passed": 147,
+      "failures": []
+    },
+    "optimum": {
+      "passed": 54,
+      "failures": []
+    },
+    "simulation_identical": {
+      "passed": 26,
+      "failures": []
+    },
+    "simulation_statistical": {
+      "passed": 180,
+      "failures": []
+    },
+    "errors": {
+      "passed": 20,
+      "failures": []
+    }
+  },
+  "statistics": {
+    "interval_checks": 101,
+    "outside_95": [
+      "classic-adversarial:decision z=+2.23",
+      "no-reveal-four-doors:stay z=+2.87",
+      "pick-middle-random-observed:switch z=+2.12",
+      "prior-skewed-toward-observed:stay z=+3.38",
+      "prior-skewed-toward-observed:switch z=-3.38",
+      "two-prizes-random:switch z=+2.30"
+    ],
+    "allowed_outside": 13
+  }
+}

@@ -1,0 +1,26 @@
+name: C
+
+on:
+  push:
+    branches: [master, modernize/2026]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: c
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - run: gcc --version
+      - run: make
+      - run: make test
+      - run: make conformance
+      - run: make conformance-sanitize
