@@ -1,7 +1,8 @@
 # juegoDeLasTresPuertas
 
-Exact and reproducible Monte Carlo analysis of the Monty Hall problem and its generalization to
-any number of doors. The repository name is Spanish for "the game of the three doors".
+Exact and reproducible analysis of the Monty Hall problem and its generalizations, built as a
+decision lab with one shared specification and a Python reference implementation. The repository
+name is Spanish for "the game of the three doors".
 
 ## Purpose
 
@@ -12,47 +13,78 @@ people find counterintuitive.
 
 ## Why this project exists
 
-The project started as a short script demonstrating that switching helps. This version turns that
-demonstration into a small, verifiable study: every simulated result can be checked against an
-exact fraction, and the assumption that makes switching work, a host who knows where the car is,
-can be turned off to watch the advantage disappear.
+The project started as a short script demonstrating that switching helps. It is now a small,
+verifiable lab for a more general question: when someone reveals information before you decide,
+how much is that information worth, and what does it depend on? The answer depends on how the
+host chooses what to reveal, so the host is an explicit, swappable policy, and every simulated
+number can be checked against an exact fraction.
 
 ## What it does
 
-- Computes exact win probabilities as rational numbers, by closed form or by walking the full game
-  tree.
-- Simulates the game with an explicit host, for 3 to 1024 doors and any valid number of opened
-  doors.
-- Compares two host models: `informed` (classic Monty Hall) and `random` (the "Monty Fall"
-  variant, where games in which the host reveals the car are discarded).
-- Reports Wilson confidence intervals and z-scores against the exact value.
-- Records the seed of every run so it can be repeated.
-- Optionally stores runs in SQLite.
+- Models `N` doors (3 to 64), `M` prizes, a uniform or weighted prior over prize placement, the
+  player's pick and `K` reveals.
+- Four host policies: `informed` (classic), `random` (may reveal a prize; those games are void),
+  `biased` (prefers some doors) and `adversarial` (offers a switch only when you are right).
+- Three strategies: `stay`, `switch` and `mixed(q)`.
+- Exact results as reduced fractions, including results conditional on which doors were opened.
+- A deterministic simulator whose random stream is fully specified, so other languages can
+  reproduce its win counts bit for bit.
+- An exploration-cost model: with a cost `c` per reveal, `V(K) = P(win) - c*K`, its exact optimum
+  over `K`, and a least-squares parabola fitted to `V(K)` (the "hypothetical optimum parabola").
 
-| Doors | Opened | Host | Stay | Switch |
+| Doors | Reveals | Host | Stay | Switch |
 | ---: | ---: | --- | ---: | ---: |
 | 3 | 1 | informed | 1/3 | 2/3 |
-| 3 | 1 | random | 1/2 | 1/2 |
+| 3 | 1 | random, no prize revealed | 1/2 | 1/2 |
+| 3 | 1 | adversarial, switch offered | 1/1 | 0/1 |
+| 3 | 1 | biased, prefers door 1 with p = 3/4, door 1 opened | 3/7 | 4/7 (= 1/(1+p)) |
+| 3 | 1 | biased, prefers door 1 with p = 3/4, door 2 opened | 1/5 | 4/5 (= 1/(2-p)) |
 | 5 | 1 | informed | 1/5 | 4/15 |
-| 100 | 98 | informed | 1/100 | 99/100 |
+| 64 | 62 | informed | 1/64 | 63/64 |
 
-## Architecture
+## The hypothetical optimum parabola
+
+The idea was to treat reveals as exploration with a price and to approximate the trade-off by a
+parabola whose vertex marks the best amount of exploration. The lab computes both the exact
+discrete optimum and that parabola, and reports how far apart they are. The result so far is that,
+in this model, the trade-off is not shaped like an inverted parabola.
+
+For a uniform prior the switch probability has the form `A + B / (N - 1 - K)` (informed, biased
+and adversarial hosts) or `M / (N - K)` (random host), and staying is constant or of the same
+form. These are convex in `K`, so `V(K)` is convex and its maximum is always at `K = 0` or at the
+largest feasible `K`: either do not explore or explore as much as possible. A property test
+checks this on generated games. A one-off random search during development, over 2,925 games
+with weighted priors and all four hosts, found no concave fit and no interior optimum either, but
+that search is not committed and is not a proof for weighted priors.
+
+So the fitted parabola is convex or linear in every case examined, and its vertex is a minimum.
+The lab still reports the vertex, its distance from the exact optimum, the regret of acting on
+the rounded vertex, and the choice the parabola itself would recommend. For ten doors with
+`c = 1/100`, the exact optimum is `K* = 8` with `V = 41/50`; the parabola's vertex is at
+`K = 241371/103790` (about 2.33), and rounding it to `K = 2` would lose `249/350` of a prize,
+while the highest point of the fitted parabola over the feasible range is `K = 8`, the right
+answer.
+
+## Repository layout
 
 ```text
-src/monty_hall/
-  domain/       Game rules, validated configuration, and a single game
-  analysis/     Exact solvers and interval statistics
-  simulation/   Seeded runner and report builder
-  persistence/  Optional SQLite repository
-  cli/          Command-line interface
-db/schema.sql   Optional database schema
-tests/          Unit, property-based, statistical, and integration suites
-tools/          Test report generator
+spec/              Shared specification: CLI contract, PRNG, JSON Schemas, scenarios, vectors
+tools/
+  enumerate.py     Independent brute-force oracle for spec/scenarios.json
+  conformance.py   Checks any language's CLI against spec/
+python/            Python reference implementation (package monty_hall)
+  src/monty_hall/
+    lab/           Decision lab: model, PRNG, exact solver, simulator, optimum, CLI contract
+    domain/ analysis/ simulation/ persistence/ cli/
+                   The original two-policy study tool with optional SQLite storage
+  tests/           Unit, property-based, statistical, integration, and spec suites
+  tools/           Test report generator, spec data generator
+  db/schema.sql    Optional database schema
+docs/              Architecture and security notes
 ```
 
-This is a command-line library with no client or server, so there is no frontend/backend split.
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the derivations, complexity analysis, and
-design decisions.
+There is no frontend or backend: these are command-line tools and a library. See
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [spec/README.md](spec/README.md).
 
 ## Quick start
 
@@ -61,37 +93,43 @@ dependencies.
 
 ```bash
 git clone https://github.com/juanmafx/juegoDeLasTresPuertas.git
-cd juegoDeLasTresPuertas
+cd juegoDeLasTresPuertas/python
 uv sync --locked
-uv run monty-hall exact
-uv run monty-hall simulate --trials 1000000 --seed 42
-```
-
-Output of that simulation on Python 3.14:
-
-```text
-doors=3 opened=1 host=informed seed=42 trials=1000000 valid_games=1000000
-stay    wins=333948 rate=0.333948 exact=0.333333 95% CI=[0.333024, 0.334873] z=+1.304
-switch  wins=666052 rate=0.666052 exact=0.666667 95% CI=[0.665127, 0.666976] z=-1.304
+uv run monty-lab exact
+uv run monty-lab simulate --seed 42 --trials 100000
+uv run monty-lab optimum --doors 10 --strategy switch --cost 1/100
 ```
 
 ## Usage guide
+
+### monty-lab, the cross-language contract
+
+```bash
+uv run monty-lab exact --doors 5 --prizes 2 --reveals 2
+uv run monty-lab exact --host biased --host-weights 1,3,1 --observed 1
+uv run monty-lab exact --doors 4 --prior 3,1,1,1 --host random --reveals 2
+uv run monty-lab simulate --host adversarial --seed 7 --trials 50000 --mixed 1/3
+uv run monty-lab optimum --doors 6 --host random --strategy switch --cost 1/30
+uv run monty-lab prng --seed 0 --kind words --count 4
+```
+
+Output is always JSON. The complete flag list, validation rules, output fields and exit codes are
+in [spec/cli.md](spec/cli.md). Explicit priors and observed reveals use exact enumeration, which is
+limited to 10 doors; simulation has no such limit.
+
+### monty-hall, the original study tool
 
 ```bash
 uv run monty-hall exact --doors 5 --opened 1
 uv run monty-hall exact --host random --enumerate --format json
 uv run monty-hall simulate --host random --trials 500000 --seed 7
-uv run monty-hall simulate --doors 10 --opened 8 --confidence 0.99 --format json
 uv run monty-hall simulate --trials 100000 --seed 1 --db runs.sqlite3
 uv run monty-hall history --db runs.sqlite3 --limit 10
 ```
 
-Invalid input exits with code 2 and a message on standard error. If the reader of standard output
-closes early, as with `| head`, the command exits with code 141.
-
-## Configuration
-
-The tool reads no environment variables or configuration files. Everything is a flag.
+It supports the `informed` and `random` hosts with one prize, prints text or JSON, and can store
+runs in SQLite. It uses Python's `random` module, so its streams are not part of the
+cross-language contract.
 
 | Flag | Commands | Default | Valid values |
 | --- | --- | --- | --- |
@@ -106,41 +144,59 @@ The tool reads no environment variables or configuration files. Everything is a 
 | `--enumerate` | `exact` | off | flag |
 | `--limit` | `history` | `20` | 1 to 1000 |
 
+Both programs exit with code 2 and a message on standard error for invalid input, and with code
+141 if the reader of standard output closes early. Neither reads environment variables or
+configuration files.
+
 ## Database
 
-Persistence is **optional**. The game has no natural need for storage, so
-[db/schema.sql](db/schema.sql) provides a small schema for keeping run results. It is applied
-automatically when `--db` is used with `simulate`. `history` opens the file read-only. Both commands
-refuse a file whose run tables, views, indexes, or triggers differ from that schema.
+Persistence is **optional** and belongs to `monty-hall`. [python/db/schema.sql](python/db/schema.sql)
+is applied automatically when `--db` is used with `simulate`. `history` opens the file read-only.
+Both commands refuse a file whose run tables, views, indexes, or triggers differ from that schema.
 
 ## Testing
 
+From `python/`:
+
 ```bash
 uv run pytest
-uv run ruff check .
-uv run ruff format --check .
+uv run ruff check . ../tools
+uv run ruff format --check . ../tools
 uv run mypy
+uv run mypy --strict ../tools
+uv run python -I ../tools/enumerate.py ../spec/scenarios.json --check
+uv run python tools/write_spec_data.py --check
+uv run python -I ../tools/conformance.py --cli "python -m monty_hall.lab"
 uv run python tools/generate_test_report.py
 ```
 
-The suite covers input validation, property-based game invariants, agreement between the closed
-form and full enumeration for 3 to 6 doors, statistical convergence with fixed seeds, the database
-constraints, rejection of tampered database schemas, and the CLI. The latest recorded run is in
-[reports/tests/test-report.md](reports/tests/test-report.md).
+The suite covers input validation, PRNG vectors, property-based invariants (including that
+averaging over every possible reveal recovers the unconditional result), agreement with the
+independent enumerator on every scenario, statistical convergence with fixed seeds, JSON Schema
+validation of every output, the database, and both CLIs. The latest recorded run is in
+[python/reports/tests/test-report.md](python/reports/tests/test-report.md).
+
+`tools/conformance.py` takes the command that runs any implementation's CLI. It checks exact
+fractions for equality, simulation counts for bit-identical equality with
+`spec/simulation-reference.json`, PRNG vectors, error handling, and whether the exact values fall
+inside the Wilson 95% intervals. About one interval in twenty is expected to miss by chance, so it
+fails only when misses exceed what a 0.1% binomial tail allows, or when any deviation reaches
+five standard errors.
 
 ## Reproducibility
 
-The same seed, configuration, and Python version produce the same result. Python only guarantees
-stable sequences across versions for `random.random()`, so results from the integer sampling used
-here could change in a future Python release. Statistical tests use fixed seeds, and property tests
-run derandomized.
+`monty-lab` uses SplitMix64, xoshiro256** and Lemire's bounded draws exactly as written in
+[spec/prng.md](spec/prng.md), so a seed and scenario give the same counts in any language and any
+Python version. `monty-hall` keeps its original behaviour: the same seed, configuration and Python
+version produce the same result. Statistical tests use fixed seeds, and property tests run
+derandomized.
 
 ## Security
 
-The tool makes no network calls, has no runtime dependencies, uses parameterized SQL, bounds its
-numeric options, and refuses SQLite files whose run tables or views differ from the expected schema.
-The `random` module is used deliberately because this is a simulation and nothing here is a security
-token. See [SECURITY.md](SECURITY.md) and [docs/SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md).
+The tools make no network calls, have no runtime dependencies, use parameterized SQL, bound their
+numeric options, and refuse SQLite files whose run tables or views differ from the expected schema.
+Neither random generator is cryptographically secure, and none needs to be. See
+[SECURITY.md](SECURITY.md) and [docs/SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md).
 
 ## Project history
 

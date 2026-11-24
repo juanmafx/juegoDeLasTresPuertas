@@ -3,6 +3,9 @@
 - Date: 2026-11-23
 - Scope: all tracked files on branch `modernize/2026` and the full Git history
 - Open findings: none in the code; accepted limitations are listed below
+- Not covered: the decision lab added later (`spec/`, `tools/`, `python/src/monty_hall/lab/`)
+  has not been audited. It adds a Ruff `S603` exception for `tools/conformance.py`, which runs the
+  CLI command its user passes in.
 
 ## Method
 

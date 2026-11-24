@@ -1,0 +1,3015 @@
+{
+  "version": 1,
+  "description": "Shared scenarios with exact expectations computed by tools/enumerate.py.",
+  "scenarios": [
+    {
+      "id": "classic-informed",
+      "description": "Textbook anchor: informed host, three doors. Stay 1/3, switch 2/3.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 20190925,
+        "trials": 30000
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "0/1"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/3",
+            "switch": "2/3",
+            "mixed": "1/2"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/3",
+              "value": "1/3"
+            },
+            {
+              "reveals": 1,
+              "win": "2/3",
+              "value": "2/3"
+            }
+          ],
+          "optimum": {
+            "reveals": 1,
+            "value": "2/3"
+          },
+          "parabola": null
+        }
+      }
+    },
+    {
+      "id": "classic-random",
+      "description": "Textbook anchor: random host, conditional on no prize revealed. Stay 1/2, switch 1/2.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "random",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 1,
+        "trials": 30000
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "1/100"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "2/3",
+            "void": "1/3",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/2",
+            "switch": "1/2",
+            "mixed": "1/2"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/3",
+              "value": "1/3"
+            },
+            {
+              "reveals": 1,
+              "win": "1/2",
+              "value": "49/100"
+            }
+          ],
+          "optimum": {
+            "reveals": 1,
+            "value": "49/100"
+          },
+          "parabola": null
+        }
+      }
+    },
+    {
+      "id": "classic-adversarial",
+      "description": "Textbook anchor: adversarial host offers only when the pick holds the prize. Switch 0.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "adversarial",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 2,
+        "trials": 30000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/3",
+            "void": "0/1",
+            "no_offer": "2/3",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/1",
+            "switch": "0/1",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "biased-p3-4-lower-opened",
+      "description": "Biased host prefers door 1 with p = 3/4; door 1 opened. Switch 1/(1+p) = 4/7.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "biased",
+        "host_weights": [
+          1,
+          3,
+          1
+        ],
+        "mixed": "1/2",
+        "observed": [
+          1
+        ]
+      },
+      "simulation": {
+        "seed": 3,
+        "trials": 40000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": "7/12"
+          },
+          "win": {
+            "stay": "3/7",
+            "switch": "4/7",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "biased-p3-4-upper-opened",
+      "description": "Biased host prefers door 1 with p = 3/4; door 2 opened. Switch 1/(2-p) = 4/5.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "biased",
+        "host_weights": [
+          1,
+          3,
+          1
+        ],
+        "mixed": "1/2",
+        "observed": [
+          2
+        ]
+      },
+      "simulation": {
+        "seed": 3,
+        "trials": 40000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": "5/12"
+          },
+          "win": {
+            "stay": "1/5",
+            "switch": "4/5",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "biased-p1-4-lower-opened",
+      "description": "Biased host with p = 1/4 for door 1; door 1 opened. Switch 1/(1+p) = 4/5.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "biased",
+        "host_weights": [
+          1,
+          1,
+          3
+        ],
+        "mixed": "1/2",
+        "observed": [
+          1
+        ]
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": "5/12"
+          },
+          "win": {
+            "stay": "1/5",
+            "switch": "4/5",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "biased-p1-2-lower-opened",
+      "description": "Biased host with equal weights reduces to the informed host. Switch 2/3.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "biased",
+        "host_weights": [
+          1,
+          1,
+          1
+        ],
+        "mixed": "1/2",
+        "observed": [
+          1
+        ]
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": "1/2"
+          },
+          "win": {
+            "stay": "1/3",
+            "switch": "2/3",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "biased-unobserved",
+      "description": "Averaged over the opened door, host preference does not change the switch rate.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "biased",
+        "host_weights": [
+          1,
+          3,
+          1
+        ],
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 4,
+        "trials": 20000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/3",
+            "switch": "2/3",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "informed-observed-upper",
+      "description": "Informed host, door 2 observed opened.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": [
+          2
+        ]
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": "1/2"
+          },
+          "win": {
+            "stay": "1/3",
+            "switch": "2/3",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "random-observed-lower",
+      "description": "Random host, door 1 observed opened without a prize.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "random",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": [
+          1
+        ]
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "2/3",
+            "void": "1/3",
+            "no_offer": "0/1",
+            "observed": "1/3"
+          },
+          "win": {
+            "stay": "1/2",
+            "switch": "1/2",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "adversarial-observed",
+      "description": "Adversarial host, door 1 observed opened.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "adversarial",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": [
+          1
+        ]
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/3",
+            "void": "0/1",
+            "no_offer": "2/3",
+            "observed": "1/6"
+          },
+          "win": {
+            "stay": "1/1",
+            "switch": "0/1",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "mixed-q-zero",
+      "description": "Mixed strategy with q = 0 equals staying.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "0/1",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 5,
+        "trials": 20000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/3",
+            "switch": "2/3",
+            "mixed": "1/3"
+          }
+        }
+      }
+    },
+    {
+      "id": "mixed-q-one",
+      "description": "Mixed strategy with q = 1 equals switching.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/1",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 5,
+        "trials": 20000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/3",
+            "switch": "2/3",
+            "mixed": "2/3"
+          }
+        }
+      }
+    },
+    {
+      "id": "mixed-q-one-third",
+      "description": "Mixed strategy with q = 1/3 on the classic game.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/3",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 6,
+        "trials": 20000
+      },
+      "optimum": {
+        "strategy": "mixed",
+        "cost": "1/50"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/3",
+            "switch": "2/3",
+            "mixed": "4/9"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/3",
+              "value": "1/3"
+            },
+            {
+              "reveals": 1,
+              "win": "4/9",
+              "value": "191/450"
+            }
+          ],
+          "optimum": {
+            "reveals": 1,
+            "value": "191/450"
+          },
+          "parabola": null
+        }
+      }
+    },
+    {
+      "id": "no-reveal-four-doors",
+      "description": "K = 0: switching blindly to another door.",
+      "scenario": {
+        "doors": 4,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 0,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 7,
+        "trials": 20000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/4",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/4",
+            "switch": "1/4",
+            "mixed": "1/4"
+          }
+        }
+      }
+    },
+    {
+      "id": "full-reveal-four-doors",
+      "description": "K = N - 2: one closed door remains besides the pick.",
+      "scenario": {
+        "doors": 4,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 2,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/4",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/4",
+            "switch": "3/4",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "five-doors-one-reveal",
+      "description": "Partial reveal: switch 4/15.",
+      "scenario": {
+        "doors": 5,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "1/20"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/5",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/5",
+            "switch": "4/15",
+            "mixed": "7/30"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/5",
+              "value": "1/5"
+            },
+            {
+              "reveals": 1,
+              "win": "4/15",
+              "value": "13/60"
+            },
+            {
+              "reveals": 2,
+              "win": "2/5",
+              "value": "3/10"
+            },
+            {
+              "reveals": 3,
+              "win": "4/5",
+              "value": "13/20"
+            }
+          ],
+          "optimum": {
+            "reveals": 3,
+            "value": "13/20"
+          },
+          "parabola": {
+            "a": "1/12",
+            "b": "-8/75",
+            "c": "21/100",
+            "shape": "convex",
+            "residual_sum_of_squares": "1/500",
+            "vertex": {
+              "reveals": "16/25",
+              "value": "1319/7500"
+            },
+            "vertex_offset": "-59/25",
+            "vertex_value_gap": "-889/1875",
+            "rounded_vertex": {
+              "reveals": 1,
+              "value": "13/60",
+              "regret": "13/30"
+            },
+            "fitted_choice": {
+              "reveals": 3,
+              "value": "13/20",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "five-doors-random-three-reveals",
+      "description": "Random host with three reveals on five doors.",
+      "scenario": {
+        "doors": 5,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 3,
+        "host": "random",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 8,
+        "trials": 30000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/5",
+          "outcomes": {
+            "decision": "2/5",
+            "void": "3/5",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/2",
+            "switch": "1/2",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "ten-doors-eight-reveals",
+      "description": "Ten doors, host opens eight.",
+      "scenario": {
+        "doors": 10,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 8,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "1/100"
+      },
+      "expected": {
+        "exact_method": "class_enumeration",
+        "exact": {
+          "prize_at_pick": "1/10",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/10",
+            "switch": "9/10",
+            "mixed": "1/2"
+          }
+        },
+        "optimum_methods": [
+          "brute_force",
+          "class_enumeration"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/10",
+              "value": "1/10"
+            },
+            {
+              "reveals": 1,
+              "win": "9/80",
+              "value": "41/400"
+            },
+            {
+              "reveals": 2,
+              "win": "9/70",
+              "value": "19/175"
+            },
+            {
+              "reveals": 3,
+              "win": "3/20",
+              "value": "3/25"
+            },
+            {
+              "reveals": 4,
+              "win": "9/50",
+              "value": "7/50"
+            },
+            {
+              "reveals": 5,
+              "win": "9/40",
+              "value": "7/40"
+            },
+            {
+              "reveals": 6,
+              "win": "3/10",
+              "value": "6/25"
+            },
+            {
+              "reveals": 7,
+              "win": "9/20",
+              "value": "19/50"
+            },
+            {
+              "reveals": 8,
+              "win": "9/10",
+              "value": "41/50"
+            }
+          ],
+          "optimum": {
+            "reveals": 8,
+            "value": "41/50"
+          },
+          "parabola": {
+            "a": "10379/517440",
+            "b": "-80457/862400",
+            "c": "2983/18480",
+            "shape": "convex",
+            "residual_sum_of_squares": "82727317/1811040000",
+            "vertex": {
+              "reveals": "241371/103790",
+              "value": "28429599959/537050976000"
+            },
+            "vertex_offset": "-588949/103790",
+            "vertex_value_gap": "-411952200361/537050976000",
+            "rounded_vertex": {
+              "reveals": 2,
+              "value": "19/175",
+              "regret": "249/350"
+            },
+            "fitted_choice": {
+              "reveals": 8,
+              "value": "41/50",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "max-doors-max-reveals",
+      "description": "N = 64, K = 62: switch 63/64.",
+      "scenario": {
+        "doors": 64,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 62,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 9,
+        "trials": 3000
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "1/1000"
+      },
+      "expected": {
+        "exact_method": "class_enumeration",
+        "exact": {
+          "prize_at_pick": "1/64",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/64",
+            "switch": "63/64",
+            "mixed": "1/2"
+          }
+        },
+        "optimum_methods": [
+          "brute_force",
+          "class_enumeration"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/64",
+              "value": "1/64"
+            },
+            {
+              "reveals": 1,
+              "win": "63/3968",
+              "value": "7379/496000"
+            },
+            {
+              "reveals": 2,
+              "win": "63/3904",
+              "value": "6899/488000"
+            },
+            {
+              "reveals": 3,
+              "win": "21/1280",
+              "value": "429/32000"
+            },
+            {
+              "reveals": 4,
+              "win": "63/3776",
+              "value": "5987/472000"
+            },
+            {
+              "reveals": 5,
+              "win": "63/3712",
+              "value": "1111/92800"
+            },
+            {
+              "reveals": 6,
+              "win": "21/1216",
+              "value": "1713/152000"
+            },
+            {
+              "reveals": 7,
+              "win": "9/512",
+              "value": "677/64000"
+            },
+            {
+              "reveals": 8,
+              "win": "63/3520",
+              "value": "871/88000"
+            },
+            {
+              "reveals": 9,
+              "win": "7/384",
+              "value": "443/48000"
+            },
+            {
+              "reveals": 10,
+              "win": "63/3392",
+              "value": "727/84800"
+            },
+            {
+              "reveals": 11,
+              "win": "63/3328",
+              "value": "3299/416000"
+            },
+            {
+              "reveals": 12,
+              "win": "21/1088",
+              "value": "993/136000"
+            },
+            {
+              "reveals": 13,
+              "win": "63/3200",
+              "value": "107/16000"
+            },
+            {
+              "reveals": 14,
+              "win": "9/448",
+              "value": "341/56000"
+            },
+            {
+              "reveals": 15,
+              "win": "21/1024",
+              "value": "141/25600"
+            },
+            {
+              "reveals": 16,
+              "win": "63/3008",
+              "value": "1859/376000"
+            },
+            {
+              "reveals": 17,
+              "win": "63/2944",
+              "value": "1619/368000"
+            },
+            {
+              "reveals": 18,
+              "win": "7/320",
+              "value": "31/8000"
+            },
+            {
+              "reveals": 19,
+              "win": "63/2816",
+              "value": "1187/352000"
+            },
+            {
+              "reveals": 20,
+              "win": "63/2752",
+              "value": "199/68800"
+            },
+            {
+              "reveals": 21,
+              "win": "3/128",
+              "value": "39/16000"
+            },
+            {
+              "reveals": 22,
+              "win": "63/2624",
+              "value": "659/328000"
+            },
+            {
+              "reveals": 23,
+              "win": "63/2560",
+              "value": "103/64000"
+            },
+            {
+              "reveals": 24,
+              "win": "21/832",
+              "value": "129/104000"
+            },
+            {
+              "reveals": 25,
+              "win": "63/2432",
+              "value": "11/12160"
+            },
+            {
+              "reveals": 26,
+              "win": "63/2368",
+              "value": "179/296000"
+            },
+            {
+              "reveals": 27,
+              "win": "7/256",
+              "value": "11/32000"
+            },
+            {
+              "reveals": 28,
+              "win": "9/320",
+              "value": "1/8000"
+            },
+            {
+              "reveals": 29,
+              "win": "63/2176",
+              "value": "-13/272000"
+            },
+            {
+              "reveals": 30,
+              "win": "21/704",
+              "value": "-3/17600"
+            },
+            {
+              "reveals": 31,
+              "win": "63/2048",
+              "value": "-61/256000"
+            },
+            {
+              "reveals": 32,
+              "win": "63/1984",
+              "value": "-61/248000"
+            },
+            {
+              "reveals": 33,
+              "win": "21/640",
+              "value": "-3/16000"
+            },
+            {
+              "reveals": 34,
+              "win": "63/1856",
+              "value": "-13/232000"
+            },
+            {
+              "reveals": 35,
+              "win": "9/256",
+              "value": "1/6400"
+            },
+            {
+              "reveals": 36,
+              "win": "7/192",
+              "value": "11/24000"
+            },
+            {
+              "reveals": 37,
+              "win": "63/1664",
+              "value": "179/208000"
+            },
+            {
+              "reveals": 38,
+              "win": "63/1600",
+              "value": "11/8000"
+            },
+            {
+              "reveals": 39,
+              "win": "21/512",
+              "value": "129/64000"
+            },
+            {
+              "reveals": 40,
+              "win": "63/1472",
+              "value": "103/36800"
+            },
+            {
+              "reveals": 41,
+              "win": "63/1408",
+              "value": "659/176000"
+            },
+            {
+              "reveals": 42,
+              "win": "3/64",
+              "value": "39/8000"
+            },
+            {
+              "reveals": 43,
+              "win": "63/1280",
+              "value": "199/32000"
+            },
+            {
+              "reveals": 44,
+              "win": "63/1216",
+              "value": "1187/152000"
+            },
+            {
+              "reveals": 45,
+              "win": "7/128",
+              "value": "31/3200"
+            },
+            {
+              "reveals": 46,
+              "win": "63/1088",
+              "value": "1619/136000"
+            },
+            {
+              "reveals": 47,
+              "win": "63/1024",
+              "value": "1859/128000"
+            },
+            {
+              "reveals": 48,
+              "win": "21/320",
+              "value": "141/8000"
+            },
+            {
+              "reveals": 49,
+              "win": "9/128",
+              "value": "341/16000"
+            },
+            {
+              "reveals": 50,
+              "win": "63/832",
+              "value": "107/4160"
+            },
+            {
+              "reveals": 51,
+              "win": "21/256",
+              "value": "993/32000"
+            },
+            {
+              "reveals": 52,
+              "win": "63/704",
+              "value": "3299/88000"
+            },
+            {
+              "reveals": 53,
+              "win": "63/640",
+              "value": "727/16000"
+            },
+            {
+              "reveals": 54,
+              "win": "7/64",
+              "value": "443/8000"
+            },
+            {
+              "reveals": 55,
+              "win": "63/512",
+              "value": "871/12800"
+            },
+            {
+              "reveals": 56,
+              "win": "9/64",
+              "value": "677/8000"
+            },
+            {
+              "reveals": 57,
+              "win": "21/128",
+              "value": "1713/16000"
+            },
+            {
+              "reveals": 58,
+              "win": "63/320",
+              "value": "1111/8000"
+            },
+            {
+              "reveals": 59,
+              "win": "63/256",
+              "value": "5987/32000"
+            },
+            {
+              "reveals": 60,
+              "win": "21/64",
+              "value": "429/1600"
+            },
+            {
+              "reveals": 61,
+              "win": "63/128",
+              "value": "6899/16000"
+            },
+            {
+              "reveals": 62,
+              "win": "63/64",
+              "value": "7379/8000"
+            }
+          ],
+          "optimum": {
+            "reveals": 62,
+            "value": "7379/8000"
+          },
+          "parabola": {
+            "a": "119577992924372514353292337/529935805117259118901092689920",
+            "b": "-35828325177990371570255158897/3312098781982869493131829312000",
+            "c": "15195923039486460804755879/175150649496714410001683200",
+            "shape": "convex",
+            "residual_sum_of_squares": "74332389585553097196276903446467401152286860840283940891/125619158514386444960680894905419412348983548532490240000",
+            "vertex": {
+              "reveals": "71656650355980743140510317794/2989449823109312858832308425",
+              "value": "-424635816104497479524528908004304757860907049817485583359/9901353117919259781868600944436443893671994868039553600000"
+            },
+            "vertex_offset": "-113689238676796654107092804556/2989449823109312858832308425",
+            "vertex_value_gap": "-9557396398245274720825579704128869694286613316225468835159/9901353117919259781868600944436443893671994868039553600000",
+            "rounded_vertex": {
+              "reveals": 24,
+              "value": "129/104000",
+              "regret": "47899/52000"
+            },
+            "fitted_choice": {
+              "reveals": 62,
+              "value": "7379/8000",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "max-doors-no-reveal",
+      "description": "N = 64, K = 0.",
+      "scenario": {
+        "doors": 64,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 0,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 10,
+        "trials": 20000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/64",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/64",
+            "switch": "1/64",
+            "mixed": "1/64"
+          }
+        }
+      }
+    },
+    {
+      "id": "max-doors-max-prizes",
+      "description": "N = 64, M = 62, the only feasible K values are 0 and 1.",
+      "scenario": {
+        "doors": 64,
+        "prizes": 62,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "1/10"
+      },
+      "expected": {
+        "exact_method": "class_enumeration",
+        "exact": {
+          "prize_at_pick": "31/32",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "31/32",
+            "switch": "63/64",
+            "mixed": "125/128"
+          }
+        },
+        "optimum_methods": [
+          "class_enumeration"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "31/32",
+              "value": "31/32"
+            },
+            {
+              "reveals": 1,
+              "win": "63/64",
+              "value": "283/320"
+            }
+          ],
+          "optimum": {
+            "reveals": 0,
+            "value": "31/32"
+          },
+          "parabola": null
+        }
+      }
+    },
+    {
+      "id": "max-doors-random-half",
+      "description": "N = 64, M = 32, random host opens 31.",
+      "scenario": {
+        "doors": 64,
+        "prizes": 32,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 31,
+        "host": "random",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "expected": {
+        "exact_method": "class_enumeration",
+        "exact": {
+          "prize_at_pick": "1/2",
+          "outcomes": {
+            "decision": "1/55534064877048198",
+            "void": "55534064877048197/55534064877048198",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "32/33",
+            "switch": "32/33",
+            "mixed": "32/33"
+          }
+        }
+      }
+    },
+    {
+      "id": "max-doors-adversarial",
+      "description": "N = 64, adversarial host opens 31.",
+      "scenario": {
+        "doors": 64,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 31,
+        "host": "adversarial",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "expected": {
+        "exact_method": "class_enumeration",
+        "exact": {
+          "prize_at_pick": "1/64",
+          "outcomes": {
+            "decision": "1/64",
+            "void": "0/1",
+            "no_offer": "63/64",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/1",
+            "switch": "0/1",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "two-prizes-informed",
+      "description": "Two prizes among five doors, two reveals.",
+      "scenario": {
+        "doors": 5,
+        "prizes": 2,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 2,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 11,
+        "trials": 30000
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "1/30"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "2/5",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "2/5",
+            "switch": "4/5",
+            "mixed": "3/5"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "2/5",
+              "value": "2/5"
+            },
+            {
+              "reveals": 1,
+              "win": "8/15",
+              "value": "1/2"
+            },
+            {
+              "reveals": 2,
+              "win": "4/5",
+              "value": "11/15"
+            }
+          ],
+          "optimum": {
+            "reveals": 2,
+            "value": "11/15"
+          },
+          "parabola": {
+            "a": "1/15",
+            "b": "1/30",
+            "c": "2/5",
+            "shape": "convex",
+            "residual_sum_of_squares": "0/1",
+            "vertex": {
+              "reveals": "-1/4",
+              "value": "19/48"
+            },
+            "vertex_offset": "-9/4",
+            "vertex_value_gap": "-27/80",
+            "rounded_vertex": {
+              "reveals": 0,
+              "value": "2/5",
+              "regret": "1/3"
+            },
+            "fitted_choice": {
+              "reveals": 2,
+              "value": "11/15",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "max-prizes-five-doors",
+      "description": "M = N - 2 on five doors.",
+      "scenario": {
+        "doors": 5,
+        "prizes": 3,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "0/1"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "3/5",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "3/5",
+            "switch": "4/5",
+            "mixed": "7/10"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "3/5",
+              "value": "3/5"
+            },
+            {
+              "reveals": 1,
+              "win": "4/5",
+              "value": "4/5"
+            }
+          ],
+          "optimum": {
+            "reveals": 1,
+            "value": "4/5"
+          },
+          "parabola": null
+        }
+      }
+    },
+    {
+      "id": "two-prizes-random",
+      "description": "Two prizes among six doors, random host opens three.",
+      "scenario": {
+        "doors": 6,
+        "prizes": 2,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 3,
+        "host": "random",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 12,
+        "trials": 30000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/5",
+            "void": "4/5",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "2/3",
+            "switch": "2/3",
+            "mixed": "2/3"
+          }
+        }
+      }
+    },
+    {
+      "id": "two-prizes-adversarial",
+      "description": "Adversarial host with two prizes: switching can still win.",
+      "scenario": {
+        "doors": 6,
+        "prizes": 2,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "adversarial",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 13,
+        "trials": 30000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/3",
+          "outcomes": {
+            "decision": "1/3",
+            "void": "0/1",
+            "no_offer": "2/3",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/1",
+            "switch": "1/4",
+            "mixed": "5/8"
+          }
+        }
+      }
+    },
+    {
+      "id": "three-prizes-biased",
+      "description": "Biased host with three prizes, unobserved.",
+      "scenario": {
+        "doors": 7,
+        "prizes": 3,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 2,
+        "host": "biased",
+        "host_weights": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 14,
+        "trials": 20000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "3/7",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "3/7",
+            "switch": "9/14",
+            "mixed": "15/28"
+          }
+        }
+      }
+    },
+    {
+      "id": "two-prizes-biased-observed",
+      "description": "Biased host with two prizes and an observed reveal.",
+      "scenario": {
+        "doors": 5,
+        "prizes": 2,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 2,
+        "host": "biased",
+        "host_weights": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "mixed": "1/2",
+        "observed": [
+          1,
+          2
+        ]
+      },
+      "simulation": {
+        "seed": 15,
+        "trials": 40000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "2/5",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": "689/5040"
+          },
+          "win": {
+            "stay": "185/689",
+            "switch": "1193/1378",
+            "mixed": "1563/2756"
+          }
+        }
+      }
+    },
+    {
+      "id": "pick-last-door-observed",
+      "description": "Pick is the last door, door 0 opened.",
+      "scenario": {
+        "doors": 4,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 3,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": [
+          0
+        ]
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/4",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": "1/3"
+          },
+          "win": {
+            "stay": "1/4",
+            "switch": "3/8",
+            "mixed": "5/16"
+          }
+        }
+      }
+    },
+    {
+      "id": "pick-middle-random-observed",
+      "description": "Random host, pick door 2, doors 0 and 5 opened.",
+      "scenario": {
+        "doors": 6,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 2,
+        "reveals": 2,
+        "host": "random",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": [
+          5,
+          0
+        ]
+      },
+      "simulation": {
+        "seed": 16,
+        "trials": 40000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/6",
+          "outcomes": {
+            "decision": "2/3",
+            "void": "1/3",
+            "no_offer": "0/1",
+            "observed": "1/15"
+          },
+          "win": {
+            "stay": "1/4",
+            "switch": "1/4",
+            "mixed": "1/4"
+          }
+        }
+      }
+    },
+    {
+      "id": "prior-skewed-away",
+      "description": "Prior 1:2:3 makes the pick the least likely prize door.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": [
+          1,
+          2,
+          3
+        ],
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 17,
+        "trials": 20000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/6",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/6",
+            "switch": "5/6",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "prior-skewed-toward-observed",
+      "description": "Prior 3:1:1 favours the pick; door 1 opened.",
+      "scenario": {
+        "doors": 3,
+        "prizes": 1,
+        "prior": [
+          3,
+          1,
+          1
+        ],
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": [
+          1
+        ]
+      },
+      "simulation": {
+        "seed": 18,
+        "trials": 30000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "3/5",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": "1/2"
+          },
+          "win": {
+            "stay": "3/5",
+            "switch": "2/5",
+            "mixed": "1/2"
+          }
+        }
+      }
+    },
+    {
+      "id": "prior-zero-at-pick",
+      "description": "The pick has prior weight 0, so staying never wins.",
+      "scenario": {
+        "doors": 4,
+        "prizes": 1,
+        "prior": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 19,
+        "trials": 20000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "0/1",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "0/1",
+            "switch": "1/2",
+            "mixed": "1/4"
+          }
+        }
+      }
+    },
+    {
+      "id": "prior-zero-at-pick-adversarial",
+      "description": "Adversarial host with a pick that never holds the prize: no decision is ever offered.",
+      "scenario": {
+        "doors": 4,
+        "prizes": 1,
+        "prior": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "pick": 0,
+        "reveals": 1,
+        "host": "adversarial",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 20,
+        "trials": 5000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "0/1",
+          "outcomes": {
+            "decision": "0/1",
+            "void": "0/1",
+            "no_offer": "1/1",
+            "observed": null
+          },
+          "win": {
+            "stay": null,
+            "switch": null,
+            "mixed": null
+          }
+        }
+      }
+    },
+    {
+      "id": "prior-certain-pick",
+      "description": "Prize doors are forced to {0, 1}, so the pick always holds a prize.",
+      "scenario": {
+        "doors": 4,
+        "prizes": 2,
+        "prior": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/1",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/1",
+            "switch": "1/2",
+            "mixed": "3/4"
+          }
+        }
+      }
+    },
+    {
+      "id": "prior-weighted-random-two-prizes",
+      "description": "Weighted prior, two prizes, random host.",
+      "scenario": {
+        "doors": 5,
+        "prizes": 2,
+        "prior": [
+          5,
+          1,
+          1,
+          1,
+          1
+        ],
+        "pick": 0,
+        "reveals": 2,
+        "host": "random",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 21,
+        "trials": 30000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "5/6",
+          "outcomes": {
+            "decision": "4/9",
+            "void": "5/9",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "15/16",
+            "switch": "17/32",
+            "mixed": "47/64"
+          }
+        }
+      }
+    },
+    {
+      "id": "prior-weighted-biased-observed",
+      "description": "Weighted prior and biased host with an observed reveal.",
+      "scenario": {
+        "doors": 6,
+        "prizes": 3,
+        "prior": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "pick": 5,
+        "reveals": 2,
+        "host": "biased",
+        "host_weights": [
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "mixed": "1/2",
+        "observed": [
+          0,
+          1
+        ]
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "2603219/3527160",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": "275185741/935625600"
+          },
+          "win": {
+            "stay": "202042741/275185741",
+            "switch": "623514482/825557223",
+            "mixed": "1229642705/1651114446"
+          }
+        }
+      }
+    },
+    {
+      "id": "prior-weighted-ten-doors-random",
+      "description": "Weighted prior at the enumeration limit of ten doors.",
+      "scenario": {
+        "doors": 10,
+        "prizes": 1,
+        "prior": [
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "pick": 0,
+        "reveals": 2,
+        "host": "random",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 22,
+        "trials": 20000
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "2/11",
+          "outcomes": {
+            "decision": "9/11",
+            "void": "2/11",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "2/9",
+            "switch": "1/9",
+            "mixed": "1/6"
+          }
+        }
+      }
+    },
+    {
+      "id": "prior-weighted-eight-doors",
+      "description": "Weighted prior with two prizes and three reveals.",
+      "scenario": {
+        "doors": 8,
+        "prizes": 2,
+        "prior": [
+          1,
+          1,
+          2,
+          2,
+          3,
+          3,
+          4,
+          4
+        ],
+        "pick": 7,
+        "reveals": 3,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "simulation": {
+        "seed": 23,
+        "trials": 20000
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "1/40"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "22447/58140",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "22447/58140",
+            "switch": "93833/232560",
+            "mixed": "61207/155040"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "93833/406980",
+              "value": "93833/406980"
+            },
+            {
+              "reveals": 1,
+              "win": "93833/348840",
+              "value": "10639/43605"
+            },
+            {
+              "reveals": 2,
+              "win": "93833/290700",
+              "value": "39649/145350"
+            },
+            {
+              "reveals": 3,
+              "win": "93833/232560",
+              "value": "76391/232560"
+            },
+            {
+              "reveals": 4,
+              "win": "93833/174420",
+              "value": "76391/174420"
+            },
+            {
+              "reveals": 5,
+              "win": "93833/116280",
+              "value": "39649/58140"
+            }
+          ],
+          "optimum": {
+            "reveals": 5,
+            "value": "39649/58140"
+          },
+          "parabola": {
+            "a": "93833/3561075",
+            "b": "-13971959/284886000",
+            "c": "93833/379848",
+            "shape": "convex",
+            "residual_sum_of_squares": "28359719314469/10434861385200000",
+            "vertex": {
+              "reveals": "13971959/15013280",
+              "value": "1917896015062319/8554146572160000"
+            },
+            "vertex_offset": "-61094441/15013280",
+            "vertex_value_gap": "-3915667064393681/8554146572160000",
+            "rounded_vertex": {
+              "reveals": 1,
+              "value": "10639/43605",
+              "regret": "76391/174420"
+            },
+            "fitted_choice": {
+              "reveals": 5,
+              "value": "39649/58140",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "cost-prohibitive",
+      "description": "Reveals cost a full prize: no exploration is worth it.",
+      "scenario": {
+        "doors": 6,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "1/1"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/6",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/6",
+            "switch": "5/24",
+            "mixed": "3/16"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/6",
+              "value": "1/6"
+            },
+            {
+              "reveals": 1,
+              "win": "5/24",
+              "value": "-19/24"
+            },
+            {
+              "reveals": 2,
+              "win": "5/18",
+              "value": "-31/18"
+            },
+            {
+              "reveals": 3,
+              "win": "5/12",
+              "value": "-31/12"
+            },
+            {
+              "reveals": 4,
+              "win": "5/6",
+              "value": "-19/6"
+            }
+          ],
+          "optimum": {
+            "reveals": 0,
+            "value": "1/6"
+          },
+          "parabola": {
+            "a": "59/1008",
+            "b": "-5443/5040",
+            "c": "53/280",
+            "shape": "convex",
+            "residual_sum_of_squares": "67/10080",
+            "vertex": {
+              "reveals": "5443/590",
+              "value": "-28500529/5947200"
+            },
+            "vertex_offset": "5443/590",
+            "vertex_value_gap": "-29491729/5947200",
+            "rounded_vertex": {
+              "reveals": 4,
+              "value": "-19/6",
+              "regret": "10/3"
+            },
+            "fitted_choice": {
+              "reveals": 0,
+              "value": "1/6",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "cost-stay-linear",
+      "description": "Staying ignores reveals, so V(K) is linear and the parabola has no vertex.",
+      "scenario": {
+        "doors": 6,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "stay",
+        "cost": "1/50"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/6",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/6",
+            "switch": "5/24",
+            "mixed": "3/16"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/6",
+              "value": "1/6"
+            },
+            {
+              "reveals": 1,
+              "win": "1/6",
+              "value": "11/75"
+            },
+            {
+              "reveals": 2,
+              "win": "1/6",
+              "value": "19/150"
+            },
+            {
+              "reveals": 3,
+              "win": "1/6",
+              "value": "8/75"
+            },
+            {
+              "reveals": 4,
+              "win": "1/6",
+              "value": "13/150"
+            }
+          ],
+          "optimum": {
+            "reveals": 0,
+            "value": "1/6"
+          },
+          "parabola": {
+            "a": "0/1",
+            "b": "-1/50",
+            "c": "1/6",
+            "shape": "linear",
+            "residual_sum_of_squares": "0/1",
+            "vertex": null,
+            "vertex_offset": null,
+            "vertex_value_gap": null,
+            "rounded_vertex": null,
+            "fitted_choice": {
+              "reveals": 0,
+              "value": "1/6",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "cost-random-host",
+      "description": "Random host value curve.",
+      "scenario": {
+        "doors": 6,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "random",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "1/30"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/6",
+          "outcomes": {
+            "decision": "5/6",
+            "void": "1/6",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/5",
+            "switch": "1/5",
+            "mixed": "1/5"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/6",
+              "value": "1/6"
+            },
+            {
+              "reveals": 1,
+              "win": "1/5",
+              "value": "1/6"
+            },
+            {
+              "reveals": 2,
+              "win": "1/4",
+              "value": "11/60"
+            },
+            {
+              "reveals": 3,
+              "win": "1/3",
+              "value": "7/30"
+            },
+            {
+              "reveals": 4,
+              "win": "1/2",
+              "value": "11/30"
+            }
+          ],
+          "optimum": {
+            "reveals": 4,
+            "value": "11/30"
+          },
+          "parabola": {
+            "a": "3/140",
+            "b": "-41/1050",
+            "c": "121/700",
+            "shape": "convex",
+            "residual_sum_of_squares": "29/63000",
+            "vertex": {
+              "reveals": "41/45",
+              "value": "7327/47250"
+            },
+            "vertex_offset": "-139/45",
+            "vertex_value_gap": "-4999/23625",
+            "rounded_vertex": {
+              "reveals": 1,
+              "value": "1/6",
+              "regret": "1/5"
+            },
+            "fitted_choice": {
+              "reveals": 4,
+              "value": "11/30",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "cost-mixed-two-prizes",
+      "description": "Mixed strategy with q = 2/7 and two prizes.",
+      "scenario": {
+        "doors": 8,
+        "prizes": 2,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "2/7",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "mixed",
+        "cost": "1/40"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/4",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/4",
+            "switch": "7/24",
+            "mixed": "11/42"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/4",
+              "value": "1/4"
+            },
+            {
+              "reveals": 1,
+              "win": "11/42",
+              "value": "199/840"
+            },
+            {
+              "reveals": 2,
+              "win": "39/140",
+              "value": "8/35"
+            },
+            {
+              "reveals": 3,
+              "win": "17/56",
+              "value": "8/35"
+            },
+            {
+              "reveals": 4,
+              "win": "29/84",
+              "value": "103/420"
+            },
+            {
+              "reveals": 5,
+              "win": "3/7",
+              "value": "17/56"
+            }
+          ],
+          "optimum": {
+            "reveals": 5,
+            "value": "17/56"
+          },
+          "parabola": {
+            "a": "2/245",
+            "b": "-159/4900",
+            "c": "25/98",
+            "shape": "convex",
+            "residual_sum_of_squares": "3221/12348000",
+            "vertex": {
+              "reveals": "159/80",
+              "value": "174719/784000"
+            },
+            "vertex_offset": "-241/80",
+            "vertex_value_gap": "-63281/784000",
+            "rounded_vertex": {
+              "reveals": 2,
+              "value": "8/35",
+              "regret": "3/40"
+            },
+            "fitted_choice": {
+              "reveals": 5,
+              "value": "17/56",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "cost-adversarial-stay",
+      "description": "Adversarial host: staying wins whenever offered, so V(K) only loses cost.",
+      "scenario": {
+        "doors": 6,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "adversarial",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "stay",
+        "cost": "1/100"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/6",
+          "outcomes": {
+            "decision": "1/6",
+            "void": "0/1",
+            "no_offer": "5/6",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/1",
+            "switch": "0/1",
+            "mixed": "1/2"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/1",
+              "value": "1/1"
+            },
+            {
+              "reveals": 1,
+              "win": "1/1",
+              "value": "99/100"
+            },
+            {
+              "reveals": 2,
+              "win": "1/1",
+              "value": "49/50"
+            },
+            {
+              "reveals": 3,
+              "win": "1/1",
+              "value": "97/100"
+            },
+            {
+              "reveals": 4,
+              "win": "1/1",
+              "value": "24/25"
+            }
+          ],
+          "optimum": {
+            "reveals": 0,
+            "value": "1/1"
+          },
+          "parabola": {
+            "a": "0/1",
+            "b": "-1/100",
+            "c": "1/1",
+            "shape": "linear",
+            "residual_sum_of_squares": "0/1",
+            "vertex": null,
+            "vertex_offset": null,
+            "vertex_value_gap": null,
+            "rounded_vertex": null,
+            "fitted_choice": {
+              "reveals": 0,
+              "value": "1/1",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "cost-weighted-prior",
+      "description": "Weighted prior value curve.",
+      "scenario": {
+        "doors": 5,
+        "prizes": 1,
+        "prior": [
+          1,
+          1,
+          1,
+          1,
+          4
+        ],
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "1/10"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/8",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/8",
+            "switch": "7/24",
+            "mixed": "5/24"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "7/32",
+              "value": "7/32"
+            },
+            {
+              "reveals": 1,
+              "win": "7/24",
+              "value": "23/120"
+            },
+            {
+              "reveals": 2,
+              "win": "7/16",
+              "value": "19/80"
+            },
+            {
+              "reveals": 3,
+              "win": "7/8",
+              "value": "23/40"
+            }
+          ],
+          "optimum": {
+            "reveals": 3,
+            "value": "23/40"
+          },
+          "parabola": {
+            "a": "35/384",
+            "b": "-311/1920",
+            "c": "147/640",
+            "shape": "convex",
+            "residual_sum_of_squares": "49/20480",
+            "vertex": {
+              "reveals": "311/350",
+              "value": "211979/1344000"
+            },
+            "vertex_offset": "-739/350",
+            "vertex_value_gap": "-560821/1344000",
+            "rounded_vertex": {
+              "reveals": 1,
+              "value": "23/120",
+              "regret": "23/60"
+            },
+            "fitted_choice": {
+              "reveals": 3,
+              "value": "23/40",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "cost-biased-free",
+      "description": "Biased host with free reveals.",
+      "scenario": {
+        "doors": 6,
+        "prizes": 1,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "biased",
+        "host_weights": [
+          1,
+          1,
+          2,
+          2,
+          3,
+          3
+        ],
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "switch",
+        "cost": "0/1"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/6",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/6",
+            "switch": "5/24",
+            "mixed": "3/16"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/6",
+              "value": "1/6"
+            },
+            {
+              "reveals": 1,
+              "win": "5/24",
+              "value": "5/24"
+            },
+            {
+              "reveals": 2,
+              "win": "5/18",
+              "value": "5/18"
+            },
+            {
+              "reveals": 3,
+              "win": "5/12",
+              "value": "5/12"
+            },
+            {
+              "reveals": 4,
+              "win": "5/6",
+              "value": "5/6"
+            }
+          ],
+          "optimum": {
+            "reveals": 4,
+            "value": "5/6"
+          },
+          "parabola": {
+            "a": "59/1008",
+            "b": "-403/5040",
+            "c": "53/280",
+            "shape": "convex",
+            "residual_sum_of_squares": "67/10080",
+            "vertex": {
+              "reveals": "403/590",
+              "value": "963311/5947200"
+            },
+            "vertex_offset": "-1957/590",
+            "vertex_value_gap": "-3992689/5947200",
+            "rounded_vertex": {
+              "reveals": 1,
+              "value": "5/24",
+              "regret": "5/8"
+            },
+            "fitted_choice": {
+              "reveals": 4,
+              "value": "5/6",
+              "regret": "0/1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "cost-zero-flat",
+      "description": "Free reveals and staying: every K ties, the smallest K is reported.",
+      "scenario": {
+        "doors": 4,
+        "prizes": 2,
+        "prior": "uniform",
+        "pick": 0,
+        "reveals": 1,
+        "host": "informed",
+        "host_weights": null,
+        "mixed": "1/2",
+        "observed": null
+      },
+      "optimum": {
+        "strategy": "stay",
+        "cost": "0/1"
+      },
+      "expected": {
+        "exact_method": "brute_force",
+        "exact": {
+          "prize_at_pick": "1/2",
+          "outcomes": {
+            "decision": "1/1",
+            "void": "0/1",
+            "no_offer": "0/1",
+            "observed": null
+          },
+          "win": {
+            "stay": "1/2",
+            "switch": "3/4",
+            "mixed": "5/8"
+          }
+        },
+        "optimum_methods": [
+          "brute_force"
+        ],
+        "optimum": {
+          "curve": [
+            {
+              "reveals": 0,
+              "win": "1/2",
+              "value": "1/2"
+            },
+            {
+              "reveals": 1,
+              "win": "1/2",
+              "value": "1/2"
+            }
+          ],
+          "optimum": {
+            "reveals": 0,
+            "value": "1/2"
+          },
+          "parabola": null
+        }
+      }
+    }
+  ]
+}

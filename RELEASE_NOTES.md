@@ -12,7 +12,7 @@ exact fraction.
 - Reproducible seeded simulation with Wilson confidence intervals.
 - A random-host mode showing that the advantage depends on the host's knowledge.
 - Optional SQLite storage of run results.
-- Automated tests, with the recorded run in `reports/tests/`.
+- Automated tests, with the recorded run in `reports/tests/` (now `python/reports/tests/`).
 
 ## Breaking changes
 

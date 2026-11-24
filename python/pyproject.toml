@@ -14,10 +14,12 @@ dependencies = []
 
 [project.scripts]
 monty-hall = "monty_hall.cli.main:entry_point"
+monty-lab = "monty_hall.lab.cli:entry_point"
 
 [dependency-groups]
 dev = [
     "hypothesis==6.170.17",
+    "jsonschema==4.26.0",
     "mypy==2.4.1",
     "pytest==9.2.0",
     "ruff==0.17.6",
@@ -47,9 +49,14 @@ select = ["E", "F", "W", "I", "B", "C4", "UP", "S", "SIM", "PT", "RET", "RUF"]
 "src/monty_hall/domain/game.py" = ["S311"]
 "src/monty_hall/simulation/runner.py" = ["S311"]
 "tools/generate_test_report.py" = ["S314", "S603"]
+"../tools/conformance.py" = ["S603"]
 
 [tool.mypy]
 strict = true
 files = ["src", "tests", "tools"]
 mypy_path = "src"
 explicit_package_bases = true
+
+[[tool.mypy.overrides]]
+module = ["jsonschema", "jsonschema.*"]
+ignore_missing_imports = true

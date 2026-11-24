@@ -1,0 +1,280 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/juanmafx/juegoDeLasTresPuertas/spec/cli-output.schema.json",
+  "title": "monty-lab command output",
+  "description": "The JSON document every implementation prints on standard output for exact, simulate, optimum and prng. See spec/cli.md.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/exact"
+    },
+    {
+      "$ref": "#/$defs/simulate"
+    },
+    {
+      "$ref": "#/$defs/optimum"
+    },
+    {
+      "$ref": "#/$defs/prng"
+    }
+  ],
+  "$defs": {
+    "exact": {
+      "type": "object",
+      "required": [
+        "command",
+        "scenario",
+        "prize_at_pick",
+        "outcomes",
+        "win"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "command": {
+          "const": "exact"
+        },
+        "scenario": {
+          "$ref": "scenario.schema.json#/$defs/scenario"
+        },
+        "prize_at_pick": {
+          "$ref": "scenario.schema.json#/$defs/probability"
+        },
+        "outcomes": {
+          "$ref": "scenario.schema.json#/$defs/outcomes"
+        },
+        "win": {
+          "$ref": "scenario.schema.json#/$defs/win"
+        }
+      }
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "strategy": {
+      "type": "object",
+      "required": [
+        "wins",
+        "rate",
+        "wilson95"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "wins": {
+          "$ref": "#/$defs/count"
+        },
+        "rate": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "wilson95": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    "simulate": {
+      "type": "object",
+      "required": [
+        "command",
+        "scenario",
+        "seed",
+        "trials",
+        "counts",
+        "sample_size",
+        "strategies"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "command": {
+          "const": "simulate"
+        },
+        "scenario": {
+          "$ref": "scenario.schema.json#/$defs/scenario"
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "trials": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000000
+        },
+        "counts": {
+          "type": "object",
+          "required": [
+            "decision",
+            "void",
+            "no_offer",
+            "observed"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "decision": {
+              "$ref": "#/$defs/count"
+            },
+            "void": {
+              "$ref": "#/$defs/count"
+            },
+            "no_offer": {
+              "$ref": "#/$defs/count"
+            },
+            "observed": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/count"
+                }
+              ]
+            }
+          }
+        },
+        "sample_size": {
+          "$ref": "#/$defs/count"
+        },
+        "strategies": {
+          "type": "object",
+          "required": [
+            "stay",
+            "switch",
+            "mixed"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "stay": {
+              "$ref": "#/$defs/strategy"
+            },
+            "switch": {
+              "$ref": "#/$defs/strategy"
+            },
+            "mixed": {
+              "$ref": "#/$defs/strategy"
+            }
+          }
+        }
+      }
+    },
+    "optimum": {
+      "type": "object",
+      "required": [
+        "command",
+        "scenario",
+        "strategy",
+        "cost",
+        "curve",
+        "optimum",
+        "parabola"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "command": {
+          "const": "optimum"
+        },
+        "scenario": {
+          "$ref": "scenario.schema.json#/$defs/scenario"
+        },
+        "strategy": {
+          "enum": [
+            "stay",
+            "switch",
+            "mixed"
+          ]
+        },
+        "cost": {
+          "$ref": "scenario.schema.json#/$defs/fraction"
+        },
+        "curve": {
+          "$ref": "scenario.schema.json#/$defs/curve"
+        },
+        "optimum": {
+          "$ref": "scenario.schema.json#/$defs/optimum"
+        },
+        "parabola": {
+          "$ref": "scenario.schema.json#/$defs/parabola"
+        }
+      }
+    },
+    "prng": {
+      "type": "object",
+      "required": [
+        "command",
+        "seed",
+        "kind",
+        "values"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "command": {
+          "const": "prng"
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "kind": {
+          "enum": [
+            "splitmix",
+            "words",
+            "bounded",
+            "weighted",
+            "shuffle"
+          ]
+        },
+        "bound": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9223372036854775807
+        },
+        "weights": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]*)$"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,447 @@
+{
+  "version": 1,
+  "runs": [
+    {
+      "id": "classic-informed",
+      "seed": 20190925,
+      "trials": 30000,
+      "counts": {
+        "decision": 30000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 30000,
+      "wins": {
+        "stay": 10024,
+        "switch": 19976,
+        "mixed": 15122
+      }
+    },
+    {
+      "id": "classic-random",
+      "seed": 1,
+      "trials": 30000,
+      "counts": {
+        "decision": 20044,
+        "void": 9956,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20044,
+      "wins": {
+        "stay": 10029,
+        "switch": 10015,
+        "mixed": 9995
+      }
+    },
+    {
+      "id": "classic-adversarial",
+      "seed": 2,
+      "trials": 30000,
+      "counts": {
+        "decision": 10182,
+        "void": 0,
+        "no_offer": 19818,
+        "observed": null
+      },
+      "sample_size": 10182,
+      "wins": {
+        "stay": 10182,
+        "switch": 0,
+        "mixed": 5121
+      }
+    },
+    {
+      "id": "biased-p3-4-lower-opened",
+      "seed": 3,
+      "trials": 40000,
+      "counts": {
+        "decision": 40000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": 23090
+      },
+      "sample_size": 23090,
+      "wins": {
+        "stay": 9917,
+        "switch": 13173,
+        "mixed": 11438
+      }
+    },
+    {
+      "id": "biased-p3-4-upper-opened",
+      "seed": 3,
+      "trials": 40000,
+      "counts": {
+        "decision": 40000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": 16910
+      },
+      "sample_size": 16910,
+      "wins": {
+        "stay": 3394,
+        "switch": 13516,
+        "mixed": 8451
+      }
+    },
+    {
+      "id": "biased-unobserved",
+      "seed": 4,
+      "trials": 20000,
+      "counts": {
+        "decision": 20000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20000,
+      "wins": {
+        "stay": 6648,
+        "switch": 13352,
+        "mixed": 10025
+      }
+    },
+    {
+      "id": "mixed-q-zero",
+      "seed": 5,
+      "trials": 20000,
+      "counts": {
+        "decision": 20000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20000,
+      "wins": {
+        "stay": 6619,
+        "switch": 13381,
+        "mixed": 6619
+      }
+    },
+    {
+      "id": "mixed-q-one",
+      "seed": 5,
+      "trials": 20000,
+      "counts": {
+        "decision": 20000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20000,
+      "wins": {
+        "stay": 6619,
+        "switch": 13381,
+        "mixed": 13381
+      }
+    },
+    {
+      "id": "mixed-q-one-third",
+      "seed": 6,
+      "trials": 20000,
+      "counts": {
+        "decision": 20000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20000,
+      "wins": {
+        "stay": 6572,
+        "switch": 13428,
+        "mixed": 8834
+      }
+    },
+    {
+      "id": "no-reveal-four-doors",
+      "seed": 7,
+      "trials": 20000,
+      "counts": {
+        "decision": 20000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20000,
+      "wins": {
+        "stay": 5176,
+        "switch": 4930,
+        "mixed": 5057
+      }
+    },
+    {
+      "id": "five-doors-random-three-reveals",
+      "seed": 8,
+      "trials": 30000,
+      "counts": {
+        "decision": 11917,
+        "void": 18083,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 11917,
+      "wins": {
+        "stay": 6010,
+        "switch": 5907,
+        "mixed": 5944
+      }
+    },
+    {
+      "id": "max-doors-max-reveals",
+      "seed": 9,
+      "trials": 3000,
+      "counts": {
+        "decision": 3000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 3000,
+      "wins": {
+        "stay": 45,
+        "switch": 2955,
+        "mixed": 1492
+      }
+    },
+    {
+      "id": "max-doors-no-reveal",
+      "seed": 10,
+      "trials": 20000,
+      "counts": {
+        "decision": 20000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20000,
+      "wins": {
+        "stay": 311,
+        "switch": 301,
+        "mixed": 305
+      }
+    },
+    {
+      "id": "two-prizes-informed",
+      "seed": 11,
+      "trials": 30000,
+      "counts": {
+        "decision": 30000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 30000,
+      "wins": {
+        "stay": 11891,
+        "switch": 23975,
+        "mixed": 17882
+      }
+    },
+    {
+      "id": "two-prizes-random",
+      "seed": 12,
+      "trials": 30000,
+      "counts": {
+        "decision": 5887,
+        "void": 24113,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 5887,
+      "wins": {
+        "stay": 3879,
+        "switch": 4008,
+        "mixed": 3922
+      }
+    },
+    {
+      "id": "two-prizes-adversarial",
+      "seed": 13,
+      "trials": 30000,
+      "counts": {
+        "decision": 9887,
+        "void": 0,
+        "no_offer": 20113,
+        "observed": null
+      },
+      "sample_size": 9887,
+      "wins": {
+        "stay": 9887,
+        "switch": 2466,
+        "mixed": 6200
+      }
+    },
+    {
+      "id": "three-prizes-biased",
+      "seed": 14,
+      "trials": 20000,
+      "counts": {
+        "decision": 20000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20000,
+      "wins": {
+        "stay": 8490,
+        "switch": 12857,
+        "mixed": 10634
+      }
+    },
+    {
+      "id": "two-prizes-biased-observed",
+      "seed": 15,
+      "trials": 40000,
+      "counts": {
+        "decision": 40000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": 5529
+      },
+      "sample_size": 5529,
+      "wins": {
+        "stay": 1524,
+        "switch": 4748,
+        "mixed": 3090
+      }
+    },
+    {
+      "id": "pick-middle-random-observed",
+      "seed": 16,
+      "trials": 40000,
+      "counts": {
+        "decision": 26583,
+        "void": 13417,
+        "no_offer": 0,
+        "observed": 2678
+      },
+      "sample_size": 2678,
+      "wins": {
+        "stay": 652,
+        "switch": 717,
+        "mixed": 653
+      }
+    },
+    {
+      "id": "prior-skewed-away",
+      "seed": 17,
+      "trials": 20000,
+      "counts": {
+        "decision": 20000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20000,
+      "wins": {
+        "stay": 3296,
+        "switch": 16704,
+        "mixed": 10071
+      }
+    },
+    {
+      "id": "prior-skewed-toward-observed",
+      "seed": 18,
+      "trials": 30000,
+      "counts": {
+        "decision": 30000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": 15060
+      },
+      "sample_size": 15060,
+      "wins": {
+        "stay": 9239,
+        "switch": 5821,
+        "mixed": 7600
+      }
+    },
+    {
+      "id": "prior-zero-at-pick",
+      "seed": 19,
+      "trials": 20000,
+      "counts": {
+        "decision": 20000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20000,
+      "wins": {
+        "stay": 0,
+        "switch": 10115,
+        "mixed": 5045
+      }
+    },
+    {
+      "id": "prior-zero-at-pick-adversarial",
+      "seed": 20,
+      "trials": 5000,
+      "counts": {
+        "decision": 0,
+        "void": 0,
+        "no_offer": 5000,
+        "observed": null
+      },
+      "sample_size": 0,
+      "wins": {
+        "stay": 0,
+        "switch": 0,
+        "mixed": 0
+      }
+    },
+    {
+      "id": "prior-weighted-random-two-prizes",
+      "seed": 21,
+      "trials": 30000,
+      "counts": {
+        "decision": 13341,
+        "void": 16659,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 13341,
+      "wins": {
+        "stay": 12495,
+        "switch": 7094,
+        "mixed": 9895
+      }
+    },
+    {
+      "id": "prior-weighted-ten-doors-random",
+      "seed": 22,
+      "trials": 20000,
+      "counts": {
+        "decision": 16414,
+        "void": 3586,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 16414,
+      "wins": {
+        "stay": 3648,
+        "switch": 1782,
+        "mixed": 2692
+      }
+    },
+    {
+      "id": "prior-weighted-eight-doors",
+      "seed": 23,
+      "trials": 20000,
+      "counts": {
+        "decision": 20000,
+        "void": 0,
+        "no_offer": 0,
+        "observed": null
+      },
+      "sample_size": 20000,
+      "wins": {
+        "stay": 7689,
+        "switch": 8093,
+        "mixed": 7905
+      }
+    }
+  ]
+}

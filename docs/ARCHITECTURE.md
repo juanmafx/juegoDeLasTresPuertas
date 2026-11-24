@@ -4,13 +4,27 @@
 
 1. Every simulated number can be checked against an exact one.
 2. Game rules live in one place and have no dependency on input, output, or storage.
-3. Runs are reproducible from their recorded seed.
+3. Runs are reproducible from their recorded seed, in every language for `monty-lab`.
 4. The runtime has no third-party dependencies.
+5. Expected values come from code that shares nothing with the implementations they check.
+
+## Repository structure
+
+`spec/` is the language-neutral contract, `tools/` holds the independent enumerator and the
+conformance runner, and `python/` is the reference implementation. Further implementations are
+meant to live in sibling directories and pass `tools/conformance.py`.
 
 ## Module structure
 
 ```text
-src/monty_hall/
+python/src/monty_hall/
+  lab/
+    model.py        Scenario, Host, Strategy, fraction parsing and validation
+    prng.py         SplitMix64, xoshiro256**, bounded, weighted and shuffle draws
+    solver.py       Closed forms and enumeration over prize sets for observed reveals
+    simulator.py    Deterministic simulation following spec/prng.md
+    optimum.py      V(K) curve, exact optimum, exact least-squares parabola
+    cli.py          The monty-lab command-line contract
   domain/
     models.py       GameConfig, HostPolicy, GameOutcome, validation
     game.py         play_game
@@ -32,10 +46,16 @@ Dependencies point inward:
 ```text
 cli -> persistence -> simulation -> domain
 cli -> simulation -> analysis -> domain
+lab.cli -> lab.optimum -> lab.solver -> lab.model
+lab.cli -> lab.simulator -> lab.prng
+lab.cli -> analysis.intervals
 ```
 
+The original `domain`, `analysis`, `simulation`, `persistence` and `cli` packages are unchanged
+and still back `monty-hall`. `lab` reuses only the Wilson interval from them.
+
 `domain` imports nothing from the other packages. A test asserts that the packaged schema is
-identical to `db/schema.sql`, so the two copies cannot drift.
+identical to `python/db/schema.sql`, so the two copies cannot drift.
 
 ## The model
 
@@ -72,6 +92,31 @@ P(stay | valid) = P(switch | valid) = 1 / (n - k)
 Given that the car was not revealed, it is uniform over the `n - k` closed doors, so switching has
 no advantage. The advantage comes from the host's knowledge rather than from a door being opened.
 
+## The generalized model (monty-lab)
+
+The full contract is in `spec/cli.md`. With `N` doors, `M` prizes, `K` reveals, the pick `d`
+and `pi = P(d holds a prize)` under the prior, the closed forms used by `lab/solver.py` are:
+
+```text
+informed, biased:  stay = pi                 switch = (M - pi) / (N - 1 - K)
+adversarial:       decision = pi             stay = 1, switch = (M - 1) / (N - 1 - K)
+random:            a = C(N - M, K) / C(N - 1, K), b = C(N - 1 - M, K) / C(N - 1, K)
+                   decision = pi * a + (1 - pi) * b
+                   stay = pi * a / decision
+                   switch = (pi * a * (M - 1) + (1 - pi) * b * M) / ((N - 1 - K) * decision)
+```
+
+The informed and biased forms hold because a host that never opens a prize door leaves every
+prize except the pick's among the `N - 1 - K` closed doors, whatever its preferences. Host
+preferences matter only once you condition on which doors were opened, so observed reveals are
+solved by enumerating prize sets: the prior over sets is built by dynamic programming over
+subsets, and the probability that a biased host opens a given set is summed over its orderings
+the same way. Enumeration is limited to 10 doors. For a uniform prior `pi = M / N`; for weights
+it comes from the same subset dynamic programme.
+
+The optimum curve evaluates `V(K) = P(win | strategy, K) - c*K` for every feasible `K` and fits
+`a K^2 + b K + c` by solving the 3 by 3 normal equations exactly with Cramer's rule.
+
 ## Algorithms and complexity
 
 | Operation | Time | Memory |
@@ -81,6 +126,10 @@ no advantage. The advantage comes from the host's knowledge rather than from a d
 | `run_simulation` | O(T * n) | O(n) |
 | `enumerate_game_tree` | O(n^3 * k * C(n - 1, k)) operations, upper bound | O(k * C(n - 1, k)) |
 | `wilson_interval`, `z_score` | O(1) | O(1) |
+| `lab.solver.solve`, uniform prior, no observation | O(K) big-integer operations | O(1) |
+| `lab.solver.solve`, weighted prior or observation | O(M * N^2 * 2^N) plus O(K^2 * 2^K) per prize set, upper bound | O(2^N) |
+| `lab.simulator.simulate` | O(T * N * (M + K)) | O(N) |
+| `lab.optimum.optimum_curve` | `N - M` solves plus O(N) for the fit | O(N) |
 
 `T` is the number of trials. Enumeration is exponential in `n` for mid-range `k`, so it is limited
 to 9 doors. Its purpose is to verify the closed form independently, using exact rationals so that
@@ -106,6 +155,9 @@ the denominator.
 | `tests/property` | Hypothesis, derandomized | Game invariants, closed form equals enumeration for 3 to 6 doors |
 | `tests/statistical` | Fixed-seed z and chi-square tests | Simulation converges, sampling is unbiased |
 | `tests/integration` | Real SQLite and CLI | Round trips, constraints, tampered schemas, exit codes |
+| `tests/lab` | Examples, Hypothesis, fixed-seed z tests | PRNG values, validation, anchors, observations average back to the unconditional result, corner optima for uniform priors, least-squares minimality, convergence |
+| `tests/spec` | Spec files, JSON Schema, subprocess | Every scenario equals the independent enumerator, outputs match the schema, generated spec data is current |
+| `tools/conformance.py` | Black-box CLI runs | Exact equality, bit-identical counts, interval coverage, error handling |
 
 ## Persistence
 
@@ -121,5 +173,6 @@ crafted trigger from running during `simulate`. Rows are type-checked when read.
 ## Recommended extensions
 
 - Replace per-game list building with an O(k) sparse sampler for very large door counts.
-- Add a biased-host policy, which makes the conditional probability depend on the door opened.
-- Move to a version-stable generator if results must match across Python releases.
+- Implement the contract in Java, PHP and C and run `tools/conformance.py` against each.
+- Lift the 10-door enumeration limit for weighted priors with a faster inclusion-probability
+  method, if one that stays exact proves practical.
