@@ -1,0 +1,36 @@
+name: Java
+
+on:
+  push:
+    branches: [master, modernize/2026]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  MAVEN_IMAGE: maven:3.9.11-eclipse-temurin-17@sha256:e4a7ace3dc0d645ed97f8d9ad0b0d3f0b14fa8d150138f27f116d7105a639b82
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d
+        with:
+          version: "0.13.5"
+          enable-cache: false
+      - name: Build and test in the pinned Maven image
+        run: |
+          mkdir -p "${RUNNER_TEMP}/m2"
+          docker run --rm -u "$(id -u):$(id -g)" \
+            -v "${GITHUB_WORKSPACE}:/work" -w /work/java \
+            -v "${RUNNER_TEMP}/m2:/var/maven/.m2" -e MAVEN_CONFIG=/var/maven/.m2 \
+            "${MAVEN_IMAGE}" mvn -B -ntp -Duser.home=/var/maven verify
+      - name: Conformance against spec/
+        run: >
+          uv run --no-project --python 3.14 python -I tools/conformance.py
+          --cli "docker run --rm -i -v ${GITHUB_WORKSPACE}:/work:ro -w /work ${MAVEN_IMAGE} java -jar java/target/monty-lab.jar"
