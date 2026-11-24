@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling==1.33.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "monty-hall-lab"
+dynamic = ["version"]
+description = "Exact and seeded Monte Carlo analysis of the generalized Monty Hall problem."
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [{ name = "Juan Manuel Ramallo" }]
+keywords = ["monty-hall", "probability", "monte-carlo", "simulation", "statistics"]
+dependencies = []
+
+[project.scripts]
+monty-hall = "monty_hall.cli.main:entry_point"
+
+[dependency-groups]
+dev = [
+    "hypothesis==6.170.17",
+    "mypy==2.4.1",
+    "pytest==9.2.0",
+    "ruff==0.17.6",
+]
+
+[tool.hatch.version]
+path = "src/monty_hall/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/monty_hall"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config"
+xfail_strict = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests", "tools"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "C4", "UP", "S", "SIM", "PT", "RET", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S311"]
+"src/monty_hall/domain/game.py" = ["S311"]
+"src/monty_hall/simulation/runner.py" = ["S311"]
+"tools/generate_test_report.py" = ["S314", "S603"]
+
+[tool.mypy]
+strict = true
+files = ["src", "tests", "tools"]
+mypy_path = "src"
+explicit_package_bases = true
