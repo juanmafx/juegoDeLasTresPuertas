@@ -5,16 +5,37 @@
 1. Every simulated number can be checked against an exact one.
 2. Game rules live in one place and have no dependency on input, output, or storage.
 3. Runs are reproducible from their recorded seed, in every language for `monty-lab`.
-4. The runtime has no third-party dependencies.
+4. Runtimes have no third-party dependencies, except PHP, which uses the pinned `brick/math`
+   library for arbitrary-precision integers.
 5. Expected values come from code that shares nothing with the implementations they check.
+6. Implementations are checked against each other as well as against the specification.
 
 ## Repository structure
 
-`spec/` is the language-neutral contract, `tools/` holds the independent enumerator and the
-conformance runner, and `python/` is the reference implementation. Further implementations are
-meant to live in sibling directories and pass `tools/conformance.py`.
+```text
+spec/      Language-neutral contract: CLI, PRNG, JSON Schemas, scenarios, vectors, reference counts
+tools/     enumerate.py (oracle), conformance.py, crosscheck.py, make_figures.py, record_run.py
+python/    Reference implementation, plus the original monty-hall study tool
+java/      Java 17, Maven, no runtime dependencies (JUnit for tests)
+php/       PHP 8.4, Composer, brick/math at run time (PHPUnit and PHPStan for development)
+c/         C17, make, no dependencies beyond the C library
+db/        schema.sql for monty-lab results recorded from any implementation
+docs/      THEORY.md, DECISION_GUIDE.md, this file, SECURITY_AUDIT.md, figures/
+```
+
+Each implementation is self-contained: it reads no files at run time and shares no code with
+the others. They meet only at the command line. The data flow is:
+
+```text
+spec/*.json  --->  tools/conformance.py  <---  any CLI   (exact equality, bit-identical counts)
+any CLI x 4  --->  tools/crosscheck.py                    (all four agree on random invocations)
+any CLI      --->  tools/make_figures.py --->  docs/figures/*.svg, results.json
+any CLI      --->  tools/record_run.py   --->  SQLite file using db/schema.sql
+```
 
 ## Module structure
+
+The Python reference:
 
 ```text
 python/src/monty_hall/
@@ -56,6 +77,21 @@ and still back `monty-hall`. `lab` reuses only the Wilson interval from them.
 
 `domain` imports nothing from the other packages. A test asserts that the packaged schema is
 identical to `python/db/schema.sql`, so the two copies cannot drift.
+
+The other implementations follow the same split into model, PRNG, solver, simulator, optimum and
+CLI:
+
+| Concern | Java (`io.github.juanmafx.montylab`) | PHP (`php/src`) | C (`c/src`) |
+| --- | --- | --- | --- |
+| Exact fractions | `Fraction` over `java.math.BigInteger` | `Fraction` over `brick/math` | `rational.c`, fixed 4096-bit capacity |
+| Scenario and validation | `Scenario`, `Host`, `Strategy` | `Scenario`, `Host`, `Strategy` | `model.c` |
+| PRNG | `SplitMix64`, `Xoshiro256StarStar` | `Prng/` | `prng.c` |
+| Exact solver | `Solver` | `Solver` | `solver.c` |
+| Simulator and Wilson interval | `Simulator`, `Wilson` | `Simulator`, `Wilson` | `simulator.c` |
+| Optimum and parabola | `Optimum` | `Optimum`, `Parabola` | `optimum.c` |
+| JSON and command line | `Json`, `Cli` | `Cli` | `json.c`, `cli.c`, `main.c` |
+
+Details, including each language's integer handling, are in the language READMEs.
 
 ## The model
 
@@ -158,8 +194,25 @@ the denominator.
 | `tests/lab` | Examples, Hypothesis, fixed-seed z tests | PRNG values, validation, anchors, observations average back to the unconditional result, corner optima for uniform priors, least-squares minimality, convergence |
 | `tests/spec` | Spec files, JSON Schema, subprocess | Every scenario equals the independent enumerator, outputs match the schema, generated spec data is current |
 | `tools/conformance.py` | Black-box CLI runs | Exact equality, bit-identical counts, interval coverage, error handling |
+| `tools/crosscheck.py` | Differential runs across CLIs | All implementations return the same exit code and JSON on seeded random invocations |
+| `tools/make_figures.py --check` | Regeneration | The committed figures and `results.json` match what a CLI produces now |
+| Java, PHP and C suites | JUnit, PHPUnit with PHPStan level 9, C test runner plain and sanitized | Each implementation's internals, independently of the Python tests |
 
 ## Persistence
+
+### monty-lab results from any language
+
+`db/schema.sql` has one `lab_runs` row per recorded CLI document, with the normalized scenario,
+the implementation and its version, and the full JSON output. Per-command tables hold the values
+that are useful to query: exact fractions, simulation counts, and the optimum with the parabola's
+shape, vertex and regrets. Exact values stay as `"numerator/denominator"` text so nothing is
+rounded. `CHECK` constraints mirror the specification's ranges and require the per-command columns
+to be present exactly for their command. `lab_simulation_rates` computes rates, and
+`lab_simulation_disagreements` groups seeded simulations by scenario, seed and trial count and
+lists any group whose counts are not identical across recorded runs. `tools/record_run.py` is the
+loader; it uses parameterized SQL and one transaction per invocation.
+
+### The original monty-hall run database
 
 SQLite was chosen because storage is optional and needs no server. Tables are `STRICT`, and `CHECK`
 constraints reject impossible results such as more wins than valid games. All values are bound as
@@ -173,6 +226,10 @@ crafted trigger from running during `simulate`. Rows are type-checked when read.
 ## Recommended extensions
 
 - Replace per-game list building with an O(k) sparse sampler for very large door counts.
-- Implement the contract in Java, PHP and C and run `tools/conformance.py` against each.
 - Lift the 10-door enumeration limit for weighted priors with a faster inclusion-probability
-  method, if one that stays exact proves practical.
+  method, if one that stays exact proves practical. That would let the CLI confirm the
+  random-host interior optimum described in THEORY.md, section 8.3.
+- Model exploration with diminishing returns, for example noisy reveals, to test the concave
+  case of the hypothetical optimum parabola.
+- Add a check to `tools/record_run.py` that refuses database files whose objects differ from
+  `db/schema.sql`, as `monty-hall` does for its own schema.

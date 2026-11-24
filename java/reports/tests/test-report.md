@@ -1,6 +1,6 @@
 # Test Report
 
-- Generated (UTC): 2026-11-24T13:02:07Z
+- Generated (UTC): 2026-11-24T13:37:47Z
 - Build image: `maven:3.9.11-eclipse-temurin-17@sha256:e4a7ace3dc0d645ed97f8d9ad0b0d3f0b14fa8d150138f27f116d7105a639b82`
 - Build command: `mvn -B -ntp clean verify` (exit code 0)
 - Conformance runtime: openjdk version "17.0.21.1" 2026-11-17

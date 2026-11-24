@@ -1,10 +1,10 @@
 # Test Report
 
-- Generated (UTC): 2026-11-24T13:03:36Z
+- Generated (UTC): 2026-11-24T13:37:53Z
 - PHP: 8.4.28 (Linux)
 - PHPUnit: 13.4.8
 - Command: `vendor/bin/phpunit --log-junit reports/tests/junit.xml`, then `php tools/write-test-report.php`
-- Suite time (s): 9.511729
+- Suite time (s): 11.920866
 
 | Total | Passed | Failed | Errors | Skipped | Assertions |
 | ---: | ---: | ---: | ---: | ---: | ---: |

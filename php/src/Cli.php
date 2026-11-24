@@ -13,7 +13,7 @@ use MontyHall\Lab\Prng\Xoshiro256StarStar;
 
 final class Cli
 {
-    public const string VERSION = '1.0.0';
+    public const string VERSION = '3.0.0';
     public const int EXIT_OK = 0;
     public const int EXIT_USAGE = 2;
     public const int EXIT_BROKEN_PIPE = 141;

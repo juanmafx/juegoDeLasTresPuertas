@@ -1,6 +1,6 @@
 # Test Report
 
-- Generated (UTC): 2026-11-24T12:52:00Z
+- Generated (UTC): 2026-11-24T13:42:58Z
 - Python: 3.14.3 (CPython)
 - Operating system: Linux
 - pytest: 9.2.0
@@ -10,6 +10,6 @@
 
 | Total | Passed | Failed | Errors | Skipped |
 | ---: | ---: | ---: | ---: | ---: |
-| 264 | 264 | 0 | 0 | 0 |
+| 275 | 275 | 0 | 0 | 0 |
 
 Per-test results are in `junit.xml` in this directory.

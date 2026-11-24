@@ -1,8 +1,9 @@
 # juegoDeLasTresPuertas
 
 Exact and reproducible analysis of the Monty Hall problem and its generalizations, built as a
-decision lab with one shared specification and a Python reference implementation. The repository
-name is Spanish for "the game of the three doors".
+decision lab with one shared specification and four implementations that must agree exactly:
+Python (the reference), Java, PHP and C. The repository name is Spanish for "the game of the three
+doors".
 
 ## Purpose
 
@@ -27,8 +28,8 @@ number can be checked against an exact fraction.
   `biased` (prefers some doors) and `adversarial` (offers a switch only when you are right).
 - Three strategies: `stay`, `switch` and `mixed(q)`.
 - Exact results as reduced fractions, including results conditional on which doors were opened.
-- A deterministic simulator whose random stream is fully specified, so other languages can
-  reproduce its win counts bit for bit.
+- A deterministic simulator whose random stream is fully specified, so all four languages
+  produce bit-identical win counts for the same seed.
 - An exploration-cost model: with a cost `c` per reveal, `V(K) = P(win) - c*K`, its exact optimum
   over `K`, and a least-squares parabola fitted to `V(K)` (the "hypothetical optimum parabola").
 
@@ -42,28 +43,35 @@ number can be checked against an exact fraction.
 | 5 | 1 | informed | 1/5 | 4/15 |
 | 64 | 62 | informed | 1/64 | 63/64 |
 
-## The hypothetical optimum parabola
+## Theory and the hypothetical optimum parabola
 
-The idea was to treat reveals as exploration with a price and to approximate the trade-off by a
-parabola whose vertex marks the best amount of exploration. The lab computes both the exact
-discrete optimum and that parabola, and reports how far apart they are. The result so far is that,
-in this model, the trade-off is not shaped like an inverted parabola.
+[docs/THEORY.md](docs/THEORY.md) builds from three doors to a general rule for deciding with
+partial information: the update depends on how the information was generated, which is why the
+four hosts give different answers for the same opened door. It derives the `N`, `M`, `K`
+formulas, connects them to Bayesian updating and the value of information, and analyses the
+exploration-cost model. [docs/DECISION_GUIDE.md](docs/DECISION_GUIDE.md) turns the model into
+practical questions and is marked as interpretation.
 
-For a uniform prior the switch probability has the form `A + B / (N - 1 - K)` (informed, biased
-and adversarial hosts) or `M / (N - K)` (random host), and staying is constant or of the same
-form. These are convex in `K`, so `V(K)` is convex and its maximum is always at `K = 0` or at the
-largest feasible `K`: either do not explore or explore as much as possible. A property test
-checks this on generated games. A one-off random search during development, over 2,925 games
-with weighted priors and all four hosts, found no concave fit and no interior optimum either, but
-that search is not committed and is not a proof for weighted priors.
+The hypothetical optimum parabola is the author's modeling concept: treat reveals as exploration
+with a price and approximate net value against exploration by a parabola whose vertex marks the
+best amount of exploration. The lab reports both that parabola and the exact discrete optimum.
+In this model the trade-off is usually not an inverted parabola:
 
-So the fitted parabola is convex or linear in every case examined, and its vertex is a minimum.
-The lab still reports the vertex, its distance from the exact optimum, the regret of acting on
-the rounded vertex, and the choice the parabola itself would recommend. For ten doors with
-`c = 1/100`, the exact optimum is `K* = 8` with `V = 41/50`; the parabola's vertex is at
-`K = 241371/103790` (about 2.33), and rounding it to `K = 2` would lose `249/350` of a prize,
-while the highest point of the fitted parabola over the feasible range is `K = 8`, the right
-answer.
+- For the informed, biased and adversarial hosts with any prior, and the random host with a
+  uniform prior, `V(K)` is provably convex, so the exact optimum is `K = 0` or the largest
+  feasible `K`, and the switch from one to the other happens at a critical cost such as `1/N`.
+- A committed sweep of 4,140 `optimum` calls found no concave fit and no interior optimum; the
+  fitted vertex was a minimum in every convex case, while the end the parabola rates higher
+  matched the exact optimum in 3,559 of 3,600 fits.
+- Switching against the random host with a non-uniform prior can be slightly concave. An exact
+  example with 22 doors has an interior optimum, beyond the 10-door limit the CLI enforces for
+  explicit priors.
+
+For ten doors with `c = 1/100`, the exact optimum is `K* = 8` with `V = 41/50`; the parabola's
+vertex is at `K = 241371/103790` (about 2.33), and rounding it to `K = 2` would lose `249/350` of a
+prize, while the highest point of the fitted parabola over the feasible range is `K = 8`.
+
+![Exact V(K) and the fitted parabola](docs/figures/optimum-parabola.svg)
 
 ## Repository layout
 
@@ -73,6 +81,9 @@ tools/
   enumerate.py     Independent brute-force oracle for spec/scenarios.json
   conformance.py   Checks any language's CLI against spec/
   crosscheck.py    Runs random invocations through several CLIs and requires identical output
+  make_figures.py  Generates docs/figures/ (SVG charts and results.json) from CLI output
+  record_run.py    Stores exact, simulate and optimum output from any implementation in SQLite
+db/schema.sql      SQLite schema for monty-lab results from any language
 python/            Python reference implementation (package monty_hall)
   src/monty_hall/
     lab/           Decision lab: model, PRNG, exact solver, simulator, optimum, CLI contract
@@ -80,11 +91,11 @@ python/            Python reference implementation (package monty_hall)
                    The original two-policy study tool with optional SQLite storage
   tests/           Unit, property-based, statistical, integration, and spec suites
   tools/           Test report generator, spec data generator
-  db/schema.sql    Optional database schema
+  db/schema.sql    Schema of the original monty-hall tool's optional run database
 java/              Java 17 implementation of monty-lab, built with Maven (see java/README.md)
 php/               PHP 8.4 implementation of monty-lab, built with Composer (see php/README.md)
 c/                 C17 implementation of monty-lab, built with make (see c/README.md)
-docs/              Architecture and security notes
+docs/              Theory, decision guide, architecture, security audit, figures/
 ```
 
 There is no frontend or backend: these are command-line tools and a library. See
@@ -92,8 +103,11 @@ There is no frontend or backend: these are command-line tools and a library. See
 
 ## Quick start
 
-Requires Python 3.13 or newer and [uv](https://docs.astral.sh/uv/). There are no runtime
-dependencies.
+The Python reference requires Python 3.13 or newer and [uv](https://docs.astral.sh/uv/). There
+are no runtime dependencies in Python, Java or C; PHP uses the pinned `brick/math` library for
+arbitrary-precision integers. Build and test instructions for the other three are
+in [java/README.md](java/README.md) (Java 17, Maven), [php/README.md](php/README.md) (PHP 8.4,
+Composer) and [c/README.md](c/README.md) (C17, make).
 
 ```bash
 git clone https://github.com/juanmafx/juegoDeLasTresPuertas.git
@@ -103,6 +117,9 @@ uv run monty-lab exact
 uv run monty-lab simulate --seed 42 --trials 100000
 uv run monty-lab optimum --doors 10 --strategy switch --cost 1/100
 ```
+
+The same commands work with `java -jar java/target/monty-lab.jar`, `php php/bin/monty-lab` and
+`c/build/monty-lab` once built, and print the same JSON.
 
 ## Usage guide
 
@@ -154,9 +171,23 @@ configuration files.
 
 ## Database
 
-Persistence is **optional** and belongs to `monty-hall`. [python/db/schema.sql](python/db/schema.sql)
-is applied automatically when `--db` is used with `simulate`. `history` opens the file read-only.
-Both commands refuse a file whose run tables, views, indexes, or triggers differ from that schema.
+Persistence is **optional**, and there are two schemas.
+
+- [db/schema.sql](db/schema.sql) stores `monty-lab` results from any of the four
+  implementations. `tools/record_run.py` applies it and loads `exact`, `simulate` and `optimum`
+  JSON documents with the implementation's name and version, keeping each original document. The
+  view `lab_simulation_disagreements` lists seeded simulations whose counts differ between
+  recorded runs, which should always be empty.
+
+  ```bash
+  c/build/monty-lab simulate --seed 7 --trials 1000 > run.json
+  python3 -I tools/record_run.py --db lab.sqlite3 --implementation c --implementation-version 3.0.0 run.json
+  ```
+
+- [python/db/schema.sql](python/db/schema.sql) belongs to the original `monty-hall` tool. It is
+  applied automatically when `--db` is used with `simulate`, and `history` opens the file
+  read-only. Both commands refuse a file whose run tables, views, indexes, or triggers differ from
+  that schema.
 
 ## Testing
 
@@ -171,13 +202,20 @@ uv run mypy --strict ../tools
 uv run python -I ../tools/enumerate.py ../spec/scenarios.json --check
 uv run python tools/write_spec_data.py --check
 uv run python -I ../tools/conformance.py --cli "python -m monty_hall.lab"
+uv run python -I ../tools/make_figures.py --cli "$PWD/.venv/bin/python -m monty_hall.lab" --check
 uv run python tools/generate_test_report.py
 ```
+
+Each of the other implementations has its own suite and report, described in its README: JUnit in
+[java/reports/](java/reports/), PHPUnit and PHPStan in [php/reports/](php/reports/), and the C
+unit tests, plain and under AddressSanitizer and UndefinedBehaviorSanitizer, in
+[c/reports/](c/reports/). Each report directory also holds that implementation's conformance
+result.
 
 The suite covers input validation, PRNG vectors, property-based invariants (including that
 averaging over every possible reveal recovers the unconditional result), agreement with the
 independent enumerator on every scenario, statistical convergence with fixed seeds, JSON Schema
-validation of every output, the database, and both CLIs. The latest recorded run is in
+validation of every output, both databases, and both CLIs. The latest recorded run is in
 [python/reports/tests/test-report.md](python/reports/tests/test-report.md).
 
 `tools/conformance.py` takes the command that runs any implementation's CLI. It checks exact
@@ -203,14 +241,19 @@ derandomized.
 
 ## Security
 
-The tools make no network calls, have no runtime dependencies, use parameterized SQL, bound their
-numeric options, and refuse SQLite files whose run tables or views differ from the expected schema.
+The tools make no network calls, have no runtime dependencies apart from PHP's `brick/math`, use
+parameterized SQL and bound
+their numeric options. `monty-hall` refuses SQLite files whose run tables or views differ from the
+expected schema; `tools/record_run.py` does not perform that check, so use it only on database
+files you created.
 Neither random generator is cryptographically secure, and none needs to be. See
 [SECURITY.md](SECURITY.md) and [docs/SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md).
 
 ## Project history
 
-Originally created in 2019 by Juan Manuel Ramallo as a single Python script. Modernized in 2026.
+Originally created in 2019 by Juan Manuel Ramallo as a single Python script. Rebuilt as a tested
+package in version 2.0.0 and extended to the four-language decision lab in version 3.0.0, both in
+2026. See [CHANGELOG.md](CHANGELOG.md).
 The Monty Hall problem itself is not original to this project: it was posed by Steve Selvin in 1975
 and popularized by Marilyn vos Savant. The "Monty Fall" name comes from Jeffrey S. Rosenthal.
 
