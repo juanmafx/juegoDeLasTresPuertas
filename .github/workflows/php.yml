@@ -1,0 +1,41 @@
+name: PHP
+
+on:
+  push:
+    branches: [master, modernize/2026]
+    paths: ["php/**", "spec/**", "tools/conformance.py", ".github/workflows/php.yml"]
+  pull_request:
+    paths: ["php/**", "spec/**", "tools/conformance.py", ".github/workflows/php.yml"]
+
+permissions:
+  contents: read
+
+env:
+  PHP_IMAGE: php:8.4-cli@sha256:6b13a8678b38ca38e4e3950be57b664ed8c8706131a0586111f68792aede4c58
+  COMPOSER_IMAGE: composer@sha256:698d3801b2a622ace460c4743c781282fcbcb733a4cbf8b31c44731e846585e8
+
+jobs:
+  php:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install dependencies from the lock file without scripts or plugins
+        run: >
+          docker run --rm -u "$(id -u):$(id -g)" -e COMPOSER_HOME=/tmp/composer
+          -v "$GITHUB_WORKSPACE/php:/app" -w /app "$COMPOSER_IMAGE"
+          sh -c 'composer validate && composer install --no-scripts --no-plugins --no-interaction --prefer-dist && composer audit --locked'
+      - name: PHPStan
+        run: >
+          docker run --rm -u "$(id -u):$(id -g)" -v "$GITHUB_WORKSPACE:/app" -w /app/php "$PHP_IMAGE"
+          vendor/bin/phpstan analyse --no-progress --memory-limit=1G
+      - name: PHPUnit
+        run: >
+          docker run --rm --network none -u "$(id -u):$(id -g)" -v "$GITHUB_WORKSPACE:/app" -w /app/php "$PHP_IMAGE"
+          vendor/bin/phpunit
+      - name: Cross-language conformance
+        run: >
+          python3 -I tools/conformance.py --jobs 4
+          --cli "docker run --rm --network none -v $GITHUB_WORKSPACE:/app:ro $PHP_IMAGE php /app/php/bin/monty-lab"

@@ -1,0 +1,11 @@
+parameters:
+    level: 9
+    paths:
+        - src
+        - tests
+        - bin/monty-lab
+        - tools
+    tmpDir: .phpstan-cache
+    ignoreErrors:
+        -
+            identifier: missingType.iterableValue

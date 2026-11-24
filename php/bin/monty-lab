@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+
+// Entry point of the PHP monty-lab command-line program.
+
+declare(strict_types=1);
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+exit(MontyHall\Lab\Cli::main($argv ?? []));

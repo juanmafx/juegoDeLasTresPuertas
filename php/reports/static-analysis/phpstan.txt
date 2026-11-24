@@ -1,0 +1,4 @@
+Note: Using configuration file /app/php/phpstan.neon.
+
+ [OK] No errors                                                                 
+
