@@ -1,3 +1,5 @@
+from math import sqrt
+
 import pytest
 
 from monty_hall.analysis.intervals import wilson_interval, z_score
@@ -7,6 +9,18 @@ def test_wilson_matches_reference_value() -> None:
     interval = wilson_interval(50, 100, 0.95)
     assert interval.lower == pytest.approx(0.40383, abs=1e-4)
     assert interval.upper == pytest.approx(0.59617, abs=1e-4)
+
+
+@pytest.mark.parametrize(("successes", "trials"), [(1, 3), (343, 675), (332, 675), (5034, 10000)])
+def test_wilson_95_uses_the_spec_z_constant_bit_for_bit(successes: int, trials: int) -> None:
+    z = 1.959963984540054
+    z_squared = z * z
+    rate = successes / trials
+    denominator = 1 + z_squared / trials
+    center = (rate + z_squared / (2 * trials)) / denominator
+    margin = z * sqrt(rate * (1 - rate) / trials + z_squared / (4 * trials**2)) / denominator
+    interval = wilson_interval(successes, trials, 0.95)
+    assert (interval.lower, interval.upper) == (center - margin, center + margin)
 
 
 def test_wilson_extremes_reach_bounds() -> None:

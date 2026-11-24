@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from math import sqrt
 from statistics import NormalDist
 
+Z95 = 1.959963984540054
+
 
 @dataclass(frozen=True, slots=True)
 class ConfidenceInterval:
@@ -19,7 +21,7 @@ def wilson_interval(successes: int, trials: int, confidence: float = 0.95) -> Co
         raise ValueError("successes must be between 0 and trials")
     if not 0 < confidence < 1:
         raise ValueError("confidence must be strictly between 0 and 1")
-    z = NormalDist().inv_cdf((1 + confidence) / 2)
+    z = Z95 if confidence == 0.95 else NormalDist().inv_cdf((1 + confidence) / 2)
     z_squared = z * z
     rate = successes / trials
     denominator = 1 + z_squared / trials
