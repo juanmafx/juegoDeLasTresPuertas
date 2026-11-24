@@ -23,6 +23,17 @@ number and is treated as 1.0.0.
 - The README now states the switching result correctly. The earlier text said the player always
   wins under a condition that was worded incorrectly.
 
+### Security
+
+- `simulate` and `history` refuse SQLite files whose run tables, views, indexes, or triggers differ
+  from the packaged schema, and stored rows are type-checked when read.
+
+### Fixed
+
+- Text output no longer rounds confidence levels such as 0.999 up to `100%`.
+- An unusable `--db` path now fails before the simulation runs.
+- A closed output pipe now exits with code 141 instead of printing a Python error.
+
 ### Removed
 
 - **Breaking:** `MontyHall.py`, replaced by the `monty-hall` command. It remains in Git history.

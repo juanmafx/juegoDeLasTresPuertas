@@ -17,7 +17,9 @@ details. This is a personal project, so responses are best effort and no respons
 
 This is a local command-line tool. It has no network access, authentication, or runtime
 dependencies. Its inputs are command-line flags and an optional SQLite file path chosen by the
-person running it. Do not point it at a database file you do not trust.
+person running it. The tool refuses files whose run tables, views, indexes, or triggers differ from
+its schema, but that check does not make a hostile file safe to parse, so do not point it at a
+database file you do not trust.
 
 The `random` module is intentionally used for simulation and must not be reused for security
 purposes. Seeds are not secrets.

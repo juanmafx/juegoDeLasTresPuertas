@@ -79,7 +79,7 @@ no advantage. The advantage comes from the host's knowledge rather than from a d
 | `closed_form` | O(1) arithmetic operations | O(1) |
 | `play_game` | O(n) | O(n) |
 | `run_simulation` | O(T * n) | O(n) |
-| `enumerate_game_tree` | O(n^3 * C(n - 1, k)) fraction operations, upper bound | O(k * C(n - 1, k)) |
+| `enumerate_game_tree` | O(n^3 * k * C(n - 1, k)) operations, upper bound | O(k * C(n - 1, k)) |
 | `wilson_interval`, `z_score` | O(1) | O(1) |
 
 `T` is the number of trials. Enumeration is exponential in `n` for mid-range `k`, so it is limited
@@ -103,15 +103,20 @@ the denominator.
 | Suite | Technique | What it establishes |
 | --- | --- | --- |
 | `tests/unit` | Example-based | Validation, known fractions, reference interval values |
-| `tests/property` | Hypothesis, derandomized | Game invariants, closed form equals enumeration |
+| `tests/property` | Hypothesis, derandomized | Game invariants, closed form equals enumeration for 3 to 6 doors |
 | `tests/statistical` | Fixed-seed z and chi-square tests | Simulation converges, sampling is unbiased |
-| `tests/integration` | Real SQLite and CLI | Round trips, constraints, exit codes |
+| `tests/integration` | Real SQLite and CLI | Round trips, constraints, tampered schemas, exit codes |
 
 ## Persistence
 
 SQLite was chosen because storage is optional and needs no server. Tables are `STRICT`, and `CHECK`
 constraints reject impossible results such as more wins than valid games. All values are bound as
-parameters. `history` connects in read-only mode so it cannot alter a file it is pointed at.
+parameters. `history` connects in read-only mode, so it does not change the database file. For a
+database in WAL mode, SQLite can still create `-wal` and `-shm` files next to it.
+
+Before any query, the repository compares the objects attached to its table and view with those of
+the packaged schema, and refuses a mismatch. This stops a crafted view from hanging `history` and a
+crafted trigger from running during `simulate`. Rows are type-checked when read.
 
 ## Recommended extensions
 

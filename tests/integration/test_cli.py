@@ -1,10 +1,62 @@
 import json
+import os
 import sqlite3
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
 
 from monty_hall.cli.main import main
+from monty_hall.simulation.runner import SimulationRequest, SimulationResult
+
+
+def test_text_output_keeps_fractional_confidence(capsys: pytest.CaptureFixture[str]) -> None:
+    assert main(["simulate", "--trials", "100", "--seed", "1", "--confidence", "0.999"]) == 0
+    assert "99.9% CI" in capsys.readouterr().out
+
+
+def test_unusable_database_fails_before_simulating(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def fail(_: SimulationRequest) -> SimulationResult:
+        raise AssertionError("simulation must not run")
+
+    monkeypatch.setattr("monty_hall.cli.main.run_simulation", fail)
+    database = tmp_path / "missing" / "runs.sqlite3"
+    assert main(["simulate", "--trials", "10", "--seed", "1", "--db", str(database)]) == 2
+    assert capsys.readouterr().err.startswith("error:")
+
+
+def test_closed_output_pipe_exits_without_traceback() -> None:
+    read_end, write_end = os.pipe()
+    os.close(read_end)
+    completed = subprocess.run(
+        [sys.executable, "-m", "monty_hall", "exact"],
+        stdout=write_end,
+        stderr=subprocess.PIPE,
+        check=False,
+        text=True,
+    )
+    os.close(write_end)
+    assert completed.returncode == 141
+    assert completed.stderr == ""
+
+
+def test_history_reports_tampered_view_without_traceback(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    database = tmp_path / "tampered.sqlite3"
+    connection = sqlite3.connect(database)
+    connection.execute(
+        "CREATE VIEW simulation_run_rates AS SELECT 1 AS id, x'00ff' AS created_at, 3 AS doors, "
+        "1 AS opened_doors, 'informed' AS host_policy, 1 AS seed, 1 AS valid_games, "
+        "0.5 AS stay_win_rate, 0.5 AS switch_win_rate"
+    )
+    connection.commit()
+    connection.close()
+    assert main(["history", "--db", str(database)]) == 2
+    assert capsys.readouterr().err.startswith("error:")
 
 
 def test_simulate_json_is_reproducible(capsys: pytest.CaptureFixture[str]) -> None:

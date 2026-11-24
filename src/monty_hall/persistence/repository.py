@@ -2,10 +2,17 @@ import sqlite3
 from dataclasses import dataclass
 from importlib.resources import files
 from pathlib import Path
-from types import TracebackType
-from typing import Self
+from types import NoneType, TracebackType
+from typing import Any, Self
 
+from monty_hall.domain.models import ConfigurationError
 from monty_hall.simulation.runner import SimulationResult
+
+SELECT_SCHEMA_OBJECTS = """
+SELECT type, name, tbl_name, sql
+FROM sqlite_schema
+WHERE lower(tbl_name) IN ('simulation_runs', 'simulation_run_rates')
+"""
 
 INSERT_RUN = """
 INSERT INTO simulation_runs (
@@ -35,15 +42,57 @@ class StoredRun:
     switch_win_rate: float | None
 
 
+STORED_RUN_TYPES: tuple[type | tuple[type, ...], ...] = (
+    int,
+    str,
+    int,
+    int,
+    str,
+    int,
+    int,
+    (float, NoneType),
+    (float, NoneType),
+)
+
+
+def parse_stored_run(row: tuple[Any, ...]) -> StoredRun:
+    if len(row) != len(STORED_RUN_TYPES) or not all(
+        isinstance(value, expected) for value, expected in zip(row, STORED_RUN_TYPES, strict=True)
+    ):
+        raise ConfigurationError("database contains an invalid run")
+    return StoredRun(*row)
+
+
+def _schema_objects(connection: sqlite3.Connection) -> set[tuple[str, str, str, str]]:
+    return set(connection.execute(SELECT_SCHEMA_OBJECTS).fetchall())
+
+
+def _expected_schema_objects(schema: str) -> set[tuple[str, str, str, str]]:
+    reference = sqlite3.connect(":memory:")
+    try:
+        reference.executescript(schema)
+        return _schema_objects(reference)
+    finally:
+        reference.close()
+
+
 class RunRepository:
     def __init__(self, path: Path, *, read_only: bool = False) -> None:
+        schema = files("monty_hall.persistence").joinpath("schema.sql").read_text("utf-8")
         if read_only:
             uri = f"{path.resolve().as_uri()}?mode=ro"
             self._connection = sqlite3.connect(uri, uri=True)
-            return
-        self._connection = sqlite3.connect(path)
-        schema = files("monty_hall.persistence").joinpath("schema.sql").read_text("utf-8")
-        self._connection.executescript(schema)
+        else:
+            self._connection = sqlite3.connect(path)
+        try:
+            existing = _schema_objects(self._connection)
+            if (read_only or existing) and existing != _expected_schema_objects(schema):
+                raise ConfigurationError("database schema does not match the monty-hall schema")
+            if not existing:
+                self._connection.executescript(schema)
+        except BaseException:
+            self._connection.close()
+            raise
 
     def __enter__(self) -> Self:
         return self
@@ -81,4 +130,4 @@ class RunRepository:
         if not 1 <= limit <= 1000:
             raise ValueError("limit must be between 1 and 1000")
         rows = self._connection.execute(SELECT_RECENT_RUNS, (limit,)).fetchall()
-        return [StoredRun(*row) for row in rows]
+        return [parse_stored_run(row) for row in rows]

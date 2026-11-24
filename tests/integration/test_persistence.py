@@ -1,13 +1,88 @@
 import sqlite3
 from pathlib import Path
+from typing import Any
 
 import pytest
 
-from monty_hall.domain.models import GameConfig, HostPolicy
-from monty_hall.persistence.repository import RunRepository
+from monty_hall.domain.models import ConfigurationError, GameConfig, HostPolicy
+from monty_hall.persistence.repository import RunRepository, parse_stored_run
 from monty_hall.simulation.runner import SimulationRequest, SimulationResult, run_simulation
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def _execute(path: Path, statement: str) -> None:
+    connection = sqlite3.connect(path)
+    connection.execute(statement)
+    connection.commit()
+    connection.close()
+
+
+@pytest.mark.parametrize("read_only", [True, False])
+@pytest.mark.parametrize(
+    "statement",
+    [
+        "CREATE VIEW simulation_run_rates AS SELECT 1 AS id",
+        "CREATE VIEW simulation_run_rates AS WITH RECURSIVE r(x) AS "
+        "(SELECT 1 UNION ALL SELECT x + 1 FROM r) SELECT x AS id FROM r",
+        "CREATE TABLE simulation_runs (id INTEGER PRIMARY KEY)",
+        "CREATE TABLE SIMULATION_RUNS (id INTEGER PRIMARY KEY)",
+    ],
+)
+def test_rejects_tampered_schema(tmp_path: Path, statement: str, read_only: bool) -> None:
+    path = tmp_path / "tampered.sqlite3"
+    _execute(path, statement)
+    before = path.read_bytes()
+    with pytest.raises(ConfigurationError, match="schema"):
+        RunRepository(path, read_only=read_only)
+    assert path.read_bytes() == before
+
+
+def test_rejects_added_trigger(tmp_path: Path) -> None:
+    path = tmp_path / "runs.sqlite3"
+    RunRepository(path).__exit__(None, None, None)
+    _execute(
+        path,
+        "CREATE TRIGGER wipe AFTER INSERT ON simulation_runs "
+        "BEGIN DELETE FROM simulation_runs; END",
+    )
+    with pytest.raises(ConfigurationError, match="schema"):
+        RunRepository(path)
+
+
+def test_reopening_a_valid_database_keeps_its_runs(tmp_path: Path) -> None:
+    path = tmp_path / "runs.sqlite3"
+    with RunRepository(path) as repository:
+        run_id = repository.save(_result())
+    with RunRepository(path) as repository:
+        repository.save(_result(8))
+    with RunRepository(path, read_only=True) as repository:
+        assert run_id in [run.id for run in repository.recent()]
+
+
+def test_schema_is_added_next_to_unrelated_tables(tmp_path: Path) -> None:
+    path = tmp_path / "shared.sqlite3"
+    _execute(path, "CREATE TABLE unrelated (id INTEGER)")
+    with RunRepository(path) as repository:
+        assert repository.save(_result()) == 1
+
+
+@pytest.mark.parametrize(
+    "row",
+    [
+        (1, b"\x00", 3, 1, "informed", 1, 1, 0.5, 0.5),
+        (1, "now", 3, 1, "informed", 1, 1, 0.5),
+        (1, "now", "3", 1, "informed", 1, 1, 0.5, 0.5),
+    ],
+)
+def test_parse_stored_run_rejects_invalid_rows(row: tuple[Any, ...]) -> None:
+    with pytest.raises(ConfigurationError, match="invalid run"):
+        parse_stored_run(row)
+
+
+def test_parse_stored_run_accepts_null_rates() -> None:
+    run = parse_stored_run((1, "now", 3, 1, "random", 1, 0, None, None))
+    assert run.stay_win_rate is None
 
 
 def _result(seed: int = 7) -> SimulationResult:

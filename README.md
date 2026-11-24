@@ -86,7 +86,8 @@ uv run monty-hall simulate --trials 100000 --seed 1 --db runs.sqlite3
 uv run monty-hall history --db runs.sqlite3 --limit 10
 ```
 
-Invalid input exits with code 2 and a message on standard error.
+Invalid input exits with code 2 and a message on standard error. If the reader of standard output
+closes early, as with `| head`, the command exits with code 141.
 
 ## Configuration
 
@@ -109,7 +110,8 @@ The tool reads no environment variables or configuration files. Everything is a 
 
 Persistence is **optional**. The game has no natural need for storage, so
 [db/schema.sql](db/schema.sql) provides a small schema for keeping run results. It is applied
-automatically when `--db` is used with `simulate`. `history` opens the file read-only.
+automatically when `--db` is used with `simulate`. `history` opens the file read-only. Both commands
+refuse a file whose run tables, views, indexes, or triggers differ from that schema.
 
 ## Testing
 
@@ -122,8 +124,9 @@ uv run python tools/generate_test_report.py
 ```
 
 The suite covers input validation, property-based game invariants, agreement between the closed
-form and full enumeration, statistical convergence with fixed seeds, the database constraints, and
-the CLI. The latest recorded run is in [reports/tests/test-report.md](reports/tests/test-report.md).
+form and full enumeration for 3 to 6 doors, statistical convergence with fixed seeds, the database
+constraints, rejection of tampered database schemas, and the CLI. The latest recorded run is in
+[reports/tests/test-report.md](reports/tests/test-report.md).
 
 ## Reproducibility
 
@@ -134,10 +137,10 @@ run derandomized.
 
 ## Security
 
-The tool makes no network calls, has no runtime dependencies, uses parameterized SQL, and validates
-all input. The `random` module is used deliberately because this is a simulation and nothing here
-is a security token. See [SECURITY.md](SECURITY.md) and
-[docs/SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md).
+The tool makes no network calls, has no runtime dependencies, uses parameterized SQL, bounds its
+numeric options, and refuses SQLite files whose run tables or views differ from the expected schema.
+The `random` module is used deliberately because this is a simulation and nothing here is a security
+token. See [SECURITY.md](SECURITY.md) and [docs/SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md).
 
 ## Project history
 

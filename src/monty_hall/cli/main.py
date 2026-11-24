@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 import secrets
 import sqlite3
 import sys
@@ -14,6 +15,8 @@ from monty_hall.domain.models import ConfigurationError, GameConfig, HostPolicy
 from monty_hall.persistence.repository import RunRepository
 from monty_hall.simulation.report import build_report
 from monty_hall.simulation.runner import MAX_SEED, SimulationRequest, run_simulation
+
+EXIT_BROKEN_PIPE = 141
 
 
 def _confidence(raw: str) -> float:
@@ -74,17 +77,19 @@ def _format_strategy(name: str, summary: dict[str, Any], confidence: float) -> s
     return (
         f"{name:<7} wins={summary['wins']} rate={summary['rate']:.6f} "
         f"exact={summary['expected']:.6f} "
-        f"{confidence:.0%} CI=[{lower:.6f}, {upper:.6f}] z={summary['z_score']:+.3f}"
+        f"{confidence * 100:.10g}% CI=[{lower:.6f}, {upper:.6f}] z={summary['z_score']:+.3f}"
     )
 
 
 def _simulate(args: argparse.Namespace) -> int:
     seed = args.seed if args.seed is not None else secrets.randbelow(MAX_SEED + 1)
     request = SimulationRequest(GameConfig(args.doors, args.opened), args.host, args.trials, seed)
-    result = run_simulation(request)
-    report = build_report(result, args.confidence)
-    if args.db is not None:
+    if args.db is None:
+        report = build_report(run_simulation(request), args.confidence)
+    else:
         with RunRepository(args.db) as repository:
+            result = run_simulation(request)
+            report = build_report(result, args.confidence)
             report["run_id"] = repository.save(result)
     if args.format == "json":
         print(json.dumps(report, indent=2))
@@ -127,11 +132,22 @@ def _history(args: argparse.Namespace) -> int:
     return 0
 
 
+def _discard_stdout() -> None:
+    devnull = os.open(os.devnull, os.O_WRONLY)
+    os.dup2(devnull, sys.stdout.fileno())
+    os.close(devnull)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     handlers = {"simulate": _simulate, "exact": _exact, "history": _history}
     try:
-        return handlers[args.command](args)
+        exit_code = handlers[args.command](args)
+        sys.stdout.flush()
+        return exit_code
+    except BrokenPipeError:
+        _discard_stdout()
+        return EXIT_BROKEN_PIPE
     except (ValueError, sqlite3.Error, OSError) as error:
         print(f"error: {error}", file=sys.stderr)
         return 2

@@ -1,6 +1,6 @@
 # Release Notes: 2.0.0
 
-Status: prepared, not tagged or published.
+Status: prepared, not tagged or released.
 
 Version 2.0.0 rebuilds the 2019 Monty Hall script as a small tested package for studying the
 problem. It now simulates the host, generalizes to many doors, and checks each result against an
