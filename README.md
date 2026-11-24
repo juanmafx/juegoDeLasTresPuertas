@@ -72,6 +72,7 @@ spec/              Shared specification: CLI contract, PRNG, JSON Schemas, scena
 tools/
   enumerate.py     Independent brute-force oracle for spec/scenarios.json
   conformance.py   Checks any language's CLI against spec/
+  crosscheck.py    Runs random invocations through several CLIs and requires identical output
 python/            Python reference implementation (package monty_hall)
   src/monty_hall/
     lab/           Decision lab: model, PRNG, exact solver, simulator, optimum, CLI contract
@@ -80,6 +81,9 @@ python/            Python reference implementation (package monty_hall)
   tests/           Unit, property-based, statistical, integration, and spec suites
   tools/           Test report generator, spec data generator
   db/schema.sql    Optional database schema
+java/              Java 17 implementation of monty-lab, built with Maven (see java/README.md)
+php/               PHP 8.4 implementation of monty-lab, built with Composer (see php/README.md)
+c/                 C17 implementation of monty-lab, built with make (see c/README.md)
 docs/              Architecture and security notes
 ```
 
@@ -182,6 +186,12 @@ fractions for equality, simulation counts for bit-identical equality with
 inside the Wilson 95% intervals. About one interval in twenty is expected to miss by chance, so it
 fails only when misses exceed what a 0.1% binomial tail allows, or when any deviation reaches
 five standard errors.
+
+`tools/crosscheck.py` compares implementations with each other rather than with spec/. It
+generates random `exact`, `simulate` and `optimum` invocations from a fixed seed, including some
+invalid ones, runs each through every CLI it is given, and fails if any exit code or JSON value
+differs, floating-point fields included. The `Conformance` workflow builds all four
+implementations, runs `conformance.py` against each, and then runs `crosscheck.py` across them.
 
 ## Reproducibility
 

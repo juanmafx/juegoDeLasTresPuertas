@@ -1,0 +1,65 @@
+name: Conformance
+
+on:
+  push:
+    branches: [master, modernize/2026]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  MAVEN_IMAGE: maven:3.9.11-eclipse-temurin-17@sha256:e4a7ace3dc0d645ed97f8d9ad0b0d3f0b14fa8d150138f27f116d7105a639b82
+  PHP_IMAGE: php:8.4-cli@sha256:6b13a8678b38ca38e4e3950be57b664ed8c8706131a0586111f68792aede4c58
+  COMPOSER_IMAGE: composer@sha256:698d3801b2a622ace460c4743c781282fcbcb733a4cbf8b31c44731e846585e8
+
+jobs:
+  all-languages:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d
+        with:
+          version: "0.13.5"
+          enable-cache: false
+      - name: Python reference
+        working-directory: python
+        run: uv sync --locked --python 3.14
+      - name: Java jar in the pinned Maven image
+        run: |
+          mkdir -p "${RUNNER_TEMP}/m2"
+          docker run --rm -u "$(id -u):$(id -g)" \
+            -v "${GITHUB_WORKSPACE}:/work" -w /work/java \
+            -v "${RUNNER_TEMP}/m2:/var/maven/.m2" -e MAVEN_CONFIG=/var/maven/.m2 \
+            "${MAVEN_IMAGE}" mvn -B -ntp -Duser.home=/var/maven -DskipTests package
+      - name: PHP dependencies from the lock file without scripts or plugins
+        run: >
+          docker run --rm -u "$(id -u):$(id -g)" -e COMPOSER_HOME=/tmp/composer
+          -v "${GITHUB_WORKSPACE}/php:/app" -w /app "${COMPOSER_IMAGE}"
+          composer install --no-dev --no-scripts --no-plugins --no-interaction --prefer-dist
+      - name: C binary
+        working-directory: c
+        run: make build/monty-lab
+      - name: Write the CLI commands
+        run: |
+          {
+            echo "PY_CLI=${GITHUB_WORKSPACE}/python/.venv/bin/python -m monty_hall.lab"
+            echo "JAVA_CLI=docker run --rm -i --network none -v ${GITHUB_WORKSPACE}:/work:ro -w /work ${MAVEN_IMAGE} java -jar java/target/monty-lab.jar"
+            echo "PHP_CLI=docker run --rm -i --network none -v ${GITHUB_WORKSPACE}:/work:ro -w /work ${PHP_IMAGE} php php/bin/monty-lab"
+            echo "C_CLI=${GITHUB_WORKSPACE}/c/build/monty-lab"
+          } >> "${GITHUB_ENV}"
+      - name: Conformance, Python
+        run: uv run --no-project --python 3.14 python -I tools/conformance.py --jobs 4 --cli "${PY_CLI}"
+      - name: Conformance, Java
+        run: uv run --no-project --python 3.14 python -I tools/conformance.py --jobs 4 --cli "${JAVA_CLI}"
+      - name: Conformance, PHP
+        run: uv run --no-project --python 3.14 python -I tools/conformance.py --jobs 4 --cli "${PHP_CLI}"
+      - name: Conformance, C
+        run: uv run --no-project --python 3.14 python -I tools/conformance.py --jobs 4 --cli "${C_CLI}"
+      - name: Four-way differential check
+        run: >
+          uv run --no-project --python 3.14 python -I tools/crosscheck.py --count 300 --jobs 4
+          --cli "python=${PY_CLI}" --cli "java=${JAVA_CLI}" --cli "php=${PHP_CLI}" --cli "c=${C_CLI}"

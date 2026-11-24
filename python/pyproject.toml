@@ -50,6 +50,7 @@ select = ["E", "F", "W", "I", "B", "C4", "UP", "S", "SIM", "PT", "RET", "RUF"]
 "src/monty_hall/simulation/runner.py" = ["S311"]
 "tools/generate_test_report.py" = ["S314", "S603"]
 "../tools/conformance.py" = ["S603"]
+"../tools/crosscheck.py" = ["S311", "S603"]
 
 [tool.mypy]
 strict = true
