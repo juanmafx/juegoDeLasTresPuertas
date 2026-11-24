@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440" role="img" aria-label="The hypothetical optimum parabola against the exact curve">
+<title>The hypothetical optimum parabola against the exact curve</title>
+<style>
+.surface { fill: #fcfcfb; }
+.title { fill: #0b0b0b; font: 600 16px sans-serif; }
+.subtitle { fill: #52514e; font: 13px sans-serif; }
+.label { fill: #52514e; font: 12px sans-serif; }
+.value { fill: #0b0b0b; font: 12px sans-serif; }
+.tick { fill: #898781; font: 11px sans-serif; }
+.grid { stroke: #e1e0d9; stroke-width: 1; }
+.axis { stroke: #c3c2b7; stroke-width: 1; }
+.ref { stroke: #898781; stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; }
+.s1 { stroke: #2a78d6; fill: #2a78d6; } .s2 { stroke: #eb6834; fill: #eb6834; }
+.s3 { stroke: #1baf7a; fill: #1baf7a; } .s4 { stroke: #6250d6; fill: #6250d6; }
+.q1 { stroke: #9ec5f4; fill: #9ec5f4; } .q2 { stroke: #5598e7; fill: #5598e7; }
+.q3 { stroke: #256abf; fill: #256abf; } .q4 { stroke: #0d366b; fill: #0d366b; }
+.line { fill: none; stroke-width: 2; stroke-linejoin: round; }
+.dashed { fill: none; stroke-width: 2; stroke-dasharray: 6 4; }
+.dot { stroke: #fcfcfb; stroke-width: 2; }
+@media (prefers-color-scheme: dark) {
+  .surface { fill: #1a1a19; } .title, .value { fill: #f0efec; } .subtitle, .label { fill: #c3c2b7; }
+  .grid { stroke: #2c2c2a; } .axis { stroke: #383835; } .dot { stroke: #1a1a19; }
+  .s1 { stroke: #3987e5; fill: #3987e5; } .s2 { stroke: #d95926; fill: #d95926; }
+  .s3 { stroke: #199e70; fill: #199e70; } .s4 { stroke: #9085e9; fill: #9085e9; }
+  .q1 { stroke: #2a4f7d; fill: #2a4f7d; } .q2 { stroke: #256abf; fill: #256abf; }
+  .q3 { stroke: #5598e7; fill: #5598e7; } .q4 { stroke: #b7d3f6; fill: #b7d3f6; }
+}
+</style>
+<rect class="surface" width="760" height="440"/>
+<text class="title" x="20" y="28">The hypothetical optimum parabola against the exact curve</text>
+<text class="subtitle" x="20" y="48">10 doors, informed host, switch, cost 1/100 per reveal: the fit is convex, so its vertex is a minimum</text>
+<line class="grid" x1="72.0" x2="564.0" y1="380.0" y2="380.0"/>
+<text class="tick" x="64.0" y="384.0" text-anchor="end">-0.25</text>
+<line class="grid" x1="72.0" x2="564.0" y1="320.8" y2="320.8"/>
+<text class="tick" x="64.0" y="324.8" text-anchor="end">0</text>
+<line class="grid" x1="72.0" x2="564.0" y1="261.6" y2="261.6"/>
+<text class="tick" x="64.0" y="265.6" text-anchor="end">0.25</text>
+<line class="grid" x1="72.0" x2="564.0" y1="202.4" y2="202.4"/>
+<text class="tick" x="64.0" y="206.4" text-anchor="end">0.5</text>
+<line class="grid" x1="72.0" x2="564.0" y1="143.2" y2="143.2"/>
+<text class="tick" x="64.0" y="147.2" text-anchor="end">0.75</text>
+<line class="grid" x1="72.0" x2="564.0" y1="84.0" y2="84.0"/>
+<text class="tick" x="64.0" y="88.0" text-anchor="end">1</text>
+<line class="axis" x1="72.0" x2="564.0" y1="380.0" y2="380.0"/>
+<text class="tick" x="72.0" y="398.0" text-anchor="middle">0</text>
+<text class="tick" x="133.5" y="398.0" text-anchor="middle">1</text>
+<text class="tick" x="195.0" y="398.0" text-anchor="middle">2</text>
+<text class="tick" x="256.5" y="398.0" text-anchor="middle">3</text>
+<text class="tick" x="318.0" y="398.0" text-anchor="middle">4</text>
+<text class="tick" x="379.5" y="398.0" text-anchor="middle">5</text>
+<text class="tick" x="441.0" y="398.0" text-anchor="middle">6</text>
+<text class="tick" x="502.5" y="398.0" text-anchor="middle">7</text>
+<text class="tick" x="564.0" y="398.0" text-anchor="middle">8</text>
+<text class="label" x="318.0" y="420.0" text-anchor="middle">Doors opened by the host (K)</text>
+<text class="label" x="72.0" y="74.0" text-anchor="start">Net value V(K) = P(win | switch, K) - K/100</text>
+<g><title>Least-squares parabola</title>
+<path class="s2 dashed" d="M72.0,282.6L78.2,284.7L84.3,286.8L90.5,288.8L96.6,290.7L102.8,292.4L108.9,294.1L115.0,295.7L121.2,297.2L127.3,298.6L133.5,299.9L139.7,301.1L145.8,302.2L151.9,303.3L158.1,304.2L164.2,305.0L170.4,305.8L176.6,306.4L182.7,307.0L188.8,307.4L195.0,307.8L201.2,308.0L207.3,308.2L213.4,308.3L219.6,308.2L225.8,308.1L231.9,307.9L238.1,307.6L244.2,307.2L250.3,306.7L256.5,306.1L262.6,305.4L268.8,304.6L274.9,303.8L281.1,302.8L287.2,301.7L293.4,300.6L299.6,299.3L305.7,297.9L311.9,296.5L318.0,294.9L324.1,293.3L330.3,291.6L336.4,289.7L342.6,287.8L348.8,285.8L354.9,283.7L361.1,281.5L367.2,279.2L373.4,276.8L379.5,274.3L385.6,271.7L391.8,269.0L397.9,266.2L404.1,263.4L410.2,260.4L416.4,257.3L422.6,254.2L428.7,250.9L434.9,247.6L441.0,244.1L447.1,240.6L453.3,237.0L459.4,233.2L465.6,229.4L471.8,225.5L477.9,221.5L484.1,217.4L490.2,213.2L496.4,208.9L502.5,204.5L508.6,200.0L514.8,195.4L521.0,190.7L527.1,186.0L533.2,181.1L539.4,176.1L545.5,171.1L551.7,165.9L557.9,160.7L564.0,155.3"/>
+</g>
+<g><title>Exact V(K)</title>
+<path class="s1 line" d="M72.0,297.1L133.5,296.5L195.0,295.1L256.5,292.4L318.0,287.6L379.5,279.4L441.0,264.0L502.5,230.8L564.0,126.6"/>
+</g>
+<circle class="s1 dot" cx="72.0" cy="297.1" r="4.5"><title>Exact V(K): K = 0: V = 1/10</title></circle>
+<circle class="s1 dot" cx="133.5" cy="296.5" r="4.5"><title>Exact V(K): K = 1: V = 41/400</title></circle>
+<circle class="s1 dot" cx="195.0" cy="295.1" r="4.5"><title>Exact V(K): K = 2: V = 19/175</title></circle>
+<circle class="s1 dot" cx="256.5" cy="292.4" r="4.5"><title>Exact V(K): K = 3: V = 3/25</title></circle>
+<circle class="s1 dot" cx="318.0" cy="287.6" r="4.5"><title>Exact V(K): K = 4: V = 7/50</title></circle>
+<circle class="s1 dot" cx="379.5" cy="279.4" r="4.5"><title>Exact V(K): K = 5: V = 7/40</title></circle>
+<circle class="s1 dot" cx="441.0" cy="264.0" r="4.5"><title>Exact V(K): K = 6: V = 6/25</title></circle>
+<circle class="s1 dot" cx="502.5" cy="230.8" r="4.5"><title>Exact V(K): K = 7: V = 19/50</title></circle>
+<circle class="s1 dot" cx="564.0" cy="126.6" r="4.5"><title>Exact V(K): K = 8: V = 41/50</title></circle>
+<circle class="s2 dot" cx="215.0" cy="308.3" r="6"><title>Vertex K = 241371/103790, a minimum</title></circle>
+<text class="value" x="215.0" y="332.3" text-anchor="middle">vertex K = 2.33 (a minimum)</text>
+<circle class="s1 dot" cx="564.0" cy="126.6" r="7"><title>Exact optimum K* = 8</title></circle>
+<text class="value" x="554.0" y="122.6" text-anchor="end">K* = 8, V = 41/50</text>
+<line class="s1 line" x1="578.0" x2="600.0" y1="94.0" y2="94.0"/>
+<text class="label" x="608.0" y="98.0">Exact V(K)</text>
+<line class="s2 dashed" x1="578.0" x2="600.0" y1="116.0" y2="116.0"/>
+<text class="label" x="608.0" y="120.0">Fitted parabola</text>
+</svg>

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440" role="img" aria-label="A biased host: the opened door carries information">
+<title>A biased host: the opened door carries information</title>
+<style>
+.surface { fill: #fcfcfb; }
+.title { fill: #0b0b0b; font: 600 16px sans-serif; }
+.subtitle { fill: #52514e; font: 13px sans-serif; }
+.label { fill: #52514e; font: 12px sans-serif; }
+.value { fill: #0b0b0b; font: 12px sans-serif; }
+.tick { fill: #898781; font: 11px sans-serif; }
+.grid { stroke: #e1e0d9; stroke-width: 1; }
+.axis { stroke: #c3c2b7; stroke-width: 1; }
+.ref { stroke: #898781; stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; }
+.s1 { stroke: #2a78d6; fill: #2a78d6; } .s2 { stroke: #eb6834; fill: #eb6834; }
+.s3 { stroke: #1baf7a; fill: #1baf7a; } .s4 { stroke: #6250d6; fill: #6250d6; }
+.q1 { stroke: #9ec5f4; fill: #9ec5f4; } .q2 { stroke: #5598e7; fill: #5598e7; }
+.q3 { stroke: #256abf; fill: #256abf; } .q4 { stroke: #0d366b; fill: #0d366b; }
+.line { fill: none; stroke-width: 2; stroke-linejoin: round; }
+.dashed { fill: none; stroke-width: 2; stroke-dasharray: 6 4; }
+.dot { stroke: #fcfcfb; stroke-width: 2; }
+@media (prefers-color-scheme: dark) {
+  .surface { fill: #1a1a19; } .title, .value { fill: #f0efec; } .subtitle, .label { fill: #c3c2b7; }
+  .grid { stroke: #2c2c2a; } .axis { stroke: #383835; } .dot { stroke: #1a1a19; }
+  .s1 { stroke: #3987e5; fill: #3987e5; } .s2 { stroke: #d95926; fill: #d95926; }
+  .s3 { stroke: #199e70; fill: #199e70; } .s4 { stroke: #9085e9; fill: #9085e9; }
+  .q1 { stroke: #2a4f7d; fill: #2a4f7d; } .q2 { stroke: #256abf; fill: #256abf; }
+  .q3 { stroke: #5598e7; fill: #5598e7; } .q4 { stroke: #b7d3f6; fill: #b7d3f6; }
+}
+</style>
+<rect class="surface" width="760" height="440"/>
+<text class="title" x="20" y="28">A biased host: the opened door carries information</text>
+<text class="subtitle" x="20" y="48">Three doors, pick door 0, host weights 1, 20p, 20(1-p); switching never falls below 1/2</text>
+<line class="grid" x1="72.0" x2="564.0" y1="380.0" y2="380.0"/>
+<text class="tick" x="64.0" y="384.0" text-anchor="end">0.4</text>
+<line class="grid" x1="72.0" x2="564.0" y1="330.7" y2="330.7"/>
+<text class="tick" x="64.0" y="334.7" text-anchor="end">0.5</text>
+<line class="grid" x1="72.0" x2="564.0" y1="281.3" y2="281.3"/>
+<text class="tick" x="64.0" y="285.3" text-anchor="end">0.6</text>
+<line class="grid" x1="72.0" x2="564.0" y1="248.4" y2="248.4"/>
+<text class="tick" x="64.0" y="252.4" text-anchor="end">0.67</text>
+<line class="grid" x1="72.0" x2="564.0" y1="182.7" y2="182.7"/>
+<text class="tick" x="64.0" y="186.7" text-anchor="end">0.8</text>
+<line class="grid" x1="72.0" x2="564.0" y1="133.3" y2="133.3"/>
+<text class="tick" x="64.0" y="137.3" text-anchor="end">0.9</text>
+<line class="grid" x1="72.0" x2="564.0" y1="84.0" y2="84.0"/>
+<text class="tick" x="64.0" y="88.0" text-anchor="end">1</text>
+<line class="axis" x1="72.0" x2="564.0" y1="380.0" y2="380.0"/>
+<text class="tick" x="72.0" y="398.0" text-anchor="middle">0</text>
+<text class="tick" x="195.0" y="398.0" text-anchor="middle">0.25</text>
+<text class="tick" x="318.0" y="398.0" text-anchor="middle">0.5</text>
+<text class="tick" x="441.0" y="398.0" text-anchor="middle">0.75</text>
+<text class="tick" x="564.0" y="398.0" text-anchor="middle">1</text>
+<text class="label" x="318.0" y="420.0" text-anchor="middle">p, the chance the host opens door 1 when it may open either</text>
+<text class="label" x="72.0" y="74.0" text-anchor="start">Probability that switching wins, given which door was opened</text>
+<path class="ref" d="M72.0,248.4H564.0"/>
+<g><title>Door 1 opened: 1/(1+p)</title>
+<path class="s1 line" d="M96.6,107.5L121.2,128.8L145.8,148.3L170.4,166.2L195.0,182.7L219.6,197.8L244.2,211.9L268.8,225.0L293.4,237.1L318.0,248.4L342.6,259.1L367.2,269.0L391.8,278.3L416.4,287.1L441.0,295.4L465.6,303.3L490.2,310.7L514.8,317.7L539.4,324.3"/>
+</g>
+<circle class="s1 dot" cx="96.6" cy="107.5" r="4.5"><title>Door 1 opened: 1/(1+p): p = 1/20: 20/21</title></circle>
+<circle class="s1 dot" cx="121.2" cy="128.8" r="4.5"><title>Door 1 opened: 1/(1+p): p = 1/10: 10/11</title></circle>
+<circle class="s1 dot" cx="145.8" cy="148.3" r="4.5"><title>Door 1 opened: 1/(1+p): p = 3/20: 20/23</title></circle>
+<circle class="s1 dot" cx="170.4" cy="166.2" r="4.5"><title>Door 1 opened: 1/(1+p): p = 1/5: 5/6</title></circle>
+<circle class="s1 dot" cx="195.0" cy="182.7" r="4.5"><title>Door 1 opened: 1/(1+p): p = 1/4: 4/5</title></circle>
+<circle class="s1 dot" cx="219.6" cy="197.8" r="4.5"><title>Door 1 opened: 1/(1+p): p = 3/10: 10/13</title></circle>
+<circle class="s1 dot" cx="244.2" cy="211.9" r="4.5"><title>Door 1 opened: 1/(1+p): p = 7/20: 20/27</title></circle>
+<circle class="s1 dot" cx="268.8" cy="225.0" r="4.5"><title>Door 1 opened: 1/(1+p): p = 2/5: 5/7</title></circle>
+<circle class="s1 dot" cx="293.4" cy="237.1" r="4.5"><title>Door 1 opened: 1/(1+p): p = 9/20: 20/29</title></circle>
+<circle class="s1 dot" cx="318.0" cy="248.4" r="4.5"><title>Door 1 opened: 1/(1+p): p = 1/2: 2/3</title></circle>
+<circle class="s1 dot" cx="342.6" cy="259.1" r="4.5"><title>Door 1 opened: 1/(1+p): p = 11/20: 20/31</title></circle>
+<circle class="s1 dot" cx="367.2" cy="269.0" r="4.5"><title>Door 1 opened: 1/(1+p): p = 3/5: 5/8</title></circle>
+<circle class="s1 dot" cx="391.8" cy="278.3" r="4.5"><title>Door 1 opened: 1/(1+p): p = 13/20: 20/33</title></circle>
+<circle class="s1 dot" cx="416.4" cy="287.1" r="4.5"><title>Door 1 opened: 1/(1+p): p = 7/10: 10/17</title></circle>
+<circle class="s1 dot" cx="441.0" cy="295.4" r="4.5"><title>Door 1 opened: 1/(1+p): p = 3/4: 4/7</title></circle>
+<circle class="s1 dot" cx="465.6" cy="303.3" r="4.5"><title>Door 1 opened: 1/(1+p): p = 4/5: 5/9</title></circle>
+<circle class="s1 dot" cx="490.2" cy="310.7" r="4.5"><title>Door 1 opened: 1/(1+p): p = 17/20: 20/37</title></circle>
+<circle class="s1 dot" cx="514.8" cy="317.7" r="4.5"><title>Door 1 opened: 1/(1+p): p = 9/10: 10/19</title></circle>
+<circle class="s1 dot" cx="539.4" cy="324.3" r="4.5"><title>Door 1 opened: 1/(1+p): p = 19/20: 20/39</title></circle>
+<g><title>Door 2 opened: 1/(2-p)</title>
+<path class="s2 line" d="M96.6,324.3L121.2,317.7L145.8,310.7L170.4,303.3L195.0,295.4L219.6,287.1L244.2,278.3L268.8,269.0L293.4,259.1L318.0,248.4L342.6,237.1L367.2,225.0L391.8,211.9L416.4,197.8L441.0,182.7L465.6,166.2L490.2,148.3L514.8,128.8L539.4,107.5"/>
+</g>
+<circle class="s2 dot" cx="96.6" cy="324.3" r="4.5"><title>Door 2 opened: 1/(2-p): p = 1/20: 20/39</title></circle>
+<circle class="s2 dot" cx="121.2" cy="317.7" r="4.5"><title>Door 2 opened: 1/(2-p): p = 1/10: 10/19</title></circle>
+<circle class="s2 dot" cx="145.8" cy="310.7" r="4.5"><title>Door 2 opened: 1/(2-p): p = 3/20: 20/37</title></circle>
+<circle class="s2 dot" cx="170.4" cy="303.3" r="4.5"><title>Door 2 opened: 1/(2-p): p = 1/5: 5/9</title></circle>
+<circle class="s2 dot" cx="195.0" cy="295.4" r="4.5"><title>Door 2 opened: 1/(2-p): p = 1/4: 4/7</title></circle>
+<circle class="s2 dot" cx="219.6" cy="287.1" r="4.5"><title>Door 2 opened: 1/(2-p): p = 3/10: 10/17</title></circle>
+<circle class="s2 dot" cx="244.2" cy="278.3" r="4.5"><title>Door 2 opened: 1/(2-p): p = 7/20: 20/33</title></circle>
+<circle class="s2 dot" cx="268.8" cy="269.0" r="4.5"><title>Door 2 opened: 1/(2-p): p = 2/5: 5/8</title></circle>
+<circle class="s2 dot" cx="293.4" cy="259.1" r="4.5"><title>Door 2 opened: 1/(2-p): p = 9/20: 20/31</title></circle>
+<circle class="s2 dot" cx="318.0" cy="248.4" r="4.5"><title>Door 2 opened: 1/(2-p): p = 1/2: 2/3</title></circle>
+<circle class="s2 dot" cx="342.6" cy="237.1" r="4.5"><title>Door 2 opened: 1/(2-p): p = 11/20: 20/29</title></circle>
+<circle class="s2 dot" cx="367.2" cy="225.0" r="4.5"><title>Door 2 opened: 1/(2-p): p = 3/5: 5/7</title></circle>
+<circle class="s2 dot" cx="391.8" cy="211.9" r="4.5"><title>Door 2 opened: 1/(2-p): p = 13/20: 20/27</title></circle>
+<circle class="s2 dot" cx="416.4" cy="197.8" r="4.5"><title>Door 2 opened: 1/(2-p): p = 7/10: 10/13</title></circle>
+<circle class="s2 dot" cx="441.0" cy="182.7" r="4.5"><title>Door 2 opened: 1/(2-p): p = 3/4: 4/5</title></circle>
+<circle class="s2 dot" cx="465.6" cy="166.2" r="4.5"><title>Door 2 opened: 1/(2-p): p = 4/5: 5/6</title></circle>
+<circle class="s2 dot" cx="490.2" cy="148.3" r="4.5"><title>Door 2 opened: 1/(2-p): p = 17/20: 20/23</title></circle>
+<circle class="s2 dot" cx="514.8" cy="128.8" r="4.5"><title>Door 2 opened: 1/(2-p): p = 9/10: 10/11</title></circle>
+<circle class="s2 dot" cx="539.4" cy="107.5" r="4.5"><title>Door 2 opened: 1/(2-p): p = 19/20: 20/21</title></circle>
+<text class="value" x="574.0" y="111.5">Door 2 opened</text>
+<text class="value" x="574.0" y="252.4">2/3 averaged over doors</text>
+<text class="value" x="574.0" y="328.3">Door 1 opened</text>
+</svg>

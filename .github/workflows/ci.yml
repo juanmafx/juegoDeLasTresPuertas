@@ -38,5 +38,6 @@ jobs:
       - run: uv run --locked python -I ../tools/enumerate.py ../spec/scenarios.json --check
       - run: uv run --locked python tools/write_spec_data.py --check
       - run: uv run --locked python -I ../tools/conformance.py --cli "python -m monty_hall.lab"
+      - run: uv run --locked python -I ../tools/make_figures.py --cli "python -m monty_hall.lab" --check
       - run: uvx --from pip-audit==2.10.1 pip-audit --strict --disable-pip -r <(uv export --locked --no-emit-project --format requirements-txt)
         shell: bash

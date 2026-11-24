@@ -51,6 +51,7 @@ select = ["E", "F", "W", "I", "B", "C4", "UP", "S", "SIM", "PT", "RET", "RUF"]
 "tools/generate_test_report.py" = ["S314", "S603"]
 "../tools/conformance.py" = ["S603"]
 "../tools/crosscheck.py" = ["S311", "S603"]
+"../tools/make_figures.py" = ["S603"]
 
 [tool.mypy]
 strict = true

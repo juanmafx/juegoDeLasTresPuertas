@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440" role="img" aria-label="The best number of reveals as the cost rises, by host">
+<title>The best number of reveals as the cost rises, by host</title>
+<style>
+.surface { fill: #fcfcfb; }
+.title { fill: #0b0b0b; font: 600 16px sans-serif; }
+.subtitle { fill: #52514e; font: 13px sans-serif; }
+.label { fill: #52514e; font: 12px sans-serif; }
+.value { fill: #0b0b0b; font: 12px sans-serif; }
+.tick { fill: #898781; font: 11px sans-serif; }
+.grid { stroke: #e1e0d9; stroke-width: 1; }
+.axis { stroke: #c3c2b7; stroke-width: 1; }
+.ref { stroke: #898781; stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; }
+.s1 { stroke: #2a78d6; fill: #2a78d6; } .s2 { stroke: #eb6834; fill: #eb6834; }
+.s3 { stroke: #1baf7a; fill: #1baf7a; } .s4 { stroke: #6250d6; fill: #6250d6; }
+.q1 { stroke: #9ec5f4; fill: #9ec5f4; } .q2 { stroke: #5598e7; fill: #5598e7; }
+.q3 { stroke: #256abf; fill: #256abf; } .q4 { stroke: #0d366b; fill: #0d366b; }
+.line { fill: none; stroke-width: 2; stroke-linejoin: round; }
+.dashed { fill: none; stroke-width: 2; stroke-dasharray: 6 4; }
+.dot { stroke: #fcfcfb; stroke-width: 2; }
+@media (prefers-color-scheme: dark) {
+  .surface { fill: #1a1a19; } .title, .value { fill: #f0efec; } .subtitle, .label { fill: #c3c2b7; }
+  .grid { stroke: #2c2c2a; } .axis { stroke: #383835; } .dot { stroke: #1a1a19; }
+  .s1 { stroke: #3987e5; fill: #3987e5; } .s2 { stroke: #d95926; fill: #d95926; }
+  .s3 { stroke: #199e70; fill: #199e70; } .s4 { stroke: #9085e9; fill: #9085e9; }
+  .q1 { stroke: #2a4f7d; fill: #2a4f7d; } .q2 { stroke: #256abf; fill: #256abf; }
+  .q3 { stroke: #5598e7; fill: #5598e7; } .q4 { stroke: #b7d3f6; fill: #b7d3f6; }
+}
+</style>
+<rect class="surface" width="760" height="440"/>
+<text class="title" x="20" y="28">The best number of reveals as the cost rises, by host</text>
+<text class="subtitle" x="20" y="48">10 doors, 2 prizes, switch: K* is always 0 or 7, and the host sets where it flips</text>
+<line class="grid" x1="72.0" x2="237.3" y1="380.0" y2="380.0"/>
+<text class="tick" x="64.0" y="384.0" text-anchor="end">0</text>
+<line class="grid" x1="72.0" x2="237.3" y1="104.0" y2="104.0"/>
+<text class="tick" x="64.0" y="108.0" text-anchor="end">7</text>
+<line class="axis" x1="72.0" x2="237.3" y1="380.0" y2="380.0"/>
+<text class="tick" x="72.0" y="398.0" text-anchor="middle">0</text>
+<text class="tick" x="154.7" y="398.0" text-anchor="middle">0.05</text>
+<text class="tick" x="237.3" y="398.0" text-anchor="middle">0.1</text>
+<text class="label" x="154.7" y="420.0" text-anchor="middle">cost per reveal</text>
+<text class="label" x="72.0" y="94.0" text-anchor="start">informed host</text>
+<g><title>informed</title>
+<path class="s1 line" d="M72.0,104.0H76.1V104.0H80.3V104.0H84.4V104.0H88.5V104.0H92.7V104.0H96.8V104.0H100.9V104.0H105.1V104.0H109.2V104.0H113.3V104.0H117.5V104.0H121.6V104.0H125.7V104.0H129.9V104.0H134.0V104.0H138.1V104.0H142.3V104.0H146.4V104.0H150.5V104.0H154.7V104.0H158.8V104.0H162.9V104.0H167.1V104.0H171.2V104.0H175.3V104.0H179.5V104.0H183.6V104.0H187.7V104.0H191.9V104.0H196.0V104.0H200.1V104.0H204.3V104.0H208.4V104.0H212.5V104.0H216.7V104.0H220.8V104.0H224.9V104.0H229.1V104.0H233.2V104.0H237.3V380.0"/>
+</g>
+<text class="value" x="231.3" y="242.0" text-anchor="end">K* = 0 from c = 1/10</text>
+<line class="grid" x1="277.3" x2="442.7" y1="380.0" y2="380.0"/>
+<text class="tick" x="269.3" y="384.0" text-anchor="end"></text>
+<line class="grid" x1="277.3" x2="442.7" y1="104.0" y2="104.0"/>
+<text class="tick" x="269.3" y="108.0" text-anchor="end"></text>
+<line class="axis" x1="277.3" x2="442.7" y1="380.0" y2="380.0"/>
+<text class="tick" x="277.3" y="398.0" text-anchor="middle">0</text>
+<text class="tick" x="360.0" y="398.0" text-anchor="middle">0.05</text>
+<text class="tick" x="442.7" y="398.0" text-anchor="middle">0.1</text>
+<text class="label" x="360.0" y="420.0" text-anchor="middle">cost per reveal</text>
+<text class="label" x="277.3" y="94.0" text-anchor="start">random host</text>
+<g><title>random</title>
+<path class="s2 line" d="M277.3,104.0H281.5V104.0H285.6V104.0H289.7V104.0H293.9V104.0H298.0V104.0H302.1V104.0H306.3V104.0H310.4V104.0H314.5V104.0H318.7V104.0H322.8V104.0H326.9V104.0H331.1V104.0H335.2V104.0H339.3V104.0H343.5V104.0H347.6V104.0H351.7V104.0H355.9V104.0H360.0V104.0H364.1V104.0H368.3V104.0H372.4V104.0H376.5V104.0H380.7V104.0H384.8V104.0H388.9V380.0H393.1V380.0H397.2V380.0H401.3V380.0H405.5V380.0H409.6V380.0H413.7V380.0H417.9V380.0H422.0V380.0H426.1V380.0H430.3V380.0H434.4V380.0H438.5V380.0H442.7V380.0"/>
+</g>
+<text class="value" x="382.9" y="242.0" text-anchor="end">K* = 0 from c = 27/400</text>
+<line class="grid" x1="482.7" x2="648.0" y1="380.0" y2="380.0"/>
+<text class="tick" x="474.7" y="384.0" text-anchor="end"></text>
+<line class="grid" x1="482.7" x2="648.0" y1="104.0" y2="104.0"/>
+<text class="tick" x="474.7" y="108.0" text-anchor="end"></text>
+<line class="axis" x1="482.7" x2="648.0" y1="380.0" y2="380.0"/>
+<text class="tick" x="482.7" y="398.0" text-anchor="middle">0</text>
+<text class="tick" x="565.3" y="398.0" text-anchor="middle">0.05</text>
+<text class="tick" x="648.0" y="398.0" text-anchor="middle">0.1</text>
+<text class="label" x="565.3" y="420.0" text-anchor="middle">cost per reveal</text>
+<text class="label" x="482.7" y="94.0" text-anchor="start">adversarial host</text>
+<g><title>adversarial</title>
+<path class="s3 line" d="M482.7,104.0H486.8V104.0H490.9V104.0H495.1V104.0H499.2V104.0H503.3V104.0H507.5V104.0H511.6V104.0H515.7V104.0H519.9V104.0H524.0V104.0H528.1V104.0H532.3V104.0H536.4V104.0H540.5V104.0H544.7V104.0H548.8V104.0H552.9V104.0H557.1V104.0H561.2V104.0H565.3V104.0H569.5V104.0H573.6V104.0H577.7V380.0H581.9V380.0H586.0V380.0H590.1V380.0H594.3V380.0H598.4V380.0H602.5V380.0H606.7V380.0H610.8V380.0H614.9V380.0H619.1V380.0H623.2V380.0H627.3V380.0H631.5V380.0H635.6V380.0H639.7V380.0H643.9V380.0H648.0V380.0"/>
+</g>
+<text class="value" x="571.7" y="242.0" text-anchor="end">K* = 0 from c = 23/400</text>
+</svg>
