@@ -23,10 +23,13 @@ nobody hands you a formula.
 ### 1. Did the source know the answer?
 
 - **Yes, and it only removed options it knew were wrong** (informed host): the surviving options
-  you did not choose gain the probability that was removed. Your own choice gains nothing from the
-  removal. *Proven in the model: THEORY.md 4.1.*
-- **No, it removed options blindly** (random host): survivors, your choice included, gain together.
-  The observation does not favour switching. *Proven in the model: THEORY.md 4.2.*
+  you did not choose gain the probability that was removed. Averaged over what the source could
+  have removed, your own choice gains nothing; when the options started equally likely, it gains
+  nothing whatever was removed. *Proven in the model: THEORY.md 4.1.*
+- **No, it removed options blindly** (random host): your choice was exposed too, and its survival
+  counts in its favour. When the options started equally likely, the survivors, your choice
+  included, end up equally likely, so the observation gives no reason to switch. *Proven in the
+  model: THEORY.md 4.2.*
 
 Example reading: an expert who rules out vendors they know to be unsuitable, leaving yours and one
 other, behaves like an informed host. A filter that drops vendors at random because of a
@@ -38,8 +41,8 @@ If your choice was protected by the rules, its survival is not evidence. If it w
 survived, its survival is evidence in its favour, in the model by the factor
 `(N - M) / (N - M - K)` for blind removal (THEORY.md 4.2).
 
-Example reading: a candidate you shortlisted yourself and who was excluded from a screening round
-learns nothing from the round. A candidate who went through the same screening as everyone else
+Example reading: if a candidate you shortlisted yourself was excluded from a screening round, the
+round tells you nothing about them. A candidate who went through the same screening as everyone else
 and passed has earned some credit.
 
 ### 3. Did the source have preferences among the options it could remove?
@@ -83,11 +86,14 @@ and an interior optimum is plausible; the model neither predicts nor verifies th
 
 The parabola is a way to summarise a value-against-effort curve. In the model:
 
-- its curvature correctly reports whether returns increase (convex) or would diminish (concave);
+- no fit in the committed sweep was concave, which matches the increasing returns proven in
+  THEORY.md 7.1; whether a concave fit would reliably signal diminishing returns is not tested
+  here;
 - its vertex is a **minimum** whenever the fit is convex, and acting on it was wrong in every
   convex case of the committed sweep (THEORY.md 8.2);
-- the end it rates higher matched the exact optimum in 3,559 of 3,600 cases and failed only near
-  the critical cost.
+- the end it rates higher matched the exact optimum in 3,559 of 3,600 cases; in the other 41 it
+  chose the wrong end and lost the whole gap between the two ends of the curve, at most `7/50` of
+  a prize (THEORY.md 8.3).
 
 As a working habit: compute or estimate the value at the extremes and at a few interior points,
 check which kind of extremum a smooth fit suggests, and never act on a vertex without that check.

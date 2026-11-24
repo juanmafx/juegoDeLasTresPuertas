@@ -29,7 +29,7 @@ jobs:
           sh -c 'composer validate && composer install --no-scripts --no-plugins --no-interaction --prefer-dist && composer audit --locked'
       - name: PHPStan
         run: >
-          docker run --rm -u "$(id -u):$(id -g)" -v "$GITHUB_WORKSPACE:/app" -w /app/php "$PHP_IMAGE"
+          docker run --rm --network none -u "$(id -u):$(id -g)" -v "$GITHUB_WORKSPACE:/app" -w /app/php "$PHP_IMAGE"
           vendor/bin/phpstan analyse --no-progress --memory-limit=1G
       - name: PHPUnit
         run: >

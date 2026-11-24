@@ -13,7 +13,8 @@ as identical reduced fractions, and seeded simulations with bit-identical win co
   reveals, four host policies (informed, random, biased, adversarial), and stay, switch and mixed
   strategies, with results conditional on the reveal actually observed.
 - **Four implementations, one answer.** `monty-lab exact`, `simulate` and `optimum` behave
-  identically in Python, Java, PHP and C. Each passes every section of `tools/conformance.py`, and
+  identically in Python, Java, PHP and C, including how they parse their input and how large an
+  exact value they can print. Each passes every section of `tools/conformance.py`, and
   `tools/crosscheck.py` compared them on 600 seeded random invocations with no difference in exit
   code or JSON.
 - **The exploration-cost model.** `optimum` evaluates `V(K) = P(win) - c*K` exactly, reports the
@@ -57,7 +58,7 @@ differ from 2.0.0 in the last floating-point bits, because it now uses the speci
 | --- | --- |
 | Python | Python 3.13 or newer and uv; no runtime dependencies |
 | Java | Java 17; Maven 3.9 to build, or the pinned Maven Docker image |
-| PHP | PHP 8.4 or newer and Composer; runtime dependency `brick/math` 1.0.0 |
+| PHP | PHP 8.4 or newer and Composer; runtime dependency `brick/math` 1.0.0; `ext-bcmath` or `ext-gmp` recommended for ten-door games with large prior weights |
 | C | A C17 compiler and make |
 
 ## Verification for this release

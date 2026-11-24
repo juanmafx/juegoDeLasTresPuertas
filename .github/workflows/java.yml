@@ -33,4 +33,4 @@ jobs:
       - name: Conformance against spec/
         run: >
           uv run --no-project --python 3.14 python -I tools/conformance.py
-          --cli "docker run --rm -i -v ${GITHUB_WORKSPACE}:/work:ro -w /work ${MAVEN_IMAGE} java -jar java/target/monty-lab.jar"
+          --cli "docker run --rm -i --network none -v ${GITHUB_WORKSPACE}:/work:ro -w /work ${MAVEN_IMAGE} java -jar java/target/monty-lab.jar"

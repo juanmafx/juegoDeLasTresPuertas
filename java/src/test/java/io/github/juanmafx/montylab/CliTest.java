@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class CliTest {
     private record Outcome(int code, String stdout, String stderr) {
@@ -55,6 +56,13 @@ class CliTest {
                 List.of("exact", "--host", "sneaky"),
                 List.of("exact", "--prior", "1,,1"),
                 List.of("exact", "--prior", "1,1,1000001"),
+                List.of("exact", "--doors", "1_0"),
+                List.of("exact", "--doors", "\uff14"),
+                List.of("exact", "--doors", "\u00a04"),
+                List.of("exact", "--prior", "1,2,3,"),
+                List.of("exact", "--prior", " uniform"),
+                List.of("exact", "--mixed", "1/9223372036854775808"),
+                List.of("optimum", "--strategy", "switch", "--cost", "9223372036854775808"),
                 List.of("exact", "--seed", "1"),
                 List.of("exact", "stray"),
                 List.of("simulate"),
@@ -109,19 +117,33 @@ class CliTest {
     }
 
     @Test
-    void equalsSyntaxAndUniquePrefixesAreAccepted() {
-        Outcome outcome = invoke("exact", "--doors=4", "--rev", "2");
+    void equalsSyntaxAndRepeatedFlagsAreAccepted() {
+        Outcome outcome = invoke("exact", "--doors=5", "--reveals", "2", "--doors", "4");
         assertEquals(0, outcome.code(), outcome.stderr());
         Map<String, Object> scenario = SpecData.map(outcome.json().get("scenario"));
         assertEquals(4, SpecData.number(scenario.get("doors")));
         assertEquals(2, SpecData.number(scenario.get("reveals")));
     }
 
-    @Test
-    void ambiguousPrefixIsRejected() {
-        Outcome outcome = invoke("exact", "--p", "1");
+    @ParameterizedTest
+    @ValueSource(strings = {"--rev", "--p", "--door"})
+    void abbreviatedFlagsAreRejected(String flag) {
+        Outcome outcome = invoke("exact", flag, "1");
         assertEquals(Cli.EXIT_USAGE, outcome.code());
-        assertTrue(outcome.stderr().contains("ambiguous"));
+        assertEquals("", outcome.stdout());
+    }
+
+    @Test
+    void theArgumentAfterAFlagIsAlwaysItsValue() {
+        Outcome negativeZero = invoke("optimum", "--strategy", "switch", "--cost", "-0/1");
+        assertEquals(0, negativeZero.code(), negativeZero.stderr());
+        assertEquals("0/1", negativeZero.json().get("cost"));
+        Outcome bothNegative = invoke("exact", "--mixed", "-1/-2");
+        assertEquals(0, bothNegative.code(), bothNegative.stderr());
+        assertEquals("1/2", SpecData.map(bothNegative.json().get("scenario")).get("mixed"));
+        Outcome helpAsValue = invoke("exact", "--prior", "-h");
+        assertEquals(Cli.EXIT_USAGE, helpAsValue.code());
+        assertEquals("", helpAsValue.stdout());
     }
 
     @Test

@@ -1,6 +1,6 @@
 # Test Report
 
-- Generated (UTC): 2026-11-24T13:37:47Z
+- Generated (UTC): 2026-11-24T15:06:45Z
 - Build image: `maven:3.9.11-eclipse-temurin-17@sha256:e4a7ace3dc0d645ed97f8d9ad0b0d3f0b14fa8d150138f27f116d7105a639b82`
 - Build command: `mvn -B -ntp clean verify` (exit code 0)
 - Conformance runtime: openjdk version "17.0.21.1" 2026-11-17
@@ -12,7 +12,7 @@
 
 | Total | Passed | Failed | Errors | Skipped |
 | ---: | ---: | ---: | ---: | ---: |
-| 300 | 300 | 0 | 0 | 0 |
+| 321 | 321 | 0 | 0 | 0 |
 
 Per-test results are in the `TEST-*.xml` files in this directory.
 
@@ -25,6 +25,8 @@ PASS optimum: 54 passed, 0 failed
 PASS simulation_identical: 26 passed, 0 failed
 PASS simulation_statistical: 180 passed, 0 failed
 PASS errors: 20 passed, 0 failed
+PASS syntax: 31 passed, 0 failed
+PASS large_values: 14 passed, 0 failed
 INFO 6 of 101 Wilson 95% intervals exclude the exact value (allowed 13): classic-adversarial:decision z=+2.23; no-reveal-four-doors:stay z=+2.87; pick-middle-random-observed:switch z=+2.12; prior-skewed-toward-observed:stay z=+3.38; prior-skewed-toward-observed:switch z=-3.38; two-prizes-random:switch z=+2.30
 ```
 

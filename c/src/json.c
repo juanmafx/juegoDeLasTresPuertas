@@ -9,6 +9,7 @@ void mh_json_init(mh_json *w, FILE *out) {
     w->depth = 0;
     w->first[0] = true;
     w->pending_key = false;
+    w->failed = false;
 }
 
 static void indent(mh_json *w) {
@@ -115,12 +116,14 @@ void mh_json_double(mh_json *w, double value) {
 }
 
 void mh_json_frac(mh_json *w, const mh_frac *value) {
-    char text[MH_FRAC_TEXT];
-    if (mh_frac_format(value, text, sizeof text) == NULL) {
+    char *text = mh_frac_to_string(value);
+    if (text == NULL) {
+        w->failed = true;
         mh_json_null(w);
         return;
     }
     mh_json_string(w, text);
+    free(text);
 }
 
 void mh_json_finish(mh_json *w) { fputc('\n', w->out); }

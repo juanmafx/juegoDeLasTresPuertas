@@ -17,8 +17,9 @@ final class Optimum
             throw new ScenarioError('cost must be a non-negative fraction');
         }
         $curve = [];
+        $pi = Solver::prizeAtPick($scenario);
         for ($reveals = 0; $reveals <= $scenario->maxReveals(); $reveals++) {
-            $win = Solver::solve($scenario->withReveals($reveals))->win($strategy, $scenario->mixed);
+            $win = Solver::closedForm($scenario->withReveals($reveals), $pi)->win($strategy, $scenario->mixed);
             if ($win === null) {
                 throw new ScenarioError('optimum is undefined when the host never offers a decision');
             }

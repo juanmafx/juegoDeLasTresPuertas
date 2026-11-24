@@ -220,8 +220,10 @@ validation of every output, both databases, and both CLIs. The latest recorded r
 
 `tools/conformance.py` takes the command that runs any implementation's CLI. It checks exact
 fractions for equality, simulation counts for bit-identical equality with
-`spec/simulation-reference.json`, PRNG vectors, error handling, and whether the exact values fall
-inside the Wilson 95% intervals. About one interval in twenty is expected to miss by chance, so it
+`spec/simulation-reference.json`, PRNG vectors, error handling, the input syntax (full flag names,
+ASCII decimal integers, fraction parts within 2^63 - 1, help before validation), one game whose
+exact values are wider than 4,096 bits, and whether the exact values fall inside the Wilson 95%
+intervals. About one interval in twenty is expected to miss by chance, so it
 fails only when misses exceed what a 0.1% binomial tail allows, or when any deviation reaches
 five standard errors.
 

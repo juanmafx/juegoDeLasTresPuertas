@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="io.github.juanmafx.montylab.SolverTest" time="0.094" tests="78" errors="0" skipped="0" failures="0">
-  <testcase name="biasedHostObservationShiftsTheOdds" classname="io.github.juanmafx.montylab.SolverTest" time="0.004"/>
-  <testcase name="randomHostGivesNoAdvantageConditionalOnNoVoid" classname="io.github.juanmafx.montylab.SolverTest" time="0.002"/>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="io.github.juanmafx.montylab.SolverTest" time="0.078" tests="78" errors="0" skipped="0" failures="0">
+  <testcase name="biasedHostObservationShiftsTheOdds" classname="io.github.juanmafx.montylab.SolverTest" time="0.003"/>
+  <testcase name="randomHostGivesNoAdvantageConditionalOnNoVoid" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[1]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[2]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="exactMatchesEveryScenario()[2]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[3]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[4]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[5]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[6]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="exactMatchesEveryScenario()[7]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="exactMatchesEveryScenario()[8]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="exactMatchesEveryScenario()[7]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="exactMatchesEveryScenario()[8]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[9]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="exactMatchesEveryScenario()[10]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[11]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="exactMatchesEveryScenario()[10]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[11]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[12]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="exactMatchesEveryScenario()[13]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[13]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[14]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[15]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[16]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[15]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[16]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[17]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[18]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[19]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="exactMatchesEveryScenario()[20]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[21]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[19]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="exactMatchesEveryScenario()[20]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[21]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[22]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[23]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[24]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[25]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[26]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[27]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[28]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[27]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[28]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[29]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[30]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="exactMatchesEveryScenario()[31]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[30]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="exactMatchesEveryScenario()[31]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[32]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[33]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[34]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[35]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[36]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="exactMatchesEveryScenario()[36]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[37]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[38]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[39]" classname="io.github.juanmafx.montylab.SolverTest" time="0.002"/>
-  <testcase name="exactMatchesEveryScenario()[40]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[38]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[39]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[40]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[41]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="exactMatchesEveryScenario()[42]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="exactMatchesEveryScenario()[42]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[43]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[44]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[45]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="exactMatchesEveryScenario()[46]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="exactMatchesEveryScenario()[47]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="exactMatchesEveryScenario()[48]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="exactMatchesEveryScenario()[47]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="exactMatchesEveryScenario()[48]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactMatchesEveryScenario()[49]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="classicInformedHost" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="sixtyFourDoorsUseArbitraryPrecision" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="adversarialHostMakesSwitchingAlwaysLose" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="sixtyFourDoorsUseArbitraryPrecision" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="adversarialHostMakesSwitchingAlwaysLose" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="exactQuadraticIsRecoveredWithZeroResidual" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="enumerationIsLimitedToTenDoors" classname="io.github.juanmafx.montylab.SolverTest" time="0.002"/>
   <testcase name="optimumRejectsNegativeCostAndUndefinedDecisions" classname="io.github.juanmafx.montylab.SolverTest" time="0.002"/>
   <testcase name="optimumTiesGoToTheSmallestReveals" classname="io.github.juanmafx.montylab.SolverTest" time="0.002"/>
-  <testcase name="adversarialHostWithZeroPriorPickHasNoDecision" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="adversarialHostWithZeroPriorPickHasNoDecision" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[1]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[2]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[2]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[3]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[4]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[5]" classname="io.github.juanmafx.montylab.SolverTest" time="0.002"/>
-  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[6]" classname="io.github.juanmafx.montylab.SolverTest" time="0.013"/>
+  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[6]" classname="io.github.juanmafx.montylab.SolverTest" time="0.01"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[7]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
-  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[8]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[8]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[9]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[10]" classname="io.github.juanmafx.montylab.SolverTest" time="0.002"/>
-  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[11]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[12]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[11]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[12]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[13]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[14]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[15]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[16]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
-  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[17]" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
+  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[16]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
+  <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[17]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="optimumMatchesEveryScenarioWithAnOptimumBlock()[18]" classname="io.github.juanmafx.montylab.SolverTest" time="0.0"/>
   <testcase name="parabolaExampleFromCliContract" classname="io.github.juanmafx.montylab.SolverTest" time="0.001"/>
 </testsuite>

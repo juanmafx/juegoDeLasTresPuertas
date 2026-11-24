@@ -1,5 +1,5 @@
 {
-  "cli": "docker run --rm -i --network none -v /home/j/Documents/git/repospublicos/juegoDeLasTresPuertas:/work:ro -w /work php:8.4-cli@sha256:6b13a8678b38ca38e4e3950be57b664ed8c8706131a0586111f68792aede4c58 php php/bin/monty-lab",
+  "cli": "docker run --rm -i --network none -v <repository>:/work:ro -w /work php:8.4-cli@sha256:6b13a8678b38ca38e4e3950be57b664ed8c8706131a0586111f68792aede4c58 php php/bin/monty-lab",
   "sections": {
     "prng": {
       "passed": 105,
@@ -23,6 +23,14 @@
     },
     "errors": {
       "passed": 20,
+      "failures": []
+    },
+    "syntax": {
+      "passed": 31,
+      "failures": []
+    },
+    "large_values": {
+      "passed": 14,
       "failures": []
     }
   },

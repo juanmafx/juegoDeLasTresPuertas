@@ -24,6 +24,14 @@
     "errors": {
       "passed": 20,
       "failures": []
+    },
+    "syntax": {
+      "passed": 31,
+      "failures": []
+    },
+    "large_values": {
+      "passed": 14,
+      "failures": []
     }
   },
   "statistics": {

@@ -83,7 +83,7 @@ CLI:
 
 | Concern | Java (`io.github.juanmafx.montylab`) | PHP (`php/src`) | C (`c/src`) |
 | --- | --- | --- | --- |
-| Exact fractions | `Fraction` over `java.math.BigInteger` | `Fraction` over `brick/math` | `rational.c`, fixed 4096-bit capacity |
+| Exact fractions | `Fraction` over `java.math.BigInteger` | `Fraction` over `brick/math` | `rational.c`, arbitrary precision on the heap |
 | Scenario and validation | `Scenario`, `Host`, `Strategy` | `Scenario`, `Host`, `Strategy` | `model.c` |
 | PRNG | `SplitMix64`, `Xoshiro256StarStar` | `Prng/` | `prng.c` |
 | Exact solver | `Solver` | `Solver` | `solver.c` |
@@ -193,7 +193,7 @@ the denominator.
 | `tests/integration` | Real SQLite and CLI | Round trips, constraints, tampered schemas, exit codes |
 | `tests/lab` | Examples, Hypothesis, fixed-seed z tests | PRNG values, validation, anchors, observations average back to the unconditional result, corner optima for uniform priors, least-squares minimality, convergence |
 | `tests/spec` | Spec files, JSON Schema, subprocess | Every scenario equals the independent enumerator, outputs match the schema, generated spec data is current |
-| `tools/conformance.py` | Black-box CLI runs | Exact equality, bit-identical counts, interval coverage, error handling |
+| `tools/conformance.py` | Black-box CLI runs | Exact equality, bit-identical counts, interval coverage, error handling, input syntax, exact values wider than 4,096 bits |
 | `tools/crosscheck.py` | Differential runs across CLIs | All implementations return the same exit code and JSON on seeded random invocations |
 | `tools/make_figures.py --check` | Regeneration | The committed figures and `results.json` match what a CLI produces now |
 | Java, PHP and C suites | JUnit, PHPUnit with PHPStan level 9, C test runner plain and sanitized | Each implementation's internals, independently of the Python tests |

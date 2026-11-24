@@ -9,7 +9,7 @@ from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from fractions import Fraction
-from math import comb, sqrt
+from math import comb, floor, sqrt
 from pathlib import Path
 from typing import Any
 
@@ -52,6 +52,49 @@ INVALID_INVOCATIONS = [
     ],
     ["prng", "--seed", "1", "--kind", "bounded", "--bound", "0"],
 ]
+
+REJECTED_SYNTAX = [
+    ["exact", "--doors", "1_0"],
+    ["exact", "--door", "4"],
+    ["exact", "--doors", "\uff14"],
+    ["exact", "--doors", "\u00a04"],
+    ["exact", "--doors", "4\u2003"],
+    ["exact", "--prior", "1,2,3,"],
+    ["exact", "--prior", " uniform"],
+    ["exact", "--host", "Random"],
+    ["exact", "--prior", "-h"],
+    ["exact", "--doors", "--help"],
+    ["exact", "--mixed", "0.5"],
+    ["exact", "--mixed", "1/2/3"],
+    ["exact", "--mixed", "1/9223372036854775808"],
+    ["exact", "--mixed", "-9223372036854775808/-9223372036854775808"],
+    ["exact", "--mixed", "1/1" + "0" * 5000],
+    ["optimum", "--strategy", "switch", "--cost", "9223372036854775808"],
+    ["simulate", "--se", "1"],
+    ["simulate", "--seed", "1", "--trials", "1_000"],
+    ["simulate", "--seed", "1", "--trials", "5", "--mixed", "1/18446744073709551615"],
+    ["prng", "--seed", "1", "--kind", "weighted", "--weights", "9223372036854775807,1"],
+]
+
+ACCEPTED_SYNTAX: list[tuple[list[str], dict[str, Any]]] = [
+    (["exact", "--doors", " +04 "], {"doors": 4}),
+    (["exact", "--doors=5", "--doors", "4"], {"doors": 4}),
+    (["exact", "--mixed", "-1/-2"], {"mixed": "1/2"}),
+    (["exact", "--mixed", "-0/5"], {"mixed": "0/1"}),
+    (["exact", "--mixed", "9223372036854775807/9223372036854775807"], {"mixed": "1/1"}),
+    (["exact", "--prior", "\t1, 2 ,3\f"], {"prior": [1, 2, 3]}),
+    (["exact", "--reveals", "0", "--observed", ""], {"observed": []}),
+    (["optimum", "--strategy", "switch", "--cost", "-0/1"], {"reveals": None}),
+]
+
+HELP_SYNTAX = [
+    ["exact", "-h"],
+    ["optimum", "--help"],
+    ["exact", "--doors", "1_0", "--bogus", "5", "-h"],
+]
+
+LARGE_PRIOR = [999001, 999017, 999023, 999037, 999049, 999059, 999067, 999079]
+LARGE_COST = "1/9223372036854775783"
 
 
 @dataclass
@@ -325,6 +368,166 @@ def check_simulation(
     return {"interval_checks": len(intervals), "outside_95": misses, "allowed_outside": budget}
 
 
+def check_syntax(command: list[str], section: Section, jobs: int) -> None:
+    def rejected(arguments: list[str]) -> Callable[[], None]:
+        def run() -> None:
+            result = run_cli(command, arguments)
+            section.check(
+                result.code == 2 and result.stdout == "",
+                f"{arguments!r:.120}: expected exit 2 and no output, got {result.code}",
+            )
+
+        return run
+
+    def accepted(arguments: list[str], echoed: dict[str, Any]) -> Callable[[], None]:
+        def run() -> None:
+            result = run_cli(command, arguments)
+            if result.code != 0:
+                section.check(False, f"{arguments!r:.120}: exit {result.code}")
+                return
+            scenario = result.json()["scenario"]
+            for key, value in echoed.items():
+                section.check(scenario.get(key) == value, f"{arguments!r}: {key} is not {value!r}")
+
+        return run
+
+    def helped(arguments: list[str]) -> Callable[[], None]:
+        def run() -> None:
+            result = run_cli(command, arguments)
+            section.check(
+                result.code == 0 and result.stdout.strip() != "",
+                f"{arguments!r}: expected usage text and exit 0, got {result.code}",
+            )
+
+        return run
+
+    tasks = [rejected(arguments) for arguments in REJECTED_SYNTAX]
+    tasks += [accepted(arguments, echoed) for arguments, echoed in ACCEPTED_SYNTAX]
+    tasks += [helped(arguments) for arguments in HELP_SYNTAX]
+    parallel(jobs, tasks)
+
+
+def weighted_prize_at_pick(weights: list[int], prizes: int, pick: int) -> Fraction:
+    layer = {0: Fraction(1)}
+    total = sum(weights)
+    for _ in range(prizes):
+        following: dict[int, Fraction] = {}
+        for mask, probability in layer.items():
+            remaining = total - sum(w for door, w in enumerate(weights) if mask >> door & 1)
+            for door, weight in enumerate(weights):
+                if mask >> door & 1 or weight == 0:
+                    continue
+                key = mask | 1 << door
+                following[key] = following.get(key, Fraction(0)) + probability * Fraction(
+                    weight, remaining
+                )
+        layer = following
+    return sum((p for mask, p in layer.items() if mask >> pick & 1), Fraction(0))
+
+
+def random_host_switch(doors: int, prizes: int, reveals: int, pi: Fraction) -> Fraction:
+    unpicked = comb(doors - 1, reveals)
+    hit = Fraction(comb(doors - prizes, reveals), unpicked)
+    miss = Fraction(comb(doors - 1 - prizes, reveals), unpicked)
+    decision = pi * hit + (1 - pi) * miss
+    numerator = pi * hit * (prizes - 1) + (1 - pi) * miss * prizes
+    return numerator / ((doors - 1 - reveals) * decision)
+
+
+def fraction_text(value: Fraction) -> str:
+    return f"{value.numerator}/{value.denominator}"
+
+
+def expected_parabola(values: list[Fraction]) -> dict[str, Any]:
+    ks = list(range(len(values)))
+    s = [sum(Fraction(k**p) for k in ks) for p in range(5)]
+    t = [sum(v * k**p for k, v in zip(ks, values, strict=True)) for p in range(3)]
+    rows = [[s[4], s[3], s[2], t[2]], [s[3], s[2], s[1], t[1]], [s[2], s[1], s[0], t[0]]]
+    for column in range(3):
+        pivot = next(r for r in range(column, 3) if rows[r][column] != 0)
+        rows[column], rows[pivot] = rows[pivot], rows[column]
+        for r in range(3):
+            if r != column and rows[r][column] != 0:
+                factor = rows[r][column] / rows[column][column]
+                rows[r] = [x - factor * y for x, y in zip(rows[r], rows[column], strict=True)]
+    a, b, c = (rows[i][3] / rows[i][i] for i in range(3))
+    fitted = [a * k * k + b * k + c for k in ks]
+    best = max(ks, key=lambda k: (values[k], -k))
+    choice = max(ks, key=lambda k: (fitted[k], -k))
+    vertex = -b / (2 * a)
+    vertex_value = c - b * b / (4 * a)
+    rounded = min(max(floor(vertex + Fraction(1, 2)), 0), ks[-1])
+    return {
+        "a": fraction_text(a),
+        "b": fraction_text(b),
+        "c": fraction_text(c),
+        "shape": "concave" if a < 0 else "convex" if a > 0 else "linear",
+        "residual_sum_of_squares": fraction_text(
+            sum((f - v) ** 2 for f, v in zip(fitted, values, strict=True))
+        ),
+        "vertex": {"reveals": fraction_text(vertex), "value": fraction_text(vertex_value)},
+        "vertex_offset": fraction_text(vertex - best),
+        "vertex_value_gap": fraction_text(vertex_value - values[best]),
+        "rounded_vertex": {
+            "reveals": rounded,
+            "value": fraction_text(values[rounded]),
+            "regret": fraction_text(values[best] - values[rounded]),
+        },
+        "fitted_choice": {
+            "reveals": choice,
+            "value": fraction_text(values[choice]),
+            "regret": fraction_text(values[best] - values[choice]),
+        },
+    }
+
+
+def check_large_values(command: list[str], section: Section) -> None:
+    doors, prizes = len(LARGE_PRIOR), 3
+    pi = weighted_prize_at_pick(LARGE_PRIOR, prizes, 0)
+    cost = Fraction(LARGE_COST)
+    wins = [random_host_switch(doors, prizes, k, pi) for k in range(doors - prizes)]
+    values = [w - cost * k for k, w in enumerate(wins)]
+    prior = ",".join(map(str, LARGE_PRIOR))
+    scenario = [
+        "--doors",
+        str(doors),
+        "--prizes",
+        str(prizes),
+        "--prior",
+        prior,
+        "--host",
+        "random",
+    ]
+    result = run_cli(command, ["optimum", *scenario, "--strategy", "switch", "--cost", LARGE_COST])
+    if result.code != 0:
+        section.check(False, f"large optimum: exit {result.code} {result.stderr.strip()}")
+        return
+    output = result.json()
+    curve = [
+        {"reveals": k, "win": fraction_text(w), "value": fraction_text(v)}
+        for k, (w, v) in enumerate(zip(wins, values, strict=True))
+    ]
+    section.check(output["curve"] == curve, "large optimum: curve differs")
+    parabola = expected_parabola(values)
+    for key, value in parabola.items():
+        section.check(
+            output["parabola"].get(key) == value, f"large optimum: parabola {key} differs"
+        )
+    widest = as_fraction(parabola["residual_sum_of_squares"]).denominator.bit_length()
+    section.check(
+        widest > 4096, f"large optimum: expected values wider than 4096 bits, got {widest}"
+    )
+    result = run_cli(command, ["exact", *scenario, "--reveals", "2"])
+    if result.code != 0:
+        section.check(False, f"large exact: exit {result.code} {result.stderr.strip()}")
+        return
+    output = result.json()
+    section.check(
+        output["prize_at_pick"] == fraction_text(pi), "large exact: prize_at_pick differs"
+    )
+    section.check(output["win"]["switch"] == fraction_text(wins[2]), "large exact: switch differs")
+
+
 def check_errors(command: list[str], section: Section, jobs: int) -> None:
     def task(arguments: list[str]) -> Callable[[], None]:
         def run() -> None:
@@ -348,6 +551,7 @@ def main() -> int:
     parser.add_argument("--jobs", type=int, default=os.cpu_count() or 1)
     parser.add_argument("--report", type=Path, help="write a JSON report to this file")
     args = parser.parse_args()
+    sys.set_int_max_str_digits(0)
     command = shlex.split(args.cli)
     scenarios = json.loads((args.spec / "scenarios.json").read_text("utf-8"))["scenarios"]
     vectors = json.loads((args.spec / "prng-vectors.json").read_text("utf-8"))["vectors"]
@@ -362,6 +566,8 @@ def main() -> int:
             "simulation_identical",
             "simulation_statistical",
             "errors",
+            "syntax",
+            "large_values",
         )
     }
     check_prng(command, vectors, sections["prng"], args.jobs)
@@ -376,6 +582,8 @@ def main() -> int:
         args.jobs,
     )
     check_errors(command, sections["errors"], args.jobs)
+    check_syntax(command, sections["syntax"], args.jobs)
+    check_large_values(command, sections["large_values"])
     failed = 0
     for section in sections.values():
         status = "PASS" if not section.failures else "FAIL"

@@ -63,5 +63,5 @@ Output is one JSON document on standard output. Invalid input exits with code 2 
 `error: ...` on standard error; a closed standard output exits with 141. See
 [`../spec/cli.md`](../spec/cli.md) for every flag and field.
 
-Like the Python reference's argparse parser, flags accept `--flag value` and `--flag=value`, and
-a unique prefix of a flag name (`--rev 2`) is accepted.
+Flags accept `--flag value` and `--flag=value`. Names must be written in full, and the argument
+after a flag is always its value, as the input syntax in `spec/cli.md` requires.

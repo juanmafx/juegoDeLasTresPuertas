@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public final class Cli {
     public static final int EXIT_OK = 0;
@@ -18,7 +17,6 @@ public final class Cli {
     static final long MAX_PRNG_COUNT = 100_000L;
     static final long MAX_SHUFFLE_SIZE = 10_000L;
 
-    private static final Pattern NEGATIVE_NUMBER = Pattern.compile("^-\\d+$|^-\\d*\\.\\d+$");
     private static final List<String> SCENARIO_FLAGS =
             List.of("doors", "prizes", "prior", "pick", "host", "host-weights", "mixed");
     private static final Map<String, List<String>> COMMAND_FLAGS = new LinkedHashMap<>();
@@ -69,7 +67,7 @@ public final class Cli {
                 throw new ScenarioException("argument command: invalid choice '" + command
                         + "' (choose from exact, simulate, optimum, prng)");
             }
-            Map<String, String> flags = parseFlags(command, allowed, args);
+            Map<String, String> flags = asksForHelp(args) ? null : parseFlags(command, allowed, args);
             if (flags == null) {
                 out.print(usage());
                 out.flush();
@@ -107,6 +105,19 @@ public final class Cli {
                 "");
     }
 
+    private static boolean asksForHelp(String[] args) {
+        for (int i = 1; i < args.length; i++) {
+            String token = args[i];
+            if (token.equals("-h") || token.equals("--help")) {
+                return true;
+            }
+            if (token.startsWith("--") && token.indexOf('=') < 0) {
+                i++;
+            }
+        }
+        return false;
+    }
+
     private static Map<String, String> parseFlags(String command, List<String> allowed, String[] args) {
         Map<String, String> flags = new HashMap<>();
         for (int i = 1; i < args.length; i++) {
@@ -126,8 +137,7 @@ public final class Cli {
             }
             name = resolve(command, allowed, name, token);
             if (value == null) {
-                if (i + 1 >= args.length || (args[i + 1].startsWith("-")
-                        && !NEGATIVE_NUMBER.matcher(args[i + 1]).matches())) {
+                if (i + 1 >= args.length) {
                     throw new ScenarioException("argument --" + name + ": expected one argument");
                 }
                 value = args[++i];
@@ -140,19 +150,6 @@ public final class Cli {
     private static String resolve(String command, List<String> allowed, String name, String token) {
         if (allowed.contains(name)) {
             return name;
-        }
-        List<String> matches = new ArrayList<>();
-        for (String candidate : allowed) {
-            if (candidate.startsWith(name)) {
-                matches.add(candidate);
-            }
-        }
-        if (matches.size() == 1 && !name.isEmpty()) {
-            return matches.get(0);
-        }
-        if (matches.size() > 1) {
-            throw new ScenarioException("ambiguous option: " + token + " could match --"
-                    + String.join(", --", matches));
         }
         throw new ScenarioException("unrecognized arguments for " + command + ": " + token);
     }

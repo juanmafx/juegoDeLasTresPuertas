@@ -50,9 +50,33 @@ Prepared, not tagged. See [RELEASE_NOTES.md](RELEASE_NOTES.md).
   conformance and the figures.
 - `SECURITY.md` covers the four implementations, the PHP runtime dependency and the new loader;
   3.x is the supported line.
+- `docs/SECURITY_AUDIT.md` records an audit of the decision lab. Dependabot also watches the Maven
+  and Composer manifests, and the Java and PHP workflows run their remaining Docker steps without
+  network access.
+- `docs/THEORY.md` and `docs/DECISION_GUIDE.md` were corrected where they overstated results: the
+  adversarial host's switch probability does rise with reveals when there are several prizes, the
+  unproven random-host case covers mixing as well as switching, and the parabola's failures and
+  curvature are described only as far as the recorded sweep supports.
 
 ### Fixed
 
+- The input syntax is now part of `spec/cli.md` and is the same in every implementation: flag
+  names must be written in full, the argument after a flag is always its value, `-h` and `--help`
+  win over other errors, integers are ASCII decimal digits with an optional sign and surrounding
+  ASCII whitespace, and each written part of a `--mixed` or `--cost` fraction must lie within
+  2^63 - 1. Before, the four implementations disagreed on flag prefixes, `1_000`, non-ASCII digits
+  and whitespace, leading zeros, values starting with `-`, help after an invalid value, and very
+  long or very large fractions, and Python 3.13 and 3.14 disagreed with each other on values such
+  as `-1/-2`. `tools/conformance.py` has a new `syntax` section for these rules.
+- The C implementation used integers of at most 4,096 bits and rejected valid ten-door games with
+  large prior weights, such as five prizes with weights near 1,000,000. It now uses
+  arbitrary-precision integers, and `tools/conformance.py` has a new `large_values` section with a
+  game whose exact values are wider than 4,096 bits.
+- The Python reference failed with exit code 2 when an exact value had more than 4,300 digits,
+  Python's default limit for converting integers to text. It now prints such values.
+- PHP fraction arithmetic cancels common factors before multiplying, and `optimum` computes the
+  prior probability of the pick once instead of once per reveal count. A ten-door optimum that
+  took about 160 seconds on the development machine now takes about 32 without GMP or BCMath.
 - The 95% Wilson interval now uses the specification's `z = 1.959963984540054` in Python, the
   value the other implementations use, instead of `NormalDist().inv_cdf(0.975)`, which differs in
   the last bits. This also changes `monty-hall`'s 95% bounds in the last bits.

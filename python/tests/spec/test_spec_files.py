@@ -2,6 +2,7 @@ import json
 import re
 import subprocess
 import sys
+from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
@@ -103,7 +104,8 @@ def test_expected_fractions_are_reduced() -> None:
     fractions = [t for e in SCENARIOS for t in _strings(e["expected"]) if FRACTION.fullmatch(t)]
     assert len(fractions) > 500
     for text in fractions:
-        value = parse_fraction(text)
+        numerator, denominator = text.split("/")
+        value = Fraction(int(numerator), int(denominator))
         assert f"{value.numerator}/{value.denominator}" == text
 
 

@@ -53,6 +53,15 @@ final class CliTest extends TestCase
             ['prng', '--seed', '1', '--kind', 'weighted', '--weights', '9223372036854775807,1'],
             ['prng', '--kind', 'words'],
             ['solve'],
+            ['exact', '--door', '4'],
+            ['exact', '--doors', '1_0'],
+            ['exact', '--prior', '-h'],
+            ['exact', '--doors', '--help'],
+            ['exact', '--prior', '1,2,3,'],
+            ['exact', '--mixed', '1/9223372036854775808'],
+            ['optimum', '--strategy', 'switch', '--cost', '9223372036854775808'],
+            ['simulate', '--se', '1'],
+            ['simulate', '--seed', '1', '--trials', '5', '--mixed', '1/18446744073709551615'],
         ];
         $named = [];
         foreach ($cases as $case) {
@@ -164,6 +173,25 @@ final class CliTest extends TestCase
         $values = SpecDataView::list($shuffle, 'values');
         sort($values);
         self::assertSame([0, 1, 2, 3, 4, 5], $values);
+    }
+
+    public function testValuesMayStartWithAMinusSignAndHaveLeadingZeros(): void
+    {
+        [$code, $stdout] = self::invoke(['exact', '--mixed', '-1/-2', '--doors', ' +04']);
+        self::assertSame(0, $code);
+        $report = self::decode($stdout);
+        self::assertSame('1/2', SpecDataView::at($report, 'scenario', 'mixed'));
+        self::assertSame(4, SpecDataView::at($report, 'scenario', 'doors'));
+        [$code, $stdout] = self::invoke(['optimum', '--strategy', 'switch', '--cost', '-0/1']);
+        self::assertSame(0, $code);
+        self::assertSame('0/1', self::decode($stdout)['cost']);
+    }
+
+    public function testHelpWinsOverOtherErrors(): void
+    {
+        [$code, $stdout] = self::invoke(['exact', '--doors', '1_0', '--bogus', '5', '-h']);
+        self::assertSame(0, $code);
+        self::assertStringContainsString('usage: monty-lab', $stdout);
     }
 
     public function testHelpAndVersion(): void

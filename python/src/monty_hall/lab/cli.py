@@ -17,6 +17,7 @@ from monty_hall.lab.model import (
     Strategy,
     format_fraction,
     parse_fraction,
+    parse_integer,
 )
 from monty_hall.lab.optimum import OptimumResult, optimum_curve
 from monty_hall.lab.prng import SplitMix64, Xoshiro256StarStar
@@ -27,6 +28,7 @@ EXIT_USAGE = 2
 EXIT_BROKEN_PIPE = 141
 MAX_PRNG_COUNT = 100_000
 MAX_SHUFFLE_SIZE = 10_000
+COMMANDS = ("exact", "simulate", "optimum", "prng")
 
 
 def _fraction(value: Fraction | None) -> str | None:
@@ -34,24 +36,46 @@ def _fraction(value: Fraction | None) -> str | None:
 
 
 def _integer_list(text: str) -> tuple[int, ...]:
-    if text.strip() == "":
+    if text.strip(" \t\n\v\f\r") == "":
         return ()
     try:
-        return tuple(int(part) for part in text.split(","))
-    except ValueError as error:
+        return tuple(parse_integer(part) for part in text.split(","))
+    except ScenarioError as error:
         raise ScenarioError(f"invalid integer list {text!r}") from error
 
 
+def _integer(text: str) -> int:
+    try:
+        return parse_integer(text)
+    except ScenarioError as error:
+        raise argparse.ArgumentTypeError(f"invalid int value: {text!r}") from error
+
+
+def _attach_values(argv: Sequence[str]) -> list[str]:
+    attached = list(argv[:1])
+    index = 1
+    while index < len(argv):
+        argument = argv[index]
+        takes_value = argument.startswith("--") and "=" not in argument and argument != "--help"
+        if takes_value and index + 1 < len(argv):
+            attached.append(f"{argument}={argv[index + 1]}")
+            index += 2
+        else:
+            attached.append(argument)
+            index += 1
+    return attached
+
+
 def _add_scenario_arguments(parser: argparse.ArgumentParser, *, reveals: bool) -> None:
-    parser.add_argument("--doors", type=int, default=3)
-    parser.add_argument("--prizes", type=int, default=1)
+    parser.add_argument("--doors", type=_integer, default=3)
+    parser.add_argument("--prizes", type=_integer, default=1)
     parser.add_argument("--prior", default="uniform")
-    parser.add_argument("--pick", type=int, default=0)
+    parser.add_argument("--pick", type=_integer, default=0)
     parser.add_argument("--host", choices=[h.value for h in Host], default=Host.INFORMED.value)
     parser.add_argument("--host-weights")
     parser.add_argument("--mixed", default="1/2")
     if reveals:
-        parser.add_argument("--reveals", type=int, default=1)
+        parser.add_argument("--reveals", type=_integer, default=1)
         parser.add_argument("--observed")
 
 
@@ -59,28 +83,37 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="monty-lab",
         description="Generalized Monty Hall decision lab (cross-language contract).",
+        allow_abbrev=False,
     )
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     commands = parser.add_subparsers(dest="command", required=True)
-    exact = commands.add_parser("exact", help="exact win probabilities as fractions")
+    exact = commands.add_parser(
+        "exact", help="exact win probabilities as fractions", allow_abbrev=False
+    )
     _add_scenario_arguments(exact, reveals=True)
-    sim = commands.add_parser("simulate", help="deterministic Monte Carlo simulation")
+    sim = commands.add_parser(
+        "simulate", help="deterministic Monte Carlo simulation", allow_abbrev=False
+    )
     _add_scenario_arguments(sim, reveals=True)
-    sim.add_argument("--trials", type=int, default=100_000)
-    sim.add_argument("--seed", type=int, required=True)
-    optimum = commands.add_parser("optimum", help="value of exploration over all reveal counts")
+    sim.add_argument("--trials", type=_integer, default=100_000)
+    sim.add_argument("--seed", type=_integer, required=True)
+    optimum = commands.add_parser(
+        "optimum", help="value of exploration over all reveal counts", allow_abbrev=False
+    )
     _add_scenario_arguments(optimum, reveals=False)
     optimum.add_argument("--strategy", choices=[s.value for s in Strategy], required=True)
     optimum.add_argument("--cost", default="0")
-    prng = commands.add_parser("prng", help="raw generator output for conformance vectors")
-    prng.add_argument("--seed", type=int, required=True)
+    prng = commands.add_parser(
+        "prng", help="raw generator output for conformance vectors", allow_abbrev=False
+    )
+    prng.add_argument("--seed", type=_integer, required=True)
     prng.add_argument(
         "--kind", choices=["splitmix", "words", "bounded", "weighted", "shuffle"], required=True
     )
-    prng.add_argument("--count", type=int, default=1)
-    prng.add_argument("--bound", type=int)
+    prng.add_argument("--count", type=_integer, default=1)
+    prng.add_argument("--bound", type=_integer)
     prng.add_argument("--weights")
-    prng.add_argument("--size", type=int)
+    prng.add_argument("--size", type=_integer)
     return parser
 
 
@@ -254,7 +287,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    args = build_parser().parse_args(argv)
+    parser = build_parser()
+    arguments = _attach_values(sys.argv[1:] if argv is None else argv)
+    if arguments[:1] and arguments[0] in COMMANDS and {"-h", "--help"} & set(arguments[1:]):
+        arguments = [arguments[0], "--help"]
+    args = parser.parse_args(arguments)
     try:
         report = run(args)
         print(json.dumps(report, indent=2))

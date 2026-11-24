@@ -26,9 +26,12 @@ them.
   defined in `spec/cli.md`, and exits with code 2 on invalid input. `tools/conformance.py` and
   `tools/crosscheck.py` include invalid invocations.
 - **Resource limits.** Door counts, prize counts, trial counts and list lengths are bounded.
-  Exact enumeration is limited to 10 doors. Very long `--mixed` or `--cost` fractions make exact
-  arithmetic slower; the C implementation refuses results above its 4096-bit integer capacity
-  with exit code 2, while the other implementations use unbounded integers.
+  Exact enumeration is limited to 10 doors. Each written part of a `--mixed` or `--cost` fraction
+  is limited to 2^63 - 1 in absolute value, so input length cannot inflate exact arithmetic.
+  Exact values themselves can still run to thousands of digits for ten-door games with large
+  prior weights; every implementation computes them exactly. Without GMP or BCMath the PHP
+  implementation can take tens of seconds on such games, and the C implementation stops with exit
+  code 2 if a single integer would exceed 4,194,304 bits or memory runs out.
 - **Memory safety.** The C implementation is compiled with warnings as errors, and its unit tests
   and the conformance suite also run under AddressSanitizer and UndefinedBehaviorSanitizer.
 - **Databases.** `monty-hall` refuses SQLite files whose run tables, views, indexes or triggers

@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="io.github.juanmafx.montylab.SimulatorTest" time="0.532" tests="34" errors="0" skipped="0" failures="0">
-  <testcase name="emptySampleReportsNullRates" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.038"/>
-  <testcase name="wilsonIntervalEdgesAndKnownValue" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.005"/>
-  <testcase name="cliContractExampleForRandomHost" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.008"/>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="io.github.juanmafx.montylab.SimulatorTest" time="0.585" tests="34" errors="0" skipped="0" failures="0">
+  <testcase name="emptySampleReportsNullRates" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.034"/>
+  <testcase name="wilsonIntervalEdgesAndKnownValue" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.003"/>
+  <testcase name="cliContractExampleForRandomHost" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.005"/>
   <testcase name="adversarialHostWithZeroPriorPickNeverOffers" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.001"/>
-  <testcase name="extremeMixedValuesMatchPureStrategies" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.016"/>
+  <testcase name="extremeMixedValuesMatchPureStrategies" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.012"/>
   <testcase name="countsAreBitIdenticalToTheReference()[1]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.031"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[2]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.012"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[3]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.01"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[4]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.02"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[5]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.014"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[6]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.009"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[7]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.007"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[8]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.006"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[2]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.029"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[3]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.02"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[4]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.043"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[5]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.039"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[6]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.02"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[7]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.019"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[8]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.016"/>
   <testcase name="countsAreBitIdenticalToTheReference()[9]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.01"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[10]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.009"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[10]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.01"/>
   <testcase name="countsAreBitIdenticalToTheReference()[11]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.019"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[12]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.043"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[13]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.036"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[12]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.04"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[13]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.031"/>
   <testcase name="countsAreBitIdenticalToTheReference()[14]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.014"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[15]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.017"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[16]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.012"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[17]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.015"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[18]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.02"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[19]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.019"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[20]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.005"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[15]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.015"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[16]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.01"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[17]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.014"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[18]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.019"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[19]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.017"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[20]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.004"/>
   <testcase name="countsAreBitIdenticalToTheReference()[21]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.006"/>
   <testcase name="countsAreBitIdenticalToTheReference()[22]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.004"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[23]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.002"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[24]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.011"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[25]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.008"/>
-  <testcase name="countsAreBitIdenticalToTheReference()[26]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.01"/>
-  <testcase name="observationFiltersWithoutChangingTheStream" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.005"/>
-  <testcase name="sameSeedIsDeterministic" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.021"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[23]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.0"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[24]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.008"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[25]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.006"/>
+  <testcase name="countsAreBitIdenticalToTheReference()[26]" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.008"/>
+  <testcase name="observationFiltersWithoutChangingTheStream" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.004"/>
+  <testcase name="sameSeedIsDeterministic" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.016"/>
   <testcase name="rejectsInvalidTrialsAndSeed" classname="io.github.juanmafx.montylab.SimulatorTest" time="0.002"/>
 </testsuite>

@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="io.github.juanmafx.montylab.FractionTest" time="0.054" tests="22" errors="0" skipped="0" failures="0">
-  <testcase name="arithmeticIsExact" classname="io.github.juanmafx.montylab.FractionTest" time="0.002"/>
-  <testcase name="comparisonAndEqualityFollowValue" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="io.github.juanmafx.montylab.FractionTest" time="0.052" tests="33" errors="0" skipped="0" failures="0">
+  <testcase name="arithmeticIsExact" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="comparisonAndEqualityFollowValue" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
   <testcase name="parsesAndReducesToLowestTerms(String, String)[1]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
   <testcase name="parsesAndReducesToLowestTerms(String, String)[2]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
-  <testcase name="parsesAndReducesToLowestTerms(String, String)[3]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="parsesAndReducesToLowestTerms(String, String)[3]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
   <testcase name="parsesAndReducesToLowestTerms(String, String)[4]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
   <testcase name="parsesAndReducesToLowestTerms(String, String)[5]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
   <testcase name="parsesAndReducesToLowestTerms(String, String)[6]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
-  <testcase name="parsesAndReducesToLowestTerms(String, String)[7]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="parsesAndReducesToLowestTerms(String, String)[7]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
   <testcase name="parsesAndReducesToLowestTerms(String, String)[8]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
   <testcase name="parsesAndReducesToLowestTerms(String, String)[9]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
-  <testcase name="parsesAndReducesToLowestTerms(String, String)[10]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="parsesAndReducesToLowestTerms(String, String)[10]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
+  <testcase name="parsesAndReducesToLowestTerms(String, String)[11]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
+  <testcase name="parsesAndReducesToLowestTerms(String, String)[12]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
+  <testcase name="parsesAndReducesToLowestTerms(String, String)[13]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
+  <testcase name="parsesAndReducesToLowestTerms(String, String)[14]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
   <testcase name="rejectsMalformedFractions(String)[1]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
-  <testcase name="rejectsMalformedFractions(String)[2]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
+  <testcase name="rejectsMalformedFractions(String)[2]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
   <testcase name="rejectsMalformedFractions(String)[3]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
-  <testcase name="rejectsMalformedFractions(String)[4]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
-  <testcase name="rejectsMalformedFractions(String)[5]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
+  <testcase name="rejectsMalformedFractions(String)[4]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="rejectsMalformedFractions(String)[5]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
   <testcase name="rejectsMalformedFractions(String)[6]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
   <testcase name="rejectsMalformedFractions(String)[7]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
   <testcase name="rejectsMalformedFractions(String)[8]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
-  <testcase name="handlesNumbersBeyondSixtyFourBits" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
-  <testcase name="floorRoundsTowardNegativeInfinity" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="rejectsMalformedFractions(String)[9]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
+  <testcase name="rejectsMalformedFractions(String)[10]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
+  <testcase name="rejectsMalformedFractions(String)[11]" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
+  <testcase name="rejectsMalformedFractions(String)[12]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="rejectsMalformedFractions(String)[13]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="rejectsMalformedFractions(String)[14]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="rejectsMalformedFractions(String)[15]" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="handlesNumbersBeyondSixtyFourBits" classname="io.github.juanmafx.montylab.FractionTest" time="0.0"/>
+  <testcase name="floorRoundsTowardNegativeInfinity" classname="io.github.juanmafx.montylab.FractionTest" time="0.001"/>
 </testsuite>

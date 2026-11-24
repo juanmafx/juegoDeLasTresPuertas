@@ -14,13 +14,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 class FractionTest {
     @ParameterizedTest
     @CsvSource({"1/2,1/2", "2/4,1/2", "0,0/1", "0/7,0/1", "-3/20,-3/20", "3/-20,-3/20", "-6/-4,3/2",
-        "5,5/1", "' 7/14 ',1/2", "+3/9,1/3"})
+        "5,5/1", "' 7/14 ',1/2", "+3/9,1/3", "-0/5,0/1", "' 1 / 2 ',1/2",
+        "9223372036854775807/9223372036854775807,1/1", "-9223372036854775807,-9223372036854775807/1"})
     void parsesAndReducesToLowestTerms(String input, String expected) {
         assertEquals(expected, Fraction.parse(input).toString());
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1/0", "", "a/2", "1/b", "1.5", "1//2", "/2", "1/"})
+    @ValueSource(strings = {"1/0", "", "a/2", "1/b", "1.5", "1//2", "/2", "1/", "1/2/3", "1_0/2", "\uff11/2",
+        "1/\u00a02", "1/9223372036854775808", "-9223372036854775808", "9223372036854775808/2"})
     void rejectsMalformedFractions(String input) {
         assertThrows(ScenarioException.class, () -> Fraction.parse(input));
     }
@@ -54,7 +56,7 @@ class FractionTest {
 
     @Test
     void handlesNumbersBeyondSixtyFourBits() {
-        Fraction big = Fraction.parse("123456789012345678901234567890/2");
+        Fraction big = Fraction.of(new BigInteger("123456789012345678901234567890"), BigInteger.TWO);
         assertEquals("61728394506172839450617283945/1", big.toString());
     }
 }

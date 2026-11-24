@@ -26,7 +26,12 @@ turns into floats; products are assembled from limbs that stay below 2^63.
 ## Requirements
 
 - PHP 8.4 or newer. No extensions beyond the defaults are needed at run time: `brick/math` falls
-  back to its pure-PHP calculator when GMP and BCMath are absent.
+  back to its pure-PHP calculator when GMP and BCMath are absent. That calculator is slow on the
+  very large exact values that ten-door games with large prior weights produce: on the
+  development machine, `optimum --doors 10 --prizes 3 --host random --strategy stay` with prior
+  weights near 1,000,000 took about 32 seconds with the pure-PHP calculator and under one second in
+  the same pinned image with the `bcmath` extension installed, with identical output. Install
+  `ext-bcmath` or `ext-gmp` if you work with such games.
 - Composer, for the pinned dependencies in `composer.lock`.
 - PHPUnit needs the `dom` and `xml` extensions. Where the local PHP lacks them, run it in the
   pinned image below.
@@ -88,9 +93,8 @@ Flags, validation, exit codes and the JSON output are those of [`../spec/cli.md`
 parabola fitted to it, with how far its vertex lies from `K*` and what following the parabola
 would cost.
 
-## Known differences from the Python reference
+## Differences from the Python reference
 
-- `simulate` rejects a `--mixed` fraction whose reduced denominator exceeds 2^63 - 1, because the
-  bounded draw takes a native integer. Python accepts denominators up to 2^64 - 1.
-- Flag names must be written in full; Python's `argparse` also accepts unambiguous prefixes such
-  as `--door`.
+None are known. The input syntax in `spec/cli.md` now bounds every written part of a fraction to
+2^63 - 1 and requires full flag names, so the earlier differences in mixed denominators and flag
+prefixes no longer exist.

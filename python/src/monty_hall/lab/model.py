@@ -1,4 +1,6 @@
 # Scenario model shared by the exact solver, the simulator and the optimum curve.
+import re
+import sys
 from dataclasses import dataclass, replace
 from enum import StrEnum
 from fractions import Fraction
@@ -10,6 +12,9 @@ MAX_WEIGHT = 1_000_000
 ENUMERATION_MAX_DOORS = 10
 MAX_TRIALS = 100_000_000
 MAX_SEED = 2**63 - 1
+MAX_FRACTION_PART = 2**63 - 1
+_INTEGER = re.compile(r"[ \t\n\v\f\r]*([+-]?)([0-9]+)[ \t\n\v\f\r]*", re.ASCII)
+_MAX_INTEGER_DIGITS = 40
 
 
 class ScenarioError(ValueError):
@@ -29,17 +34,35 @@ class Strategy(StrEnum):
     MIXED = "mixed"
 
 
+def parse_integer(text: str) -> int:
+    match = _INTEGER.fullmatch(text)
+    if match is None:
+        raise ScenarioError(f"invalid integer {text!r}")
+    digits = match.group(2).lstrip("0") or "0"
+    if len(digits) > _MAX_INTEGER_DIGITS:
+        raise ScenarioError(f"integer out of range {text!r}")
+    value = int(digits)
+    return -value if match.group(1) == "-" else value
+
+
 def parse_fraction(text: str) -> Fraction:
-    numerator, separator, denominator = text.strip().partition("/")
-    try:
-        value = Fraction(int(numerator), int(denominator) if separator else 1)
-    except (ValueError, ZeroDivisionError) as error:
-        raise ScenarioError(f"invalid fraction {text!r}") from error
-    return value
+    parts = text.split("/")
+    if len(parts) > 2:
+        raise ScenarioError(f"invalid fraction {text!r}")
+    numerator = parse_integer(parts[0])
+    denominator = parse_integer(parts[1]) if len(parts) == 2 else 1
+    if denominator == 0 or max(abs(numerator), abs(denominator)) > MAX_FRACTION_PART:
+        raise ScenarioError(f"invalid fraction {text!r}")
+    return Fraction(numerator, denominator)
 
 
 def format_fraction(value: Fraction) -> str:
-    return f"{value.numerator}/{value.denominator}"
+    limit = sys.get_int_max_str_digits()
+    sys.set_int_max_str_digits(0)
+    try:
+        return f"{value.numerator}/{value.denominator}"
+    finally:
+        sys.set_int_max_str_digits(limit)
 
 
 def _integer(name: str, value: object) -> int:

@@ -71,8 +71,7 @@ static void test_fraction_parse_and_format(void) {
     CHECK_FRAC(value, "0/1");
     CHECK(mh_frac_parse(&value, " 7 "));
     CHECK_FRAC(value, "7/1");
-    CHECK(mh_frac_parse(&value, "1_000/10"));
-    CHECK_FRAC(value, "100/1");
+    CHECK(!mh_frac_parse(&value, "1_000/10"));
     CHECK(!mh_frac_parse(&value, "1/0"));
     CHECK(!mh_frac_parse(&value, ""));
     CHECK(!mh_frac_parse(&value, "1/"));
@@ -172,9 +171,108 @@ static void test_overflow_is_detected(void) {
     mh_big_sub(&product, &one, &wide);
     CHECK(mh_arith_failed());
     mh_arith_reset();
-    char digits[1300];
-    memset(digits, '9', sizeof digits);
-    CHECK(!mh_big_parse(&product, digits, sizeof digits));
+    size_t length = (size_t)MH_BIG_LIMBS * 20;
+    char *digits = malloc(length);
+    CHECK(digits != NULL);
+    if (digits != NULL) {
+        memset(digits, '9', length);
+        CHECK(mh_big_parse(&product, digits, 1300));
+        CHECK(mh_big_bits(&product) > 4096);
+        CHECK(!mh_big_parse(&product, digits, length));
+        free(digits);
+    }
+    CHECK(!mh_arith_failed());
+}
+
+static uint64_t test_state = 0x9E3779B97F4A7C15ULL;
+
+static uint64_t next_word(void) {
+    test_state ^= test_state << 13;
+    test_state ^= test_state >> 7;
+    test_state ^= test_state << 17;
+    return test_state;
+}
+
+static void random_big(mh_big *r, size_t limbs, bool extreme) {
+    uint64_t words[128];
+    for (size_t i = 0; i < limbs; i++) {
+        uint64_t word = next_word();
+        if (extreme) {
+            word = (word & 3U) == 0 ? 0 : (word & 3U) == 1 ? UINT64_MAX : word | (1ULL << 63);
+        }
+        words[i] = word;
+    }
+    mh_big_set_u64(r, 0);
+    for (size_t i = limbs; i-- > 0;) {
+        mh_big shifted;
+        mh_big low;
+        mh_big_shl(&shifted, r, 64);
+        mh_big_set_u64(&low, words[i]);
+        mh_big_add(r, &shifted, &low);
+    }
+}
+
+static void test_long_division_identity(void) {
+    for (int round = 0; round < 3000; round++) {
+        size_t mark = mh_arena_mark();
+        mh_big a;
+        mh_big b;
+        mh_big q;
+        mh_big r;
+        mh_big back;
+        bool extreme = round % 2 == 1;
+        random_big(&a, 1 + next_word() % 40, extreme);
+        random_big(&b, 1 + next_word() % 20, extreme);
+        if (mh_big_is_zero(&b)) {
+            mh_big_set_u64(&b, 3);
+        }
+        mh_big_divmod(&q, &r, &a, &b);
+        mh_big_mul(&back, &q, &b);
+        mh_big_add(&back, &back, &r);
+        CHECK(mh_big_cmp(&back, &a) == 0);
+        CHECK(mh_big_cmp(&r, &b) < 0);
+        mh_big g;
+        mh_big ga;
+        mh_big gb;
+        mh_big rest;
+        mh_big_gcd(&g, &a, &b);
+        mh_big_divmod(&ga, &rest, &a, &g);
+        CHECK(mh_big_is_zero(&rest));
+        mh_big_divmod(&gb, &rest, &b, &g);
+        CHECK(mh_big_is_zero(&rest));
+        mh_arena_keep(mark, NULL, 0);
+    }
+    CHECK(!mh_arith_failed());
+}
+
+static void test_fractions_beyond_four_thousand_bits(void) {
+    mh_frac x;
+    mh_frac y;
+    mh_frac sum;
+    mh_frac back;
+    mh_big n;
+    mh_big d;
+    random_big(&n, 90, false);
+    random_big(&d, 85, false);
+    mh_frac_set_parts(&x, false, &n, &d);
+    random_big(&n, 70, false);
+    random_big(&d, 95, false);
+    mh_frac_set_parts(&y, true, &n, &d);
+    mh_frac_add(&sum, &x, &y);
+    mh_frac_sub(&back, &sum, &y);
+    CHECK(mh_frac_cmp(&back, &x) == 0);
+    mh_frac_mul(&sum, &x, &y);
+    mh_frac_div(&back, &sum, &y);
+    CHECK(mh_frac_cmp(&back, &x) == 0);
+    char *text = mh_frac_to_string(&x);
+    CHECK(text != NULL);
+    if (text != NULL) {
+        mh_frac parsed;
+        CHECK(mh_frac_parse(&parsed, text));
+        CHECK(mh_frac_cmp(&parsed, &x) == 0);
+        CHECK(strlen(text) > 1300);
+        free(text);
+    }
     CHECK(!mh_arith_failed());
 }
 
@@ -385,6 +483,28 @@ static void test_exact_weighted_prior(void) {
     CHECK(mh_solve(&scenario, &result, error, sizeof error));
     CHECK(!result.has_stay && !result.has_switch);
     CHECK_FRAC(result.no_offer, "1/1");
+}
+
+static void test_exact_large_weighted_prior(void) {
+    static const uint32_t weights[10] = {999001, 999017, 999023, 999037, 999049,
+                                         999059, 999067, 999079, 999083, 999091};
+    char error[MH_ERROR_SIZE];
+    mh_exact result;
+    mh_scenario scenario = make_scenario(10, 5, 0, 1, MH_HOST_INFORMED);
+    scenario.has_prior = true;
+    for (int i = 0; i < 10; i++) {
+        scenario.prior[i] = weights[i];
+    }
+    CHECK(mh_solve(&scenario, &result, error, sizeof error));
+    CHECK(mh_big_bits(&result.prize_at_pick.den) > 2048);
+    mh_frac eight;
+    mh_frac scaled;
+    mh_frac total;
+    mh_frac_set_i64(&eight, 8, 1);
+    mh_frac_mul(&scaled, &eight, &result.switch_);
+    mh_frac_add(&total, &scaled, &result.prize_at_pick);
+    CHECK_FRAC(total, "5/1");
+    CHECK(!mh_arith_failed());
 }
 
 static void test_exact_enumeration_limit(void) {
@@ -628,6 +748,14 @@ static void test_cli_rejects_invalid_input(void) {
         {"prng", "--seed", "1", "--kind", "bounded", "--bound", "0"},
         {"prng", "--seed", "1", "--kind", "words", "--count", "100001"},
         {"launch"},
+        {"exact", "--doors", "1_0"},
+        {"exact", "--door", "4"},
+        {"exact", "--prior", "-h"},
+        {"exact", "--prior", "1,2,3,"},
+        {"exact", "--mixed", "1/9223372036854775808"},
+        {"exact", "--mixed", "-9223372036854775808/-9223372036854775808"},
+        {"optimum", "--strategy", "switch", "--cost", "9223372036854775808"},
+        {"simulate", "--se", "1"},
     };
     for (size_t i = 0; i < sizeof cases / sizeof cases[0]; i++) {
         const char *argv[13] = {"monty-lab"};
@@ -641,6 +769,30 @@ static void test_cli_rejects_invalid_input(void) {
         CHECK(strstr(result.err, "error") != NULL);
         free_cli(&result);
     }
+}
+
+static void test_cli_input_syntax(void) {
+    const char *negative[] = {"monty-lab", "exact", "--mixed", "-1/-2", "--doors", " +04"};
+    cli_result result = run_cli(6, negative);
+    CHECK(result.code == 0);
+    CHECK(strstr(result.out, "\"mixed\": \"1/2\"") != NULL);
+    CHECK(strstr(result.out, "\"doors\": 4") != NULL);
+    free_cli(&result);
+    const char *zero_cost[] = {"monty-lab", "optimum", "--strategy", "switch", "--cost", "-0/1"};
+    result = run_cli(6, zero_cost);
+    CHECK(result.code == 0);
+    CHECK(strstr(result.out, "\"cost\": \"0/1\"") != NULL);
+    free_cli(&result);
+    const char *help_after_error[] = {"monty-lab", "exact", "--doors", "1_0", "--bogus", "5", "-h"};
+    result = run_cli(7, help_after_error);
+    CHECK(result.code == 0);
+    CHECK(strstr(result.out, "usage: monty-lab") != NULL);
+    free_cli(&result);
+    const char *help_as_value[] = {"monty-lab", "exact", "--doors", "--help"};
+    result = run_cli(4, help_as_value);
+    CHECK(result.code == MH_EXIT_USAGE);
+    CHECK(strcmp(result.out, "") == 0);
+    free_cli(&result);
 }
 
 static void test_cli_help_and_version(void) {
@@ -678,6 +830,8 @@ int main(void) {
     run_test("fraction_floor", test_fraction_floor);
     run_test("big_integers_beyond_64_bits", test_big_integers_beyond_64_bits);
     run_test("overflow_is_detected", test_overflow_is_detected);
+    run_test("long_division_identity", test_long_division_identity);
+    run_test("fractions_beyond_four_thousand_bits", test_fractions_beyond_four_thousand_bits);
     run_test("parse_i64_bounds", test_parse_i64_bounds);
     run_test("splitmix_and_words", test_splitmix_and_words);
     run_test("bounded_vectors", test_bounded_vectors);
@@ -686,6 +840,7 @@ int main(void) {
     run_test("exact_classic_hosts", test_exact_classic_hosts);
     run_test("exact_biased_observed", test_exact_biased_observed);
     run_test("exact_weighted_prior", test_exact_weighted_prior);
+    run_test("exact_large_weighted_prior", test_exact_large_weighted_prior);
     run_test("exact_enumeration_limit", test_exact_enumeration_limit);
     run_test("exact_sixty_four_doors", test_exact_sixty_four_doors);
     run_test("optimum_five_doors", test_optimum_five_doors);
@@ -698,6 +853,7 @@ int main(void) {
     run_test("cli_simulate_and_prng", test_cli_simulate_and_prng);
     run_test("cli_optimum_output", test_cli_optimum_output);
     run_test("cli_rejects_invalid_input", test_cli_rejects_invalid_input);
+    run_test("cli_input_syntax", test_cli_input_syntax);
     run_test("cli_help_and_version", test_cli_help_and_version);
     run_test("json_double_format", test_json_double_format);
     printf("%d tests, %d passed, %d failed\n", tests_run, tests_run - tests_failed, tests_failed);

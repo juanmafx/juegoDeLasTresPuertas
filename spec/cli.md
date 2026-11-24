@@ -45,8 +45,33 @@ adversarial host it is "given that a switch was offered".
 
 Exact values are strings `"numerator/denominator"` in lowest terms with a positive denominator,
 always including the slash: `"0/1"`, `"1/1"`, `"-3/20"`. Flags that take a fraction accept
-`a/b` or an integer `a`. Implementations need arbitrary-precision integers for exact results;
-denominators exceed 64 bits for larger games.
+`a/b` or an integer `a`, as defined under [Input syntax](#input-syntax). Implementations need
+arbitrary-precision integers for exact results: denominators exceed 64 bits for larger games, and
+with ten doors and large prior weights an exact value can run to thousands of digits. Integers of
+a fixed small width, such as 64 or 4,096 bits, are not enough.
+
+## Input syntax
+
+These rules are part of the contract; every implementation accepts and rejects the same inputs.
+
+- **Arguments.** The subcommand comes first, and the arguments after it are read left to right.
+  `-h` and `--help` ask for help. Any other argument that starts with `--` and contains no `=` is
+  a flag name and takes the next argument as its value, even when that argument starts with `-`;
+  `--name=value` is the same flag in one argument. If help was asked for anywhere, the usage text
+  is printed and the exit code is 0 before anything else is checked. Names are written in full;
+  abbreviations such as `--door` are invalid. A flag given more than once keeps its last value.
+  `--version` is accepted only as the first argument.
+- **Integers.** Optional surrounding ASCII whitespace (space, tab, line feed, vertical tab, form
+  feed, carriage return), an optional `+` or `-`, then one or more ASCII digits `0-9`. Leading
+  zeros are allowed. Nothing else is: no digit separators such as `1_000`, no non-ASCII digits or
+  whitespace, no decimal point.
+- **Integer lists.** Integers separated by commas. An empty or all-whitespace value is the empty
+  list; an empty item, as in `1,,2` or `1,2,`, is invalid.
+- **Fractions.** An integer, or two integers separated by one `/`, the second not zero. Each of the
+  two integers, as written, must lie between `-(2^63 - 1)` and `2^63 - 1`. The value is then
+  reduced, so `-1/-2` is `1/2` and `-0/5` is `0/1`.
+- **Keywords.** `uniform`, host names, strategies and PRNG kinds are lowercase and matched
+  exactly, without surrounding whitespace.
 
 ## Shared scenario flags (exact, simulate, optimum)
 
@@ -72,7 +97,8 @@ denominators exceed 64 bits for larger games.
 Any of the following exits with code 2, prints nothing on standard output and prints a message
 on standard error (`error: ...` for validation errors):
 
-- a value outside the ranges above, or a malformed integer, list or fraction;
+- a value outside the ranges above, or an integer, list, fraction, keyword or flag that breaks
+  the [input syntax](#input-syntax);
 - a prior with fewer than `M` positive weights, or a weight list whose length is not `N`;
 - host weights given without `--host biased`, or missing with it;
 - `exact` or `optimum` with an explicit prior, or `exact` with `--observed`, when `N > 10`
@@ -205,7 +231,8 @@ monty-lab prng --seed S --kind splitmix|words|bounded|weighted|shuffle
 | `weighted` | `--count`, `--weights` | `C` draws of `weighted_index(W)` |
 | `shuffle` | `--size` (1 to 10,000) | `0 .. Z - 1` after one Fisher-Yates shuffle |
 
-`--count` is 1 to 100,000, default 1. The output also echoes `seed`, `kind` and the extra flag
+`--count` is 1 to 100,000, default 1. `--weights` is a non-empty list of non-negative integers
+whose total is from 1 to 2^63 - 1. The output also echoes `seed`, `kind` and the extra flag
 that was used (`bound`, `weights` or `size`). Words are strings because they exceed the integer
 range many JSON parsers handle exactly.
 

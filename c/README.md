@@ -8,7 +8,7 @@ reference implementation.
 
 | Path | Contents |
 | --- | --- |
-| `src/rational.c` | Exact fractions over fixed-capacity unsigned integers |
+| `src/rational.c` | Exact fractions over arbitrary-precision unsigned integers |
 | `src/prng.c` | SplitMix64, xoshiro256**, Lemire bounded draws, weighted choice, Fisher-Yates |
 | `src/model.c` | Scenario limits and validation |
 | `src/solver.c` | Exact solver: closed forms, plus enumeration for weighted priors and observed reveals |
@@ -20,14 +20,19 @@ reference implementation.
 
 ## Exact arithmetic
 
-Fractions are reduced and use 64-bit limbs, with `unsigned __int128` for intermediate products.
-Each integer holds at most 64 limbs (4096 bits). The specification needs more than 64 bits: the
-64-door optimum curve has numerators and denominators of about 190 bits. Every addition,
-multiplication and shift checks the capacity. If a result would exceed it, the command exits
-with code 2 and prints `error: exact arithmetic exceeds the 4096-bit integer capacity`, and
-nothing goes to standard output. No scenario in `spec/scenarios.json` comes close to the
-capacity. A `--mixed` or `--cost` fraction with numbers of about a thousand digits can reach it,
-and the Python reference, which has unbounded integers, would still answer that input.
+Fractions are kept in lowest terms over arbitrary-precision integers with 64-bit limbs and
+`unsigned __int128` intermediate products. Division is long division with normalized quotient
+estimates, the greatest common divisor is binary, and addition and multiplication cancel common
+factors before multiplying, which keeps intermediate numbers smaller. Results can be large: with
+ten doors and prior weights near 1,000,000, exact values and parabola coefficients run to
+thousands of digits. Limb arrays live on the heap and are released in batches by
+`mh_arena_keep`, which keeps the values still in use.
+
+A single integer may hold up to 65,536 limbs (4,194,304 bits). Beyond that, or when memory runs
+out, the command exits with code 2 and prints `error: exact arithmetic exceeds the 4194304-bit
+limit or the available memory`. In a randomized search over 300 ten-door games with prior weights
+near 1,000,000 and 63-bit `--mixed` and `--cost` fractions, the widest integer had 46,912 bits.
+`tools/conformance.py` includes a game whose exact values are wider than 4,096 bits.
 
 ## Build and test
 
@@ -66,5 +71,5 @@ regret, and the `K` the parabola would choose. With `--doors 5 --strategy switch
 the fit is convex. Its vertex at `K = 16/25` is a minimum, and rounding it would lose `13/30` of
 a prize. The parabola's highest feasible point is still the exact optimum, `K* = 3`.
 
-Exit codes: 0 for success, 2 for invalid input or exceeded arithmetic capacity, 141 when
+Exit codes: 0 for success, 2 for invalid input or exceeded arithmetic limits, 141 when
 standard output closes early.

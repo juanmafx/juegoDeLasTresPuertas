@@ -14,6 +14,13 @@ def _run(arguments: list[str], capsys: pytest.CaptureFixture[str]) -> dict[str, 
     return output
 
 
+def _exit_code(arguments: list[str]) -> object:
+    try:
+        return main(arguments)
+    except SystemExit as raised:
+        return raised.code
+
+
 def test_exact_defaults_to_the_classic_game(capsys: pytest.CaptureFixture[str]) -> None:
     output = _run(["exact"], capsys)
     assert output["win"] == {"stay": "1/3", "switch": "2/3", "mixed": "1/2"}
@@ -92,6 +99,38 @@ def test_invalid_input_exits_with_code_two(
     captured = capsys.readouterr()
     assert captured.err.startswith("error:")
     assert captured.out == ""
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        ["exact", "--door", "4"],
+        ["exact", "--doors", "1_0"],
+        ["exact", "--prior", "-h"],
+        ["exact", "--doors", "--help"],
+        ["exact", "--mixed", "1/9223372036854775808"],
+        ["simulate", "--se", "1"],
+    ],
+)
+def test_syntax_outside_the_contract_exits_with_code_two(
+    arguments: list[str], capsys: pytest.CaptureFixture[str]
+) -> None:
+    assert _exit_code(arguments) == 2
+    assert capsys.readouterr().out == ""
+
+
+def test_a_value_may_start_with_a_minus_sign(capsys: pytest.CaptureFixture[str]) -> None:
+    output = _run(["exact", "--mixed", "-1/-2", "--doors", " +04"], capsys)
+    scenario = output["scenario"]
+    assert isinstance(scenario, dict)
+    assert scenario["mixed"] == "1/2"
+    assert scenario["doors"] == 4
+    assert _run(["optimum", "--strategy", "switch", "--cost", "-0/1"], capsys)["cost"] == "0/1"
+
+
+def test_help_wins_over_other_errors(capsys: pytest.CaptureFixture[str]) -> None:
+    assert _exit_code(["exact", "--doors", "1_0", "--bogus", "5", "-h"]) == 0
+    assert "usage:" in capsys.readouterr().out
 
 
 def test_module_entry_point_and_closed_pipe() -> None:

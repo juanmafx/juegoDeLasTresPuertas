@@ -45,7 +45,7 @@ final class Cli
             return 1;
         }
         $arguments = array_values(array_map(strval(...), array_slice($argv, 1)));
-        if ($arguments === [] || in_array('-h', $arguments, true) || in_array('--help', $arguments, true)) {
+        if ($arguments === [] || $arguments[0] === '-h' || $arguments[0] === '--help') {
             fwrite($arguments === [] ? $stderr : $stdout, self::USAGE);
             return $arguments === [] ? self::EXIT_USAGE : self::EXIT_OK;
         }
@@ -54,6 +54,10 @@ final class Cli
             return self::EXIT_OK;
         }
         try {
+            if (self::asksForHelp($arguments)) {
+                fwrite($stdout, self::USAGE);
+                return self::EXIT_OK;
+            }
             $report = self::run($arguments);
             $encoded = json_encode(
                 $report,
@@ -260,6 +264,25 @@ final class Cli
         return $report;
     }
 
+    public static function asksForHelp(array $arguments): bool
+    {
+        $command = array_shift($arguments);
+        if (!is_string($command) || !array_key_exists($command, self::FLAGS)) {
+            return false;
+        }
+        $count = count($arguments);
+        for ($index = 0; $index < $count; $index++) {
+            $token = strval($arguments[$index]);
+            if ($token === '-h' || $token === '--help') {
+                return true;
+            }
+            if (str_starts_with($token, '--') && !str_contains($token, '=')) {
+                $index++;
+            }
+        }
+        return false;
+    }
+
     public static function parseFlags(string $command, array $arguments): array
     {
         $allowed = self::FLAGS[$command];
@@ -315,20 +338,20 @@ final class Cli
 
     public static function integer(string $name, string $text): int
     {
-        $trimmed = trim($text);
-        if (preg_match('/^[+-]?[0-9]+$/', $trimmed) !== 1) {
+        try {
+            $value = Fraction::integer($text);
+        } catch (ScenarioError) {
             throw new ScenarioError(sprintf('%s must be an integer, got %s', $name, json_encode($text)));
         }
-        $value = filter_var($trimmed, FILTER_VALIDATE_INT);
-        if ($value === false) {
-            throw new ScenarioError(sprintf('%s is out of range: %s', $name, $trimmed));
+        if ($value->isGreaterThan(PHP_INT_MAX) || $value->isLessThan(PHP_INT_MIN)) {
+            throw new ScenarioError(sprintf('%s is out of range: %s', $name, json_encode($text)));
         }
-        return $value;
+        return $value->toInt();
     }
 
     public static function integerList(string $name, string $text): array
     {
-        if (trim($text) === '') {
+        if (trim($text, Fraction::ASCII_SPACE) === '') {
             return [];
         }
         return array_map(static fn (string $part): int => self::integer($name, $part), explode(',', $text));

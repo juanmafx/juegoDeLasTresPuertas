@@ -8,6 +8,7 @@ public final class Fraction implements Comparable<Fraction> {
     public static final Fraction ZERO = new Fraction(BigInteger.ZERO, BigInteger.ONE);
     public static final Fraction ONE = new Fraction(BigInteger.ONE, BigInteger.ONE);
     public static final Fraction HALF = new Fraction(BigInteger.ONE, BigInteger.TWO);
+    private static final BigInteger MAX_PART = BigInteger.valueOf(Long.MAX_VALUE);
 
     private final BigInteger numerator;
     private final BigInteger denominator;
@@ -49,15 +50,15 @@ public final class Fraction implements Comparable<Fraction> {
     }
 
     public static Fraction parse(String text) {
-        String trimmed = text.strip();
-        int slash = trimmed.indexOf('/');
+        String[] parts = text.split("/", -1);
+        if (parts.length > 2) {
+            throw new ScenarioException("invalid fraction '" + text + "'");
+        }
         try {
-            if (slash < 0) {
-                return of(Integers.parse(trimmed));
-            }
-            BigInteger numerator = Integers.parse(trimmed.substring(0, slash));
-            BigInteger denominator = Integers.parse(trimmed.substring(slash + 1));
-            if (denominator.signum() == 0) {
+            BigInteger numerator = Integers.parse(parts[0]);
+            BigInteger denominator = parts.length == 2 ? Integers.parse(parts[1]) : BigInteger.ONE;
+            if (denominator.signum() == 0 || numerator.abs().compareTo(MAX_PART) > 0
+                    || denominator.abs().compareTo(MAX_PART) > 0) {
                 throw new ScenarioException("invalid fraction '" + text + "'");
             }
             return of(numerator, denominator);

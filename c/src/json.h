@@ -15,6 +15,7 @@ typedef struct {
     int depth;
     bool first[MH_JSON_DEPTH];
     bool pending_key;
+    bool failed;
 } mh_json;
 
 void mh_json_init(mh_json *w, FILE *out);

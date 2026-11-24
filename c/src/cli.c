@@ -91,25 +91,26 @@ static void declare_options(invocation *inv) {
     }
 }
 
-static option *find_option(invocation *inv, const char *name, size_t length, bool *ambiguous) {
-    option *match = NULL;
-    size_t matches = 0;
-    *ambiguous = false;
+static option *find_option(invocation *inv, const char *name, size_t length) {
     for (size_t i = 0; i < inv->count; i++) {
         const char *candidate = inv->options[i].name;
         if (strlen(candidate) == length && strncmp(candidate, name, length) == 0) {
             return &inv->options[i];
         }
-        if (strncmp(candidate, name, length) == 0) {
-            match = &inv->options[i];
-            matches++;
+    }
+    return NULL;
+}
+
+static bool asks_for_help(int argc, char **argv) {
+    for (int i = 2; i < argc; i++) {
+        if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
+            return true;
+        }
+        if (strncmp(argv[i], "--", 2) == 0 && strchr(argv[i], '=') == NULL) {
+            i++;
         }
     }
-    if (matches > 1) {
-        *ambiguous = true;
-        return NULL;
-    }
-    return match;
+    return false;
 }
 
 static const char *value_of(const invocation *inv, const char *name) {
@@ -135,17 +136,13 @@ static bool parse_options(invocation *inv, int argc, char **argv, bool *help) {
         const char *name = arg + 2;
         const char *equals = strchr(name, '=');
         size_t length = equals == NULL ? strlen(name) : (size_t)(equals - name);
-        bool ambiguous;
-        option *target = find_option(inv, name, length, &ambiguous);
-        if (ambiguous) {
-            return fail(inv, "ambiguous option: %s", arg);
-        }
+        option *target = find_option(inv, name, length);
         if (target == NULL) {
             return fail(inv, "unrecognized arguments: %s", arg);
         }
         if (equals != NULL) {
             target->value = equals + 1;
-        } else if (i + 1 < argc && strncmp(argv[i + 1], "--", 2) != 0) {
+        } else if (i + 1 < argc) {
             target->value = argv[++i];
         } else {
             return fail(inv, "argument --%s: expected one argument", target->name);
@@ -216,8 +213,18 @@ static bool integer_list(invocation *inv, const char *text, int64_t *values, siz
     return true;
 }
 
+static bool fraction_part(const char *text, size_t length) {
+    int64_t value;
+    return mh_parse_i64(text, length, &value) && value != INT64_MIN;
+}
+
 static bool fraction_flag(invocation *inv, const char *text, mh_frac *out) {
-    if (!mh_frac_parse(out, text)) {
+    const char *slash = strchr(text, '/');
+    bool parts_fit = slash == NULL
+                         ? fraction_part(text, strlen(text))
+                         : fraction_part(text, (size_t)(slash - text)) &&
+                               fraction_part(slash + 1, strlen(slash + 1));
+    if (!parts_fit || !mh_frac_parse(out, text)) {
         return fail(inv, "invalid fraction '%s'", text);
     }
     return true;
@@ -758,6 +765,7 @@ int mh_cli_main(int argc, char **argv, FILE *out, FILE *err) {
     invocation inv;
     memset(&inv, 0, sizeof inv);
     mh_arith_reset();
+    size_t arena_mark = mh_arena_mark();
     if (argc < 2) {
         return usage_error(err, "the following arguments are required: command");
     }
@@ -772,6 +780,9 @@ int mh_cli_main(int argc, char **argv, FILE *out, FILE *err) {
         return usage_error(err, inv.error);
     }
     declare_options(&inv);
+    if (asks_for_help(argc, argv)) {
+        return emit(out, usage_text, strlen(usage_text));
+    }
     bool help;
     if (!parse_options(&inv, argc, argv, &help)) {
         return usage_error(err, inv.error);
@@ -807,12 +818,13 @@ int mh_cli_main(int argc, char **argv, FILE *out, FILE *err) {
         mh_json_finish(&w);
     }
     bool stream_failed = fclose(memory) != 0;
-    if (ok && mh_arith_failed()) {
+    mh_arena_keep(arena_mark, NULL, 0);
+    if (mh_arith_failed()) {
         ok = false;
         snprintf(inv.error, sizeof inv.error,
-                 "exact arithmetic exceeds the %d-bit integer capacity", MH_BIG_BITS);
+                 "exact arithmetic exceeds the %d-bit limit or the available memory", MH_BIG_BITS);
     }
-    if (ok && stream_failed) {
+    if (ok && (stream_failed || w.failed)) {
         ok = false;
         snprintf(inv.error, sizeof inv.error, "out of memory");
     }

@@ -8,12 +8,25 @@ import java.util.regex.Pattern;
 
 public final class Integers {
     private static final Pattern DECIMAL = Pattern.compile("[+-]?[0-9]+");
+    private static final String ASCII_SPACE = " \t\n\u000B\f\r";
 
     private Integers() {
     }
 
+    public static String trim(String text) {
+        int start = 0;
+        int end = text.length();
+        while (start < end && ASCII_SPACE.indexOf(text.charAt(start)) >= 0) {
+            start++;
+        }
+        while (end > start && ASCII_SPACE.indexOf(text.charAt(end - 1)) >= 0) {
+            end--;
+        }
+        return text.substring(start, end);
+    }
+
     public static BigInteger parse(String text) {
-        String trimmed = text.strip();
+        String trimmed = trim(text);
         if (!DECIMAL.matcher(trimmed).matches()) {
             throw new NumberFormatException("invalid integer '" + text + "'");
         }
@@ -39,7 +52,7 @@ public final class Integers {
 
     public static List<BigInteger> parseList(String text) {
         List<BigInteger> values = new ArrayList<>();
-        if (text.strip().isEmpty()) {
+        if (trim(text).isEmpty()) {
             return values;
         }
         try {

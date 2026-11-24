@@ -80,6 +80,14 @@ static bool prize_set_distribution(const mh_scenario *scenario, mh_distribution 
     for (int door = 0; door < n; door++) {
         total += mh_prior_weight(scenario, door);
     }
+    const mh_frac **live = malloc(size * sizeof *live);
+    if (live == NULL) {
+        distribution_free(&layer);
+        distribution_free(&following);
+        snprintf(error, error_size, "out of memory");
+        return false;
+    }
+    size_t mark = mh_arena_mark();
     layer.present[0] = true;
     mh_frac_set_i64(&layer.probability[0], 1, 1);
     for (int step = 0; step < scenario->prizes; step++) {
@@ -112,10 +120,18 @@ static bool prize_set_distribution(const mh_scenario *scenario, mh_distribution 
                 }
             }
         }
+        size_t live_count = 0;
+        for (size_t mask = 0; mask < size; mask++) {
+            if (following.present[mask]) {
+                live[live_count++] = &following.probability[mask];
+            }
+        }
+        mh_arena_keep_fracs(mark, live, live_count);
         mh_distribution swap = layer;
         layer = following;
         following = swap;
     }
+    free(live);
     distribution_free(&following);
     *out = layer;
     return true;
@@ -129,17 +145,22 @@ bool mh_prize_at_pick(const mh_scenario *scenario, mh_frac *out, char *error, si
     if (!require_enumerable(scenario, error, error_size)) {
         return false;
     }
+    size_t mark = mh_arena_mark();
     mh_distribution distribution;
     if (!prize_set_distribution(scenario, &distribution, error, error_size)) {
         return false;
     }
-    mh_frac_set_i64(out, 0, 1);
+    mh_frac sum;
+    mh_frac_set_i64(&sum, 0, 1);
     for (size_t mask = 0; mask < distribution.size; mask++) {
         if (distribution.present[mask] && (mask >> scenario->pick & 1U) != 0) {
-            mh_frac_add(out, out, &distribution.probability[mask]);
+            mh_frac_add(&sum, &sum, &distribution.probability[mask]);
         }
     }
     distribution_free(&distribution);
+    *out = sum;
+    const mh_frac *keep[1] = {out};
+    mh_arena_keep_fracs(mark, keep, 1);
     return true;
 }
 
@@ -224,6 +245,7 @@ void mh_closed_form(const mh_scenario *scenario, const mh_frac *pi, mh_exact *ou
 static bool ordered_sample_probability(const int *chosen, int size, uint64_t pool_weight,
                                        const uint32_t *weights, mh_frac *out) {
     size_t states = (size_t)1 << size;
+    size_t mark = mh_arena_mark();
     mh_frac *probability = malloc(states * sizeof *probability);
     bool *present = calloc(states, sizeof *present);
     if (probability == NULL || present == NULL) {
@@ -263,6 +285,8 @@ static bool ordered_sample_probability(const int *chosen, int size, uint64_t poo
     *out = probability[states - 1];
     free(probability);
     free(present);
+    const mh_frac *keep[1] = {out};
+    mh_arena_keep_fracs(mark, keep, 1);
     return true;
 }
 
@@ -343,7 +367,10 @@ bool mh_enumerate_observed(const mh_scenario *scenario, const mh_frac *pi, mh_ex
     mh_frac_set_i64(&joint, 0, 1);
     mh_frac_set_i64(&stay, 0, 1);
     mh_frac_set_i64(&switch_, 0, 1);
+    const mh_frac *totals[3] = {&joint, &stay, &switch_};
+    size_t mark = mh_arena_mark();
     for (size_t mask = 0; mask < distribution.size; mask++) {
+        mh_arena_keep_fracs(mark, totals, 3);
         if (!distribution.present[mask]) {
             continue;
         }
