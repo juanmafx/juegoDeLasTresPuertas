@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/juanmafx/juegoDeLasTresPuertas/spec/cli-output.schema.json",
+  "$id": "https://github.com/juanmafx/monty-hall-decision-lab/spec/cli-output.schema.json",
   "title": "monty-lab command output",
   "description": "The JSON document every implementation prints on standard output for exact, simulate, optimum and prng. See spec/cli.md.",
   "oneOf": [

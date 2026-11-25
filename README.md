@@ -1,4 +1,4 @@
-# juegoDeLasTresPuertas
+# monty-hall-decision-lab
 
 Exact and reproducible analysis of the Monty Hall problem and its generalizations, built as a
 decision lab with one shared specification and four implementations that must agree exactly:
@@ -111,7 +111,7 @@ Composer) and [c/README.md](c/README.md) (C17, make).
 
 ```bash
 git clone https://github.com/juanmafx/juegoDeLasTresPuertas.git
-cd juegoDeLasTresPuertas/python
+cd monty-hall-decision-lab/python
 uv sync --locked
 uv run monty-lab exact
 uv run monty-lab simulate --seed 42 --trials 100000

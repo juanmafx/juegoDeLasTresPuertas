@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/juanmafx/juegoDeLasTresPuertas/spec/scenario.schema.json",
+  "$id": "https://github.com/juanmafx/monty-hall-decision-lab/spec/scenario.schema.json",
   "title": "Monty Hall lab scenarios",
   "description": "A scenario and the shared scenario file. Cross-field rules that JSON Schema cannot express are listed in spec/cli.md under Validation.",
   "type": "object",
