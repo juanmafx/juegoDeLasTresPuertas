@@ -110,7 +110,7 @@ in [java/README.md](java/README.md) (Java 17, Maven), [php/README.md](php/README
 Composer) and [c/README.md](c/README.md) (C17, make).
 
 ```bash
-git clone https://github.com/juanmafx/juegoDeLasTresPuertas.git
+git clone https://github.com/juanmafx/monty-hall-decision-lab.git
 cd monty-hall-decision-lab/python
 uv sync --locked
 uv run monty-lab exact
