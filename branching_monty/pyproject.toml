@@ -1,0 +1,35 @@
+[project]
+name = "branching-monty"
+version = "0.1.0"
+description = "Branching Monty: constraint as leverage across Bayesian, epistemically restricted and quantum tiers."
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [{ name = "Juan Manuel Ramallo" }]
+dependencies = [
+    "numpy>=2.1",
+    "scipy>=1.14",
+    "cvxpy>=1.6",
+    "matplotlib>=3.9",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.8",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".."]
+addopts = "-ra --strict-markers --strict-config"
+xfail_strict = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "C4", "UP", "SIM", "RET", "RUF"]
