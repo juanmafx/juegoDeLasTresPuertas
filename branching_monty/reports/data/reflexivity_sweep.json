@@ -1,0 +1,278 @@
+{
+  "experiment": "reflexivity_sweep",
+  "black_box": "player's final choice moves the car with probability r after it is made",
+  "spec": {
+    "doors": 3,
+    "reveals": 1,
+    "q": "1"
+  },
+  "convention": "claim",
+  "seed": 20191001,
+  "trials": 20000,
+  "rows": [
+    {
+      "mode": "adversarial",
+      "r": "0",
+      "value": "2/3",
+      "lambda": 1.0,
+      "mc_rate": 0.66505,
+      "mc_stderr": 0.0033373529742896538
+    },
+    {
+      "mode": "adversarial",
+      "r": "1/10",
+      "value": "3/5",
+      "lambda": 0.8479969065549501,
+      "mc_rate": 0.5974,
+      "mc_stderr": 0.0034678036276582906
+    },
+    {
+      "mode": "adversarial",
+      "r": "1/5",
+      "value": "8/15",
+      "lambda": 0.6780719051126377,
+      "mc_rate": 0.53555,
+      "mc_stderr": 0.0035265861502308433
+    },
+    {
+      "mode": "adversarial",
+      "r": "3/10",
+      "value": "7/15",
+      "lambda": 0.48542682717024166,
+      "mc_rate": 0.47275,
+      "mc_stderr": 0.0035302792913592547
+    },
+    {
+      "mode": "adversarial",
+      "r": "2/5",
+      "value": "2/5",
+      "lambda": 0.2630344058337938,
+      "mc_rate": 0.4019,
+      "mc_stderr": 0.003466816911808295
+    },
+    {
+      "mode": "adversarial",
+      "r": "1/2",
+      "value": "1/3",
+      "lambda": 0.0,
+      "mc_rate": 0.3344,
+      "mc_stderr": 0.00333599040766007
+    },
+    {
+      "mode": "adversarial",
+      "r": "3/5",
+      "value": "4/15",
+      "lambda": -0.3219280948873623,
+      "mc_rate": 0.26875,
+      "mc_stderr": 0.0031346725307438415
+    },
+    {
+      "mode": "adversarial",
+      "r": "7/10",
+      "value": "1/5",
+      "lambda": -0.7369655941662062,
+      "mc_rate": 0.20305,
+      "mc_stderr": 0.0028444744461850946
+    },
+    {
+      "mode": "adversarial",
+      "r": "4/5",
+      "value": "2/15",
+      "lambda": -1.3219280948873622,
+      "mc_rate": 0.1364,
+      "mc_stderr": 0.0024268811260545913
+    },
+    {
+      "mode": "adversarial",
+      "r": "9/10",
+      "value": "1/15",
+      "lambda": -2.321928094887362,
+      "mc_rate": 0.0668,
+      "mc_stderr": 0.0017654710419601903
+    },
+    {
+      "mode": "adversarial",
+      "r": "1",
+      "value": "0",
+      "lambda": null,
+      "mc_rate": 0.0,
+      "mc_stderr": 0.0
+    },
+    {
+      "mode": "noise",
+      "r": "0",
+      "value": "2/3",
+      "lambda": 1.0,
+      "mc_rate": 0.66505,
+      "mc_stderr": 0.0033373529742896538
+    },
+    {
+      "mode": "noise",
+      "r": "1/10",
+      "value": "13/20",
+      "lambda": 0.963474123974886,
+      "mc_rate": 0.64885,
+      "mc_stderr": 0.003375230936543454
+    },
+    {
+      "mode": "noise",
+      "r": "1/5",
+      "value": "19/30",
+      "lambda": 0.925999418556223,
+      "mc_rate": 0.63725,
+      "mc_stderr": 0.0033997237939279714
+    },
+    {
+      "mode": "noise",
+      "r": "3/10",
+      "value": "37/60",
+      "lambda": 0.8875252707415875,
+      "mc_rate": 0.62095,
+      "mc_stderr": 0.0034305327392403647
+    },
+    {
+      "mode": "noise",
+      "r": "2/5",
+      "value": "3/5",
+      "lambda": 0.8479969065549501,
+      "mc_rate": 0.60295,
+      "mc_stderr": 0.003459778154015081
+    },
+    {
+      "mode": "noise",
+      "r": "1/2",
+      "value": "7/12",
+      "lambda": 0.8073549220576041,
+      "mc_rate": 0.58565,
+      "mc_stderr": 0.0034832748778986706
+    },
+    {
+      "mode": "noise",
+      "r": "3/5",
+      "value": "17/30",
+      "lambda": 0.765534746362977,
+      "mc_rate": 0.56765,
+      "mc_stderr": 0.003503023533320894
+    },
+    {
+      "mode": "noise",
+      "r": "7/10",
+      "value": "11/20",
+      "lambda": 0.722466024471091,
+      "mc_rate": 0.55095,
+      "mc_stderr": 0.0035171302044422524
+    },
+    {
+      "mode": "noise",
+      "r": "4/5",
+      "value": "8/15",
+      "lambda": 0.6780719051126377,
+      "mc_rate": 0.53415,
+      "mc_stderr": 0.0035272778278723667
+    },
+    {
+      "mode": "noise",
+      "r": "9/10",
+      "value": "31/60",
+      "lambda": 0.632268215499513,
+      "mc_rate": 0.52095,
+      "mc_stderr": 0.003532429033257427
+    },
+    {
+      "mode": "noise",
+      "r": "1",
+      "value": "1/2",
+      "lambda": 0.5849625007211562,
+      "mc_rate": 0.50115,
+      "mc_stderr": 0.003535524554433189
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "0",
+      "value": "2/3",
+      "lambda": 1.0,
+      "mc_rate": 0.66505,
+      "mc_stderr": 0.0033373529742896538
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "1/10",
+      "value": "7/10",
+      "lambda": 1.070389327891398,
+      "mc_rate": 0.69915,
+      "mc_stderr": 0.0032429868755516106
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "1/5",
+      "value": "11/15",
+      "lambda": 1.1375035237499351,
+      "mc_rate": 0.7335,
+      "mc_stderr": 0.003126321720488792
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "3/10",
+      "value": "23/30",
+      "lambda": 1.2016338611696504,
+      "mc_rate": 0.76675,
+      "mc_stderr": 0.002990354807543747
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "2/5",
+      "value": "4/5",
+      "lambda": 1.2630344058337937,
+      "mc_rate": 0.7989,
+      "mc_stderr": 0.002834244079115276
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "1/2",
+      "value": "5/6",
+      "lambda": 1.3219280948873624,
+      "mc_rate": 0.8324,
+      "mc_stderr": 0.0026411194596231346
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "3/5",
+      "value": "13/15",
+      "lambda": 1.3785116232537298,
+      "mc_rate": 0.86565,
+      "mc_stderr": 0.0024114319138221585
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "7/10",
+      "value": "9/10",
+      "lambda": 1.4329594072761063,
+      "mc_rate": 0.8986,
+      "mc_stderr": 0.002134455902566273
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "4/5",
+      "value": "14/15",
+      "lambda": 1.4854268271702418,
+      "mc_rate": 0.93375,
+      "mc_stderr": 0.0017587060229043402
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "9/10",
+      "value": "29/30",
+      "lambda": 1.5360529002402097,
+      "mc_rate": 0.9674,
+      "mc_stderr": 0.0012557316592329741
+    },
+    {
+      "mode": "self_fulfilling",
+      "r": "1",
+      "value": "1",
+      "lambda": 1.584962500721156,
+      "mc_rate": 1.0,
+      "mc_stderr": 0.0
+    }
+  ]
+}

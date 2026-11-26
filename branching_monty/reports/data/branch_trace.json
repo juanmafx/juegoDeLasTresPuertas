@@ -1,0 +1,155 @@
+{
+  "spec": {
+    "n_doors": 5,
+    "reveals": 2,
+    "q": "1/2",
+    "convention": "claim"
+  },
+  "history": [
+    [
+      3,
+      false
+    ],
+    [
+      2,
+      false
+    ]
+  ],
+  "branches": [
+    {
+      "car": 0,
+      "host_knows": false,
+      "weights": [
+        "1/10",
+        "1/9",
+        "1/8"
+      ]
+    },
+    {
+      "car": 0,
+      "host_knows": true,
+      "weights": [
+        "1/10",
+        "1/9",
+        "1/8"
+      ]
+    },
+    {
+      "car": 1,
+      "host_knows": false,
+      "weights": [
+        "1/10",
+        "1/9",
+        "1/8"
+      ]
+    },
+    {
+      "car": 1,
+      "host_knows": true,
+      "weights": [
+        "1/10",
+        "4/27",
+        "1/4"
+      ]
+    },
+    {
+      "car": 2,
+      "host_knows": false,
+      "weights": [
+        "1/10",
+        "1/9",
+        "0"
+      ]
+    },
+    {
+      "car": 2,
+      "host_knows": true,
+      "weights": [
+        "1/10",
+        "4/27",
+        "0"
+      ]
+    },
+    {
+      "car": 3,
+      "host_knows": false,
+      "weights": [
+        "1/10",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "car": 3,
+      "host_knows": true,
+      "weights": [
+        "1/10",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "car": 4,
+      "host_knows": false,
+      "weights": [
+        "1/10",
+        "1/9",
+        "1/8"
+      ]
+    },
+    {
+      "car": 4,
+      "host_knows": true,
+      "weights": [
+        "1/10",
+        "4/27",
+        "1/4"
+      ]
+    }
+  ],
+  "log": [
+    {
+      "step": 0,
+      "observation": null,
+      "live_branches": 10,
+      "posterior_entropy": 2.321928094887362,
+      "min_entropy": 2.321928094887362,
+      "ensemble_lambda": 0.0,
+      "ensemble_info": 0.0
+    },
+    {
+      "step": 1,
+      "observation": [
+        3,
+        false
+      ],
+      "live_branches": 8,
+      "posterior_entropy": 1.9969531181806306,
+      "min_entropy": 1.9475325801058645,
+      "ensemble_lambda": 0.7369655941662064,
+      "ensemble_info": 0.5246702885247947
+    },
+    {
+      "step": 2,
+      "observation": [
+        2,
+        false
+      ],
+      "live_branches": 6,
+      "posterior_entropy": 1.561278124459133,
+      "min_entropy": 1.415037499278844,
+      "ensemble_lambda": 1.3219280948873626,
+      "ensemble_info": 1.072905595320056
+    }
+  ],
+  "seed": 20191001,
+  "truth": {
+    "car": 0,
+    "host_knows": false
+  },
+  "decision": {
+    "door": 1,
+    "posterior": "3/8",
+    "won": false
+  }
+}
