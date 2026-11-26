@@ -73,6 +73,13 @@ prize, while the highest point of the fitted parabola over the feasible range is
 
 ![Exact V(K) and the fitted parabola](docs/figures/optimum-parabola.svg)
 
+## Branching Monty
+
+[branching_monty/](branching_monty/README.md) is a separate experimental layer that treats every
+Monty Hall variant as a branching-and-pruning system. It measures how much a constraint on an
+informed host is worth across Bayesian, epistemically restricted (Spekkens) and quantum tiers,
+with its own uv project, tests and report; the four implementations above do not depend on it.
+
 ## Repository layout
 
 ```text
