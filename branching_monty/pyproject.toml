@@ -23,7 +23,7 @@ package = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = [".."]
+pythonpath = ["..", "../python/src"]
 addopts = "-ra --strict-markers --strict-config"
 xfail_strict = true
 
