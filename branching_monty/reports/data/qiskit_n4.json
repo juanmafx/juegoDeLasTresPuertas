@@ -1,0 +1,444 @@
+{
+  "experiment": "qiskit_n4",
+  "black_box": "one CPhaseGate(phi) call marking |11>; standard diffusion; statevector",
+  "rows": [
+    {
+      "phi": 0.0,
+      "qiskit_success": 0.24999999999999978,
+      "numpy_success": 0.25,
+      "oracle_is_clifford": true
+    },
+    {
+      "phi": 0.08726646259971647,
+      "qiskit_success": 0.25142698821559517,
+      "numpy_success": 0.2514269882155955,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 0.17453292519943295,
+      "qiskit_success": 0.2556970926204217,
+      "numpy_success": 0.255697092620422,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 0.2617993877991494,
+      "qiskit_success": 0.26277781514159915,
+      "numpy_success": 0.26277781514159937,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 0.3490658503988659,
+      "qiskit_success": 0.2726152672052841,
+      "numpy_success": 0.2726152672052844,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 0.4363323129985824,
+      "qiskit_success": 0.2851345798612562,
+      "numpy_success": 0.2851345798612563,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 0.5235987755982988,
+      "qiskit_success": 0.3002404735808352,
+      "numpy_success": 0.30024047358083544,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 0.6108652381980153,
+      "qiskit_success": 0.31781798339162776,
+      "numpy_success": 0.3178179833916281,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 0.6981317007977318,
+      "qiskit_success": 0.3377333338303829,
+      "numpy_success": 0.3377333338303833,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 0.7853981633974483,
+      "qiskit_success": 0.3598349570550442,
+      "numpy_success": 0.35983495705504476,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 0.8726646259971648,
+      "qiskit_success": 0.3839546463675472,
+      "numpy_success": 0.3839546463675478,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 0.9599310885968813,
+      "qiskit_success": 0.4099088363683571,
+      "numpy_success": 0.4099088363683577,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.0471975511965976,
+      "qiskit_success": 0.43749999999999944,
+      "numpy_success": 0.43750000000000006,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.1344640137963142,
+      "qiskit_success": 0.4665181518472373,
+      "numpy_success": 0.4665181518472377,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.2217304763960306,
+      "qiskit_success": 0.4967424462528736,
+      "numpy_success": 0.4967424462528742,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.3089969389957472,
+      "qiskit_success": 0.5279428580865543,
+      "numpy_success": 0.5279428580865548,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.3962634015954636,
+      "qiskit_success": 0.5598819333749006,
+      "numpy_success": 0.5598819333749012,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.48352986419518,
+      "qiskit_success": 0.5923165964696275,
+      "numpy_success": 0.5923165964696282,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.5707963267948966,
+      "qiskit_success": 0.6249999999999996,
+      "numpy_success": 0.6250000000000001,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.658062789394613,
+      "qiskit_success": 0.6576834035303711,
+      "numpy_success": 0.6576834035303718,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.7453292519943295,
+      "qiskit_success": 0.6901180666250982,
+      "numpy_success": 0.6901180666250988,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.832595714594046,
+      "qiskit_success": 0.7220571419134443,
+      "numpy_success": 0.7220571419134452,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 1.9198621771937625,
+      "qiskit_success": 0.753257553747125,
+      "numpy_success": 0.7532575537471256,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.007128639793479,
+      "qiskit_success": 0.7834818481527612,
+      "numpy_success": 0.7834818481527622,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.0943951023931953,
+      "qiskit_success": 0.8124999999999993,
+      "numpy_success": 0.8124999999999999,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.1816615649929116,
+      "qiskit_success": 0.8400911636316412,
+      "numpy_success": 0.8400911636316423,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.2689280275926285,
+      "qiskit_success": 0.8660453536324513,
+      "numpy_success": 0.8660453536324523,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.356194490192345,
+      "qiskit_success": 0.8901650429449542,
+      "numpy_success": 0.8901650429449554,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.443460952792061,
+      "qiskit_success": 0.9122666661696156,
+      "numpy_success": 0.9122666661696167,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.5307274153917776,
+      "qiskit_success": 0.932182016608371,
+      "numpy_success": 0.9321820166083719,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.6179938779914944,
+      "qiskit_success": 0.9497595264191637,
+      "numpy_success": 0.9497595264191646,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.705260340591211,
+      "qiskit_success": 0.9648654201387429,
+      "numpy_success": 0.9648654201387438,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.792526803190927,
+      "qiskit_success": 0.9773847327947144,
+      "numpy_success": 0.9773847327947156,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.8797932657906435,
+      "qiskit_success": 0.9872221848583994,
+      "numpy_success": 0.9872221848584005,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 2.96705972839036,
+      "qiskit_success": 0.9943029073795769,
+      "numpy_success": 0.994302907379578,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 3.0543261909900767,
+      "qiskit_success": 0.9985730117844035,
+      "numpy_success": 0.9985730117844044,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 3.141592653589793,
+      "qiskit_success": 0.9999999999999991,
+      "numpy_success": 1.0,
+      "oracle_is_clifford": true
+    },
+    {
+      "phi": 3.2288591161895095,
+      "qiskit_success": 0.9985730117844035,
+      "numpy_success": 0.9985730117844044,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 3.316125578789226,
+      "qiskit_success": 0.9943029073795772,
+      "numpy_success": 0.994302907379578,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 3.4033920413889427,
+      "qiskit_success": 0.9872221848583992,
+      "numpy_success": 0.9872221848584005,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 3.490658503988659,
+      "qiskit_success": 0.9773847327947146,
+      "numpy_success": 0.9773847327947156,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 3.5779249665883754,
+      "qiskit_success": 0.9648654201387429,
+      "numpy_success": 0.9648654201387438,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 3.665191429188092,
+      "qiskit_success": 0.9497595264191637,
+      "numpy_success": 0.9497595264191646,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 3.752457891787808,
+      "qiskit_success": 0.932182016608371,
+      "numpy_success": 0.9321820166083719,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 3.839724354387525,
+      "qiskit_success": 0.9122666661696156,
+      "numpy_success": 0.9122666661696167,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 3.9269908169872414,
+      "qiskit_success": 0.8901650429449545,
+      "numpy_success": 0.8901650429449555,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.014257279586958,
+      "qiskit_success": 0.8660453536324514,
+      "numpy_success": 0.8660453536324525,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.101523742186674,
+      "qiskit_success": 0.8400911636316416,
+      "numpy_success": 0.8400911636316424,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.1887902047863905,
+      "qiskit_success": 0.8124999999999993,
+      "numpy_success": 0.8125000000000001,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.276056667386107,
+      "qiskit_success": 0.7834818481527618,
+      "numpy_success": 0.7834818481527626,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.363323129985823,
+      "qiskit_success": 0.7532575537471252,
+      "numpy_success": 0.753257553747126,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.4505895925855405,
+      "qiskit_success": 0.7220571419134443,
+      "numpy_success": 0.7220571419134452,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.537856055185257,
+      "qiskit_success": 0.6901180666250982,
+      "numpy_success": 0.6901180666250988,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.625122517784973,
+      "qiskit_success": 0.6576834035303711,
+      "numpy_success": 0.6576834035303718,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.71238898038469,
+      "qiskit_success": 0.6249999999999996,
+      "numpy_success": 0.6249999999999999,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.799655442984406,
+      "qiskit_success": 0.5923165964696278,
+      "numpy_success": 0.5923165964696282,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.886921905584122,
+      "qiskit_success": 0.5598819333749007,
+      "numpy_success": 0.5598819333749012,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 4.974188368183839,
+      "qiskit_success": 0.5279428580865545,
+      "numpy_success": 0.5279428580865548,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.061454830783555,
+      "qiskit_success": 0.49674244625287395,
+      "numpy_success": 0.4967424462528742,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.148721293383272,
+      "qiskit_success": 0.4665181518472376,
+      "numpy_success": 0.4665181518472379,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.235987755982989,
+      "qiskit_success": 0.43749999999999944,
+      "numpy_success": 0.43750000000000006,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.323254218582705,
+      "qiskit_success": 0.40990883636835723,
+      "numpy_success": 0.4099088363683577,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.410520681182422,
+      "qiskit_success": 0.3839546463675474,
+      "numpy_success": 0.3839546463675478,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.497787143782138,
+      "qiskit_success": 0.35983495705504437,
+      "numpy_success": 0.35983495705504476,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.585053606381854,
+      "qiskit_success": 0.3377333338303829,
+      "numpy_success": 0.3377333338303833,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.672320068981571,
+      "qiskit_success": 0.31781798339162776,
+      "numpy_success": 0.31781798339162826,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.759586531581287,
+      "qiskit_success": 0.30024047358083533,
+      "numpy_success": 0.30024047358083555,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.8468529941810035,
+      "qiskit_success": 0.2851345798612562,
+      "numpy_success": 0.2851345798612564,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 5.93411945678072,
+      "qiskit_success": 0.2726152672052843,
+      "numpy_success": 0.2726152672052845,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 6.021385919380437,
+      "qiskit_success": 0.26277781514159915,
+      "numpy_success": 0.26277781514159937,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 6.1086523819801535,
+      "qiskit_success": 0.2556970926204217,
+      "numpy_success": 0.255697092620422,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 6.19591884457987,
+      "qiskit_success": 0.25142698821559517,
+      "numpy_success": 0.2514269882155954,
+      "oracle_is_clifford": false
+    },
+    {
+      "phi": 6.283185307179586,
+      "qiskit_success": 0.24999999999999978,
+      "numpy_success": 0.25,
+      "oracle_is_clifford": true
+    }
+  ]
+}
