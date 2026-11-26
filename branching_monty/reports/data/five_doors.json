@@ -1,0 +1,1301 @@
+{
+  "experiment": "five_doors",
+  "black_boxes": {
+    "indicator": "one call to diag(exp(i phi [x = t])); Spekkens may use it only if Clifford, otherwise it falls back to one classical bit query",
+    "chirp": "one call to diag(omega^((x - t)^2)), Clifford for every odd prime d"
+  },
+  "summary": {
+    "3": {
+      "quantum_best": 0.9999999999583852,
+      "spekkens_best_indicator_box": 0.9999999999583852,
+      "spekkens_best_chirp_box": 1.0,
+      "strict_gap": 0.0,
+      "spearman_mana_gap": -0.28805419473300115,
+      "rows": [
+        {
+          "phi": 0.0,
+          "mana": 6.406853007629834e-16,
+          "sdp_optimum": 0.3333333333333336,
+          "grover_best_theta": 0.3333333333333337,
+          "oracle_is_clifford": true
+        },
+        {
+          "phi": 0.06981317007977318,
+          "mana": 0.07397911179816666,
+          "sdp_optimum": 0.3646991919443094,
+          "grover_best_theta": 0.3646986683571859,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.13962634015954636,
+          "mana": 0.14118451652945985,
+          "sdp_optimum": 0.39664661306266713,
+          "grover_best_theta": 0.39664555400685036,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.20943951023931956,
+          "mana": 0.20205822302704465,
+          "sdp_optimum": 0.42903261484181077,
+          "grover_best_theta": 0.42903261435588513,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.2792526803190927,
+          "mana": 0.25697284374451124,
+          "sdp_optimum": 0.4617121786593085,
+          "grover_best_theta": 0.4617102997702982,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.3490658503988659,
+          "mana": 0.30624351250187587,
+          "sdp_optimum": 0.494539043518239,
+          "grover_best_theta": 0.49453598124322695,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.4188790204786391,
+          "mana": 0.35013711991632024,
+          "sdp_optimum": 0.5273664205479032,
+          "grover_best_theta": 0.5273663504501855,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.4886921905584123,
+          "mana": 0.38887953480623677,
+          "sdp_optimum": 0.5600478142696533,
+          "grover_best_theta": 0.5600458432418232,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.5585053606381855,
+          "mana": 0.42266128867862246,
+          "sdp_optimum": 0.5924377846655298,
+          "grover_best_theta": 0.5924301732181294,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.6283185307179586,
+          "mana": 0.45164206851884986,
+          "sdp_optimum": 0.6243927286819065,
+          "grover_best_theta": 0.6243914185557875,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.6981317007977318,
+          "mana": 0.4759542703975959,
+          "sdp_optimum": 0.6557716550883173,
+          "grover_best_theta": 0.6557713588052437,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.767944870877505,
+          "mana": 0.49570580004566284,
+          "sdp_optimum": 0.6864369471157001,
+          "grover_best_theta": 0.6864317864908275,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.8377580409572782,
+          "mana": 0.5109822581385072,
+          "sdp_optimum": 0.7162551385745659,
+          "grover_best_theta": 0.7162452276339745,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.9075712110370514,
+          "mana": 0.5218486119912146,
+          "sdp_optimum": 0.745097691596616,
+          "grover_best_theta": 0.7450947284413284,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.9773843811168246,
+          "mana": 0.5283504278874093,
+          "sdp_optimum": 0.7728416753106023,
+          "grover_best_theta": 0.7728415307431239,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.0471975511965976,
+          "mana": 0.5305147166987798,
+          "sdp_optimum": 0.7993705642084924,
+          "grover_best_theta": 0.7993698861365045,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.117010721276371,
+          "mana": 0.528350427887409,
+          "sdp_optimum": 0.8245749283644032,
+          "grover_best_theta": 0.8245715225952776,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.1868238913561442,
+          "mana": 0.5218486119912144,
+          "sdp_optimum": 0.8483531500547414,
+          "grover_best_theta": 0.8483462059409002,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.2566370614359172,
+          "mana": 0.5109822581385072,
+          "sdp_optimum": 0.8706121221407603,
+          "grover_best_theta": 0.8706022435255406,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.3264502315156905,
+          "mana": 0.49570580004566284,
+          "sdp_optimum": 0.8912679387250931,
+          "grover_best_theta": 0.8912569272500797,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.3962634015954636,
+          "mana": 0.47595427039759614,
+          "sdp_optimum": 0.9102465805953178,
+          "grover_best_theta": 0.910236913498767,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.4660765716752369,
+          "mana": 0.45164206851884986,
+          "sdp_optimum": 0.9274846001736619,
+          "grover_best_theta": 0.9274785380455748,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.53588974175501,
+          "mana": 0.4226612886786232,
+          "sdp_optimum": 0.9429298124511546,
+          "grover_best_theta": 0.9429280644714938,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.6057029118347832,
+          "mana": 0.38887953480623755,
+          "sdp_optimum": 0.9565420004864762,
+          "grover_best_theta": 0.9565418651233972,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.6755160819145565,
+          "mana": 0.35013711991632024,
+          "sdp_optimum": 0.968293646498591,
+          "grover_best_theta": 0.9682865341399234,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.7453292519943295,
+          "mana": 0.30624351250187615,
+          "sdp_optimum": 0.978170702464838,
+          "grover_best_theta": 0.9781626768454638,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.8151424220741028,
+          "mana": 0.25697284374451124,
+          "sdp_optimum": 0.9861734175281496,
+          "grover_best_theta": 0.9861726244928166,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.8849555921538759,
+          "mana": 0.20205822302704493,
+          "sdp_optimum": 0.9923172428077016,
+          "grover_best_theta": 0.9923083349655498,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.9547687622336491,
+          "mana": 0.14118451652946043,
+          "sdp_optimum": 0.996633838163165,
+          "grover_best_theta": 0.9966276217901479,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.0245819323134224,
+          "mana": 0.07397911179816637,
+          "sdp_optimum": 0.9991722086644557,
+          "grover_best_theta": 0.9991717949489831,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.0943951023931953,
+          "mana": 6.406853007629834e-16,
+          "sdp_optimum": 0.9999999999583851,
+          "grover_best_theta": 1.0,
+          "oracle_is_clifford": true
+        },
+        {
+          "phi": 2.1642082724729685,
+          "mana": 0.07397911179816606,
+          "sdp_optimum": 0.9992049802041314,
+          "grover_best_theta": 0.999204513306362,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.234021442552742,
+          "mana": 0.14118451652945985,
+          "sdp_optimum": 0.9968967280138703,
+          "grover_best_theta": 0.9968888109171854,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.303834612632515,
+          "mana": 0.20205822302704465,
+          "sdp_optimum": 0.993208525600858,
+          "grover_best_theta": 0.9932065216401398,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.3736477827122884,
+          "mana": 0.256972843744511,
+          "sdp_optimum": 0.9882994158627406,
+          "grover_best_theta": 0.9882855814082762,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.443460952792061,
+          "mana": 0.30624351250187537,
+          "sdp_optimum": 0.9823563088671328,
+          "grover_best_theta": 0.9823424726308855,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.5132741228718345,
+          "mana": 0.35013711991631996,
+          "sdp_optimum": 0.9755959004955204,
+          "grover_best_theta": 0.9755918154858979,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.5830872929516078,
+          "mana": 0.38887953480623705,
+          "sdp_optimum": 0.9682659757561615,
+          "grover_best_theta": 0.9682611337550724,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.652900463031381,
+          "mana": 0.42266128867862246,
+          "sdp_optimum": 0.960645398749793,
+          "grover_best_theta": 0.9606431884971552,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.722713633111154,
+          "mana": 0.4516420685188496,
+          "sdp_optimum": 0.9530417557720338,
+          "grover_best_theta": 0.9530301735945593,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.792526803190927,
+          "mana": 0.47595427039759614,
+          "sdp_optimum": 0.9457852919642108,
+          "grover_best_theta": 0.9457845547806101,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.8623399732707004,
+          "mana": 0.4957058000456633,
+          "sdp_optimum": 0.9392176475104625,
+          "grover_best_theta": 0.939216724624657,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.9321531433504737,
+          "mana": 0.510982258138507,
+          "sdp_optimum": 0.9336742596815468,
+          "grover_best_theta": 0.9336625931823805,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.001966313430247,
+          "mana": 0.5218486119912146,
+          "sdp_optimum": 0.929460493504032,
+          "grover_best_theta": 0.929459429512462,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.07177948351002,
+          "mana": 0.528350427887409,
+          "sdp_optimum": 0.9268236980624824,
+          "grover_best_theta": 0.92682368098579,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.141592653589793,
+          "mana": 0.5305147166987798,
+          "sdp_optimum": 0.9259259259851158,
+          "grover_best_theta": 0.9259259259259262,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.2114058236695664,
+          "mana": 0.528350427887409,
+          "sdp_optimum": 0.9268236980624782,
+          "grover_best_theta": 0.92682368098579,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.2812189937493397,
+          "mana": 0.5218486119912146,
+          "sdp_optimum": 0.9294604935040308,
+          "grover_best_theta": 0.929459429512462,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.351032163829113,
+          "mana": 0.5109822581385072,
+          "sdp_optimum": 0.9336742596815466,
+          "grover_best_theta": 0.9336625931823805,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.420845333908886,
+          "mana": 0.4957058000456635,
+          "sdp_optimum": 0.9392176475104652,
+          "grover_best_theta": 0.9392167246246566,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.490658503988659,
+          "mana": 0.4759542703975966,
+          "sdp_optimum": 0.9457852919642133,
+          "grover_best_theta": 0.9457845547806101,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.5604716740684323,
+          "mana": 0.4516420685188501,
+          "sdp_optimum": 0.9530417557720352,
+          "grover_best_theta": 0.9530301735945595,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.6302848441482056,
+          "mana": 0.4226612886786232,
+          "sdp_optimum": 0.9606453987497949,
+          "grover_best_theta": 0.960643188497155,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.7000980142279785,
+          "mana": 0.38887953480623755,
+          "sdp_optimum": 0.9682659757561611,
+          "grover_best_theta": 0.9682611337550722,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.7699111843077517,
+          "mana": 0.35013711991632096,
+          "sdp_optimum": 0.975595900495521,
+          "grover_best_theta": 0.9755918154858981,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.839724354387525,
+          "mana": 0.3062435125018764,
+          "sdp_optimum": 0.9823563088671332,
+          "grover_best_theta": 0.9823424726308855,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.9095375244672983,
+          "mana": 0.2569728437445115,
+          "sdp_optimum": 0.9882994158627364,
+          "grover_best_theta": 0.9882855814082762,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.9793506945470716,
+          "mana": 0.2020582230270452,
+          "sdp_optimum": 0.9932085256008583,
+          "grover_best_theta": 0.9932065216401398,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.049163864626845,
+          "mana": 0.14118451652946012,
+          "sdp_optimum": 0.9968967280138696,
+          "grover_best_theta": 0.9968888109171852,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.118977034706618,
+          "mana": 0.07397911179816696,
+          "sdp_optimum": 0.9992049802041326,
+          "grover_best_theta": 0.9992045133063622,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.1887902047863905,
+          "mana": 9.61027951144475e-16,
+          "sdp_optimum": 0.9999999999583852,
+          "grover_best_theta": 1.0,
+          "oracle_is_clifford": true
+        },
+        {
+          "phi": 4.258603374866164,
+          "mana": 0.07397911179816606,
+          "sdp_optimum": 0.9991722086644552,
+          "grover_best_theta": 0.9991717949489831,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.328416544945937,
+          "mana": 0.14118451652946012,
+          "sdp_optimum": 0.9966338381631656,
+          "grover_best_theta": 0.9966276217901479,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.39822971502571,
+          "mana": 0.20205822302704493,
+          "sdp_optimum": 0.9923172428077018,
+          "grover_best_theta": 0.9923083349655498,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.468042885105484,
+          "mana": 0.25697284374451124,
+          "sdp_optimum": 0.9861734175281496,
+          "grover_best_theta": 0.9861726244928166,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.537856055185257,
+          "mana": 0.30624351250187615,
+          "sdp_optimum": 0.978170702464838,
+          "grover_best_theta": 0.9781626768454638,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.60766922526503,
+          "mana": 0.35013711991632074,
+          "sdp_optimum": 0.968293646498591,
+          "grover_best_theta": 0.9682865341399234,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.6774823953448035,
+          "mana": 0.38887953480623777,
+          "sdp_optimum": 0.9565420004864763,
+          "grover_best_theta": 0.956541865123397,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.747295565424577,
+          "mana": 0.4226612886786232,
+          "sdp_optimum": 0.9429298124511547,
+          "grover_best_theta": 0.9429280644714936,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.817108735504349,
+          "mana": 0.45164206851884986,
+          "sdp_optimum": 0.927484600173661,
+          "grover_best_theta": 0.927478538045575,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.886921905584122,
+          "mana": 0.4759542703975966,
+          "sdp_optimum": 0.9102465805953188,
+          "grover_best_theta": 0.9102369134987675,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.956735075663896,
+          "mana": 0.4957058000456633,
+          "sdp_optimum": 0.8912679387250932,
+          "grover_best_theta": 0.8912569272500797,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.026548245743669,
+          "mana": 0.5109822581385074,
+          "sdp_optimum": 0.8706121221407583,
+          "grover_best_theta": 0.8706022435255406,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.096361415823442,
+          "mana": 0.521848611991215,
+          "sdp_optimum": 0.8483531500547414,
+          "grover_best_theta": 0.8483462059408999,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.1661745859032155,
+          "mana": 0.5283504278874093,
+          "sdp_optimum": 0.8245749283644123,
+          "grover_best_theta": 0.824571522595278,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.235987755982989,
+          "mana": 0.53051471669878,
+          "sdp_optimum": 0.7993705642084924,
+          "grover_best_theta": 0.7993698861365045,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.305800926062762,
+          "mana": 0.5283504278874093,
+          "sdp_optimum": 0.7728416753105976,
+          "grover_best_theta": 0.7728415307431241,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.375614096142535,
+          "mana": 0.5218486119912152,
+          "sdp_optimum": 0.7450976915966165,
+          "grover_best_theta": 0.7450947284413284,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.445427266222308,
+          "mana": 0.5109822581385076,
+          "sdp_optimum": 0.7162551385745652,
+          "grover_best_theta": 0.7162452276339748,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.515240436302081,
+          "mana": 0.4957058000456635,
+          "sdp_optimum": 0.6864369471157248,
+          "grover_best_theta": 0.6864317864908278,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.585053606381854,
+          "mana": 0.4759542703975971,
+          "sdp_optimum": 0.6557716550883202,
+          "grover_best_theta": 0.655771358805244,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.654866776461628,
+          "mana": 0.4516420685188505,
+          "sdp_optimum": 0.6243927286819028,
+          "grover_best_theta": 0.6243914185557876,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.724679946541401,
+          "mana": 0.4226612886786234,
+          "sdp_optimum": 0.5924377846655139,
+          "grover_best_theta": 0.5924301732181294,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.794493116621174,
+          "mana": 0.38887953480623805,
+          "sdp_optimum": 0.5600478142696533,
+          "grover_best_theta": 0.5600458432418232,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.8643062867009474,
+          "mana": 0.35013711991632124,
+          "sdp_optimum": 0.5273664205479243,
+          "grover_best_theta": 0.5273663504501859,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.934119456780721,
+          "mana": 0.3062435125018769,
+          "sdp_optimum": 0.4945390435182278,
+          "grover_best_theta": 0.49453598124322695,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 6.003932626860494,
+          "mana": 0.25697284374451207,
+          "sdp_optimum": 0.4617121786591819,
+          "grover_best_theta": 0.46171029977029804,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 6.073745796940266,
+          "mana": 0.20205822302704632,
+          "sdp_optimum": 0.42903261484181654,
+          "grover_best_theta": 0.4290326143558854,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 6.14355896702004,
+          "mana": 0.1411845165294616,
+          "sdp_optimum": 0.39664661306266635,
+          "grover_best_theta": 0.3966455540068505,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 6.213372137099813,
+          "mana": 0.07397911179816788,
+          "sdp_optimum": 0.3646991919443092,
+          "grover_best_theta": 0.3646986683571861,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 6.283185307179586,
+          "mana": 1.2813706015259665e-15,
+          "sdp_optimum": 0.3333333333333336,
+          "grover_best_theta": 0.3333333333333337,
+          "oracle_is_clifford": true
+        }
+      ]
+    },
+    "5": {
+      "quantum_best": 0.9679999993517625,
+      "spekkens_best_indicator_box": 0.4,
+      "spekkens_best_chirp_box": 0.9999999999999993,
+      "strict_gap": 0.5679999993517625,
+      "spearman_mana_gap": 0.7315286115996482,
+      "rows": [
+        {
+          "phi": 0.0,
+          "mana": 6.406853007629834e-16,
+          "sdp_optimum": 0.2,
+          "grover_best_theta": 0.2000000000000001,
+          "oracle_is_clifford": true
+        },
+        {
+          "phi": 0.06981317007977318,
+          "mana": 0.09480461393589043,
+          "sdp_optimum": 0.22279467314816448,
+          "grover_best_theta": 0.22279453672011595,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.13962634015954636,
+          "mana": 0.18135909634866634,
+          "sdp_optimum": 0.24644310357939422,
+          "grover_best_theta": 0.24644200413570155,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.20943951023931956,
+          "mana": 0.26035195896496244,
+          "sdp_optimum": 0.27085956467603467,
+          "grover_best_theta": 0.27085800823604594,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.2792526803190927,
+          "mana": 0.33235574351787744,
+          "sdp_optimum": 0.29595474499482854,
+          "grover_best_theta": 0.29595430857468796,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.3490658503988659,
+          "mana": 0.3978502259570475,
+          "sdp_optimum": 0.3216362660385807,
+          "grover_best_theta": 0.32163624042451094,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.4188790204786391,
+          "mana": 0.4572398711145619,
+          "sdp_optimum": 0.3478092136941484,
+          "grover_best_theta": 0.34780777926967305,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.4886921905584123,
+          "mana": 0.5108671515530039,
+          "sdp_optimum": 0.3743766847551347,
+          "grover_best_theta": 0.37437108848157363,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.5585053606381855,
+          "mana": 0.5590228357455014,
+          "sdp_optimum": 0.40124034636221895,
+          "grover_best_theta": 0.4012388623714573,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.6283185307179586,
+          "mana": 0.6019540170836226,
+          "sdp_optimum": 0.4283010046241432,
+          "grover_best_theta": 0.4283009761015527,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.6981317007977318,
+          "mana": 0.639870431455461,
+          "sdp_optimum": 0.4554591815666206,
+          "grover_best_theta": 0.4554559198621841,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.767944870877505,
+          "mana": 0.6729494580358675,
+          "sdp_optimum": 0.4826156979085886,
+          "grover_best_theta": 0.4826108404441264,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.8377580409572782,
+          "mana": 0.7013400911926425,
+          "sdp_optimum": 0.5096722592441444,
+          "grover_best_theta": 0.5096721907506857,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.9075712110370514,
+          "mana": 0.7251660956544633,
+          "sdp_optimum": 0.5365320426116299,
+          "grover_best_theta": 0.5365281603334849,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 0.9773843811168246,
+          "mana": 0.744528502358675,
+          "sdp_optimum": 0.5631002808680716,
+          "grover_best_theta": 0.5630963116770275,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.0471975511965976,
+          "mana": 0.7595075621328946,
+          "sdp_optimum": 0.5892848435743665,
+          "grover_best_theta": 0.5892843368179943,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.117010721276371,
+          "mana": 0.7701642441421471,
+          "sdp_optimum": 0.6149968117758365,
+          "grover_best_theta": 0.6149874269830663,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.1868238913561442,
+          "mana": 0.7765413428130968,
+          "sdp_optimum": 0.6401510299689278,
+          "grover_best_theta": 0.6401509888866947,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.2566370614359172,
+          "mana": 0.7786642385882997,
+          "sdp_optimum": 0.664666717669717,
+          "grover_best_theta": 0.6646566491763461,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.3264502315156905,
+          "mana": 0.799519766149125,
+          "sdp_optimum": 0.6884679050636998,
+          "grover_best_theta": 0.6884672081727132,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.3962634015954636,
+          "mana": 0.8179157252428219,
+          "sdp_optimum": 0.7114840275369225,
+          "grover_best_theta": 0.7114799207916837,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.4660765716752369,
+          "mana": 0.8338534890314491,
+          "sdp_optimum": 0.733650405177579,
+          "grover_best_theta": 0.7336424603738666,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.53588974175501,
+          "mana": 0.8473348411325373,
+          "sdp_optimum": 0.7549086815107173,
+          "grover_best_theta": 0.754908255192136,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.6057029118347832,
+          "mana": 0.8583617063785861,
+          "sdp_optimum": 0.7752073267946838,
+          "grover_best_theta": 0.7752061101119943,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.6755160819145565,
+          "mana": 0.8669359346083142,
+          "sdp_optimum": 0.7945019621477206,
+          "grover_best_theta": 0.7944959305452727,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.7453292519943295,
+          "mana": 0.8730591314791141,
+          "sdp_optimum": 0.8127557060126823,
+          "grover_best_theta": 0.8127446301141681,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.8151424220741028,
+          "mana": 0.8767325315703565,
+          "sdp_optimum": 0.8299395460008521,
+          "grover_best_theta": 0.8299259787950106,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.8849555921538759,
+          "mana": 0.8779569102142044,
+          "sdp_optimum": 0.8460325093616748,
+          "grover_best_theta": 0.8460203836598282,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 1.9547687622336491,
+          "mana": 0.8767325315703565,
+          "sdp_optimum": 0.8610218294445786,
+          "grover_best_theta": 0.8610146066724494,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.0245819323134224,
+          "mana": 0.8730591314791141,
+          "sdp_optimum": 0.8749030328211947,
+          "grover_best_theta": 0.8749014246560323,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.0943951023931953,
+          "mana": 0.8669359346083142,
+          "sdp_optimum": 0.887679865481753,
+          "grover_best_theta": 0.8876792371436092,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.1642082724729685,
+          "mana": 0.8583617063785859,
+          "sdp_optimum": 0.8993641305097395,
+          "grover_best_theta": 0.8993516283461422,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.234021442552742,
+          "mana": 0.8473348411325378,
+          "sdp_optimum": 0.9099754181668194,
+          "grover_best_theta": 0.9099747184592711,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.303834612632515,
+          "mana": 0.8338534890314488,
+          "sdp_optimum": 0.9195405489570467,
+          "grover_best_theta": 0.9195296857767326,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.3736477827122884,
+          "mana": 0.8179157252428219,
+          "sdp_optimum": 0.9280930117909203,
+          "grover_best_theta": 0.9280928921543782,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.443460952792061,
+          "mana": 0.7995197661491251,
+          "sdp_optimum": 0.9356720366996395,
+          "grover_best_theta": 0.9356685081207465,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.5132741228718345,
+          "mana": 0.7786642385882999,
+          "sdp_optimum": 0.9423215612620581,
+          "grover_best_theta": 0.9423100729522444,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.5830872929516078,
+          "mana": 0.7915892083873909,
+          "sdp_optimum": 0.9480889308592407,
+          "grover_best_theta": 0.9480764636548267,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.652900463031381,
+          "mana": 0.8030487689240486,
+          "sdp_optimum": 0.9530234760450069,
+          "grover_best_theta": 0.95301220737608,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.722713633111154,
+          "mana": 0.813021504760778,
+          "sdp_optimum": 0.9571747718076391,
+          "grover_best_theta": 0.9571603607031149,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.792526803190927,
+          "mana": 0.8214893405913941,
+          "sdp_optimum": 0.9605909353765296,
+          "grover_best_theta": 0.96058253803757,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.8623399732707004,
+          "mana": 0.8284373319094414,
+          "sdp_optimum": 0.9633167689800762,
+          "grover_best_theta": 0.9633147976991719,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 2.9321531433504737,
+          "mana": 0.8338534890314488,
+          "sdp_optimum": 0.9653919532978724,
+          "grover_best_theta": 0.9653917129438485,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.001966313430247,
+          "mana": 0.8377286339825912,
+          "sdp_optimum": 0.9668493662831359,
+          "grover_best_theta": 0.9668420873910516,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.07177948351002,
+          "mana": 0.8400562897654161,
+          "sdp_optimum": 0.9677136320526999,
+          "grover_best_theta": 0.9677072245777558,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.141592653589793,
+          "mana": 0.8408326015931995,
+          "sdp_optimum": 0.9679999993517625,
+          "grover_best_theta": 0.9680000000000002,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.2114058236695664,
+          "mana": 0.8400562897654162,
+          "sdp_optimum": 0.9677136320526959,
+          "grover_best_theta": 0.9677072245777558,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.2812189937493397,
+          "mana": 0.8377286339825912,
+          "sdp_optimum": 0.9668493662831554,
+          "grover_best_theta": 0.9668420873910516,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.351032163829113,
+          "mana": 0.8338534890314488,
+          "sdp_optimum": 0.965391953297894,
+          "grover_best_theta": 0.9653917129438485,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.420845333908886,
+          "mana": 0.8284373319094411,
+          "sdp_optimum": 0.9633167689800463,
+          "grover_best_theta": 0.9633147976991719,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.490658503988659,
+          "mana": 0.8214893405913941,
+          "sdp_optimum": 0.9605909353765114,
+          "grover_best_theta": 0.9605825380375702,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.5604716740684323,
+          "mana": 0.8130215047607781,
+          "sdp_optimum": 0.9571747718076107,
+          "grover_best_theta": 0.9571603607031152,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.6302848441482056,
+          "mana": 0.803048768924049,
+          "sdp_optimum": 0.9530234760450529,
+          "grover_best_theta": 0.95301220737608,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.7000980142279785,
+          "mana": 0.7915892083873911,
+          "sdp_optimum": 0.9480889425706229,
+          "grover_best_theta": 0.9480764636548262,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.7699111843077517,
+          "mana": 0.7786642385882997,
+          "sdp_optimum": 0.942321561262727,
+          "grover_best_theta": 0.942310072952245,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.839724354387525,
+          "mana": 0.7995197661491248,
+          "sdp_optimum": 0.9356720366998983,
+          "grover_best_theta": 0.9356685081207465,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.9095375244672983,
+          "mana": 0.8179157252428217,
+          "sdp_optimum": 0.9280930117909383,
+          "grover_best_theta": 0.9280928921543782,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 3.9793506945470716,
+          "mana": 0.8338534890314488,
+          "sdp_optimum": 0.9195405489570437,
+          "grover_best_theta": 0.919529685776733,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.049163864626845,
+          "mana": 0.8473348411325373,
+          "sdp_optimum": 0.9099754176708342,
+          "grover_best_theta": 0.9099747184592711,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.118977034706618,
+          "mana": 0.8583617063785861,
+          "sdp_optimum": 0.8993641305097504,
+          "grover_best_theta": 0.8993516283461425,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.1887902047863905,
+          "mana": 0.8669359346083141,
+          "sdp_optimum": 0.8876798654813549,
+          "grover_best_theta": 0.8876792371436097,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.258603374866164,
+          "mana": 0.8730591314791141,
+          "sdp_optimum": 0.8749030311492044,
+          "grover_best_theta": 0.8749014246560323,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.328416544945937,
+          "mana": 0.8767325315703565,
+          "sdp_optimum": 0.8610218297410195,
+          "grover_best_theta": 0.8610146066724491,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.39822971502571,
+          "mana": 0.8779569102142044,
+          "sdp_optimum": 0.8460325093616461,
+          "grover_best_theta": 0.8460203836598282,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.468042885105484,
+          "mana": 0.8767325315703565,
+          "sdp_optimum": 0.8299395460008521,
+          "grover_best_theta": 0.8299259787950106,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.537856055185257,
+          "mana": 0.8730591314791143,
+          "sdp_optimum": 0.8127557060126823,
+          "grover_best_theta": 0.8127446301141681,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.60766922526503,
+          "mana": 0.8669359346083144,
+          "sdp_optimum": 0.7945019621474587,
+          "grover_best_theta": 0.7944959305452727,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.6774823953448035,
+          "mana": 0.8583617063785862,
+          "sdp_optimum": 0.7752073267946853,
+          "grover_best_theta": 0.7752061101119947,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.747295565424577,
+          "mana": 0.8473348411325375,
+          "sdp_optimum": 0.7549086815107212,
+          "grover_best_theta": 0.7549082551921362,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.817108735504349,
+          "mana": 0.8338534890314491,
+          "sdp_optimum": 0.7336504051777042,
+          "grover_best_theta": 0.7336424603738669,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.886921905584122,
+          "mana": 0.8179157252428221,
+          "sdp_optimum": 0.7114840275368599,
+          "grover_best_theta": 0.7114799207916838,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 4.956735075663896,
+          "mana": 0.7995197661491251,
+          "sdp_optimum": 0.6884679050636285,
+          "grover_best_theta": 0.6884672081727135,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.026548245743669,
+          "mana": 0.7786642385882999,
+          "sdp_optimum": 0.6646667176697185,
+          "grover_best_theta": 0.6646566491763463,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.096361415823442,
+          "mana": 0.7765413428130968,
+          "sdp_optimum": 0.6401510299689278,
+          "grover_best_theta": 0.6401509888866947,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.1661745859032155,
+          "mana": 0.7701642441421472,
+          "sdp_optimum": 0.6149968117757858,
+          "grover_best_theta": 0.6149874269830661,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.235987755982989,
+          "mana": 0.759507562132895,
+          "sdp_optimum": 0.5892848435742875,
+          "grover_best_theta": 0.5892843368179943,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.305800926062762,
+          "mana": 0.744528502358675,
+          "sdp_optimum": 0.5631002808681265,
+          "grover_best_theta": 0.5630963116770273,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.375614096142535,
+          "mana": 0.7251660956544633,
+          "sdp_optimum": 0.5365320426116404,
+          "grover_best_theta": 0.5365281603334848,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.445427266222308,
+          "mana": 0.7013400911926431,
+          "sdp_optimum": 0.5096722592442096,
+          "grover_best_theta": 0.509672190750686,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.515240436302081,
+          "mana": 0.6729494580358681,
+          "sdp_optimum": 0.48261569790863473,
+          "grover_best_theta": 0.48261084044412667,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.585053606381854,
+          "mana": 0.6398704314554615,
+          "sdp_optimum": 0.45545918156663345,
+          "grover_best_theta": 0.45545591986218426,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.654866776461628,
+          "mana": 0.6019540170836231,
+          "sdp_optimum": 0.42830100462413034,
+          "grover_best_theta": 0.4283009761015529,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.724679946541401,
+          "mana": 0.5590228357455016,
+          "sdp_optimum": 0.40124034636222206,
+          "grover_best_theta": 0.4012388623714573,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.794493116621174,
+          "mana": 0.5108671515530043,
+          "sdp_optimum": 0.37437668475512464,
+          "grover_best_theta": 0.37437108848157347,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.8643062867009474,
+          "mana": 0.4572398711145621,
+          "sdp_optimum": 0.3478092136941423,
+          "grover_best_theta": 0.34780777926967305,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 5.934119456780721,
+          "mana": 0.3978502259570478,
+          "sdp_optimum": 0.32163626603858025,
+          "grover_best_theta": 0.32163624042451094,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 6.003932626860494,
+          "mana": 0.3323557435178777,
+          "sdp_optimum": 0.29595474499482943,
+          "grover_best_theta": 0.29595430857468785,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 6.073745796940266,
+          "mana": 0.26035195896496355,
+          "sdp_optimum": 0.2708595646760342,
+          "grover_best_theta": 0.2708580082360464,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 6.14355896702004,
+          "mana": 0.18135909634866748,
+          "sdp_optimum": 0.24644310357939445,
+          "grover_best_theta": 0.2464420041357016,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 6.213372137099813,
+          "mana": 0.09480461393589164,
+          "sdp_optimum": 0.2227946731481696,
+          "grover_best_theta": 0.22279453672011612,
+          "oracle_is_clifford": false
+        },
+        {
+          "phi": 6.283185307179586,
+          "mana": 6.406853007629834e-16,
+          "sdp_optimum": 0.19999999999999996,
+          "grover_best_theta": 0.20000000000000015,
+          "oracle_is_clifford": true
+        }
+      ]
+    }
+  }
+}

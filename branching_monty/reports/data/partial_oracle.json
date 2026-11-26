@@ -1,0 +1,422 @@
+{
+  "experiment": "partial_oracle",
+  "black_boxes": {
+    "monty_host": "host opens one door, informed w.p. q; conditional on a goat",
+    "classical_bit_query": "one query 'is door x marked?' to a mark correct w.p. q",
+    "classical_mark_reveal": "one call returning the marked door, correct w.p. q",
+    "quantum": "one phase-oracle call on the mark, correct w.p. q (mixed channel)"
+  },
+  "crossing_q": 0.6180339887498949,
+  "rows": [
+    {
+      "q": 0.0,
+      "monty_host": 0.5,
+      "classical_bit_query": 0.5,
+      "classical_mark_reveal": 0.5,
+      "quantum_exact_phases": 0.5000000000000003,
+      "quantum_pi_phases": 0.48148148148148173,
+      "quantum_sdp_exact_phase": 0.49999999973346754,
+      "quantum_sdp_pi_phase": 0.49999999837446696
+    },
+    {
+      "q": 0.025,
+      "monty_host": 0.5061728395061729,
+      "classical_bit_query": 0.4875,
+      "classical_mark_reveal": 0.4875,
+      "quantum_exact_phases": 0.48750000000000027,
+      "quantum_pi_phases": 0.47037037037037055,
+      "quantum_sdp_exact_phase": 0.48749999971506514,
+      "quantum_sdp_pi_phase": 0.487499998175314
+    },
+    {
+      "q": 0.05,
+      "monty_host": 0.5121951219512195,
+      "classical_bit_query": 0.475,
+      "classical_mark_reveal": 0.475,
+      "quantum_exact_phases": 0.4750000000000003,
+      "quantum_pi_phases": 0.4592592592592595,
+      "quantum_sdp_exact_phase": 0.4749999996977843,
+      "quantum_sdp_pi_phase": 0.47499999785462865
+    },
+    {
+      "q": 0.075,
+      "monty_host": 0.5180722891566265,
+      "classical_bit_query": 0.4625,
+      "classical_mark_reveal": 0.4625,
+      "quantum_exact_phases": 0.46250000000000036,
+      "quantum_pi_phases": 0.4481481481481484,
+      "quantum_sdp_exact_phase": 0.46249999968257727,
+      "quantum_sdp_pi_phase": 0.4624999973601808
+    },
+    {
+      "q": 0.1,
+      "monty_host": 0.5238095238095238,
+      "classical_bit_query": 0.45,
+      "classical_mark_reveal": 0.45,
+      "quantum_exact_phases": 0.4500000000000003,
+      "quantum_pi_phases": 0.4370370370370372,
+      "quantum_sdp_exact_phase": 0.44999999967034743,
+      "quantum_sdp_pi_phase": 0.449999996607382
+    },
+    {
+      "q": 0.125,
+      "monty_host": 0.5294117647058824,
+      "classical_bit_query": 0.4375,
+      "classical_mark_reveal": 0.4375,
+      "quantum_exact_phases": 0.4375000000000002,
+      "quantum_pi_phases": 0.42592592592592604,
+      "quantum_sdp_exact_phase": 0.4374999996621658,
+      "quantum_sdp_pi_phase": 0.4374999954266623
+    },
+    {
+      "q": 0.15,
+      "monty_host": 0.5348837209302325,
+      "classical_bit_query": 0.425,
+      "classical_mark_reveal": 0.425,
+      "quantum_exact_phases": 0.42500000000000016,
+      "quantum_pi_phases": 0.41481481481481497,
+      "quantum_sdp_exact_phase": 0.42499999965944124,
+      "quantum_sdp_pi_phase": 0.4249999935496558
+    },
+    {
+      "q": 0.175,
+      "monty_host": 0.5402298850574713,
+      "classical_bit_query": 0.4125,
+      "classical_mark_reveal": 0.4125,
+      "quantum_exact_phases": 0.4125000000000003,
+      "quantum_pi_phases": 0.4037037037037039,
+      "quantum_sdp_exact_phase": 0.4124999996637907,
+      "quantum_sdp_pi_phase": 0.41249999988953734
+    },
+    {
+      "q": 0.2,
+      "monty_host": 0.5454545454545454,
+      "classical_bit_query": 0.4,
+      "classical_mark_reveal": 0.4,
+      "quantum_exact_phases": 0.40000000000000036,
+      "quantum_pi_phases": 0.3925925925925928,
+      "quantum_sdp_exact_phase": 0.39999999967705446,
+      "quantum_sdp_pi_phase": 0.39999999985616264
+    },
+    {
+      "q": 0.225,
+      "monty_host": 0.550561797752809,
+      "classical_bit_query": 0.3875,
+      "classical_mark_reveal": 0.3875,
+      "quantum_exact_phases": 0.3875000000000003,
+      "quantum_pi_phases": 0.38148148148148164,
+      "quantum_sdp_exact_phase": 0.38749999970127336,
+      "quantum_sdp_pi_phase": 0.38749999987095496
+    },
+    {
+      "q": 0.25,
+      "monty_host": 0.5555555555555556,
+      "classical_bit_query": 0.375,
+      "classical_mark_reveal": 0.375,
+      "quantum_exact_phases": 0.3750000000000002,
+      "quantum_pi_phases": 0.3703703703703705,
+      "quantum_sdp_exact_phase": 0.3749999997386233,
+      "quantum_sdp_pi_phase": 0.37499999982053894
+    },
+    {
+      "q": 0.275,
+      "monty_host": 0.5604395604395604,
+      "classical_bit_query": 0.3625,
+      "classical_mark_reveal": 0.3625,
+      "quantum_exact_phases": 0.3625000000000002,
+      "quantum_pi_phases": 0.3592592592592594,
+      "quantum_sdp_exact_phase": 0.36249999979140274,
+      "quantum_sdp_pi_phase": 0.36249999978668523
+    },
+    {
+      "q": 0.3,
+      "monty_host": 0.5652173913043478,
+      "classical_bit_query": 0.35,
+      "classical_mark_reveal": 0.35,
+      "quantum_exact_phases": 0.35000000000000026,
+      "quantum_pi_phases": 0.34814814814814826,
+      "quantum_sdp_exact_phase": 0.3499999998621154,
+      "quantum_sdp_pi_phase": 0.3499999996768791
+    },
+    {
+      "q": 0.325,
+      "monty_host": 0.5698924731182796,
+      "classical_bit_query": 0.3375,
+      "classical_mark_reveal": 0.3375,
+      "quantum_exact_phases": 0.3375000000000003,
+      "quantum_pi_phases": 0.33703703703703725,
+      "quantum_sdp_exact_phase": 0.33749999977931244,
+      "quantum_sdp_pi_phase": 0.3374999982005516
+    },
+    {
+      "q": 0.35,
+      "monty_host": 0.574468085106383,
+      "classical_bit_query": 0.3416666666666667,
+      "classical_mark_reveal": 0.35,
+      "quantum_exact_phases": 0.3500000000000002,
+      "quantum_pi_phases": 0.34814814814814826,
+      "quantum_sdp_exact_phase": 0.3499999993277131,
+      "quantum_sdp_pi_phase": 0.3481481444484697
+    },
+    {
+      "q": 0.375,
+      "monty_host": 0.5789473684210527,
+      "classical_bit_query": 0.3541666666666667,
+      "classical_mark_reveal": 0.375,
+      "quantum_exact_phases": 0.3750000000000002,
+      "quantum_pi_phases": 0.3703703703703705,
+      "quantum_sdp_exact_phase": 0.37499999905478715,
+      "quantum_sdp_pi_phase": 0.37037036879077856
+    },
+    {
+      "q": 0.4,
+      "monty_host": 0.5833333333333334,
+      "classical_bit_query": 0.36666666666666664,
+      "classical_mark_reveal": 0.4,
+      "quantum_exact_phases": 0.40000000000000024,
+      "quantum_pi_phases": 0.39259259259259277,
+      "quantum_sdp_exact_phase": 0.3999999992235433,
+      "quantum_sdp_pi_phase": 0.3925925908729613
+    },
+    {
+      "q": 0.425,
+      "monty_host": 0.5876288659793815,
+      "classical_bit_query": 0.37916666666666665,
+      "classical_mark_reveal": 0.425,
+      "quantum_exact_phases": 0.42500000000000016,
+      "quantum_pi_phases": 0.41481481481481497,
+      "quantum_sdp_exact_phase": 0.4249999993495031,
+      "quantum_sdp_pi_phase": 0.4148148132315871
+    },
+    {
+      "q": 0.45,
+      "monty_host": 0.5918367346938775,
+      "classical_bit_query": 0.39166666666666666,
+      "classical_mark_reveal": 0.45,
+      "quantum_exact_phases": 0.4500000000000003,
+      "quantum_pi_phases": 0.4370370370370373,
+      "quantum_sdp_exact_phase": 0.4499999982620668,
+      "quantum_sdp_pi_phase": 0.4370370356395068
+    },
+    {
+      "q": 0.475,
+      "monty_host": 0.5959595959595959,
+      "classical_bit_query": 0.4041666666666667,
+      "classical_mark_reveal": 0.475,
+      "quantum_exact_phases": 0.4750000000000002,
+      "quantum_pi_phases": 0.4592592592592595,
+      "quantum_sdp_exact_phase": 0.4749999978950654,
+      "quantum_sdp_pi_phase": 0.45925925758036296
+    },
+    {
+      "q": 0.5,
+      "monty_host": 0.6,
+      "classical_bit_query": 0.4166666666666667,
+      "classical_mark_reveal": 0.5,
+      "quantum_exact_phases": 0.5000000000000002,
+      "quantum_pi_phases": 0.48148148148148173,
+      "quantum_sdp_exact_phase": 0.49999999790525174,
+      "quantum_sdp_pi_phase": 0.4814814793040631
+    },
+    {
+      "q": 0.525,
+      "monty_host": 0.6039603960396039,
+      "classical_bit_query": 0.42916666666666664,
+      "classical_mark_reveal": 0.525,
+      "quantum_exact_phases": 0.5250000000000004,
+      "quantum_pi_phases": 0.503703703703704,
+      "quantum_sdp_exact_phase": 0.5249999981451325,
+      "quantum_sdp_pi_phase": 0.5037037012304334
+    },
+    {
+      "q": 0.55,
+      "monty_host": 0.6078431372549019,
+      "classical_bit_query": 0.44166666666666665,
+      "classical_mark_reveal": 0.55,
+      "quantum_exact_phases": 0.5500000000000004,
+      "quantum_pi_phases": 0.5259259259259262,
+      "quantum_sdp_exact_phase": 0.5499999985021529,
+      "quantum_sdp_pi_phase": 0.5259259229947266
+    },
+    {
+      "q": 0.575,
+      "monty_host": 0.6116504854368932,
+      "classical_bit_query": 0.45416666666666666,
+      "classical_mark_reveal": 0.575,
+      "quantum_exact_phases": 0.5750000000000003,
+      "quantum_pi_phases": 0.5481481481481484,
+      "quantum_sdp_exact_phase": 0.5749999988840119,
+      "quantum_sdp_pi_phase": 0.5481481445397333
+    },
+    {
+      "q": 0.6,
+      "monty_host": 0.6153846153846154,
+      "classical_bit_query": 0.4666666666666667,
+      "classical_mark_reveal": 0.6,
+      "quantum_exact_phases": 0.6000000000000003,
+      "quantum_pi_phases": 0.5703703703703706,
+      "quantum_sdp_exact_phase": 0.5999999992275558,
+      "quantum_sdp_pi_phase": 0.5703703661081112
+    },
+    {
+      "q": 0.625,
+      "monty_host": 0.6190476190476191,
+      "classical_bit_query": 0.4791666666666667,
+      "classical_mark_reveal": 0.625,
+      "quantum_exact_phases": 0.6250000000000003,
+      "quantum_pi_phases": 0.5925925925925929,
+      "quantum_sdp_exact_phase": 0.624999999522964,
+      "quantum_sdp_pi_phase": 0.5925925880470735
+    },
+    {
+      "q": 0.65,
+      "monty_host": 0.6226415094339622,
+      "classical_bit_query": 0.49166666666666664,
+      "classical_mark_reveal": 0.65,
+      "quantum_exact_phases": 0.6500000000000005,
+      "quantum_pi_phases": 0.6148148148148151,
+      "quantum_sdp_exact_phase": 0.649999999761487,
+      "quantum_sdp_pi_phase": 0.6148148112281921
+    },
+    {
+      "q": 0.675,
+      "monty_host": 0.6261682242990654,
+      "classical_bit_query": 0.5041666666666667,
+      "classical_mark_reveal": 0.675,
+      "quantum_exact_phases": 0.6750000000000005,
+      "quantum_pi_phases": 0.6370370370370374,
+      "quantum_sdp_exact_phase": 0.6749999998758025,
+      "quantum_sdp_pi_phase": 0.6370370360552515
+    },
+    {
+      "q": 0.7,
+      "monty_host": 0.6296296296296297,
+      "classical_bit_query": 0.5166666666666667,
+      "classical_mark_reveal": 0.7,
+      "quantum_exact_phases": 0.7000000000000004,
+      "quantum_pi_phases": 0.6592592592592597,
+      "quantum_sdp_exact_phase": 0.7000000000016647,
+      "quantum_sdp_pi_phase": 0.6592592592085695
+    },
+    {
+      "q": 0.725,
+      "monty_host": 0.6330275229357798,
+      "classical_bit_query": 0.5291666666666667,
+      "classical_mark_reveal": 0.725,
+      "quantum_exact_phases": 0.7250000000000004,
+      "quantum_pi_phases": 0.6814814814814818,
+      "quantum_sdp_exact_phase": 0.7250000000217449,
+      "quantum_sdp_pi_phase": 0.6814814815821146
+    },
+    {
+      "q": 0.75,
+      "monty_host": 0.6363636363636364,
+      "classical_bit_query": 0.5416666666666666,
+      "classical_mark_reveal": 0.75,
+      "quantum_exact_phases": 0.7500000000000004,
+      "quantum_pi_phases": 0.703703703703704,
+      "quantum_sdp_exact_phase": 0.750000000034114,
+      "quantum_sdp_pi_phase": 0.7037037038178282
+    },
+    {
+      "q": 0.775,
+      "monty_host": 0.6396396396396397,
+      "classical_bit_query": 0.5541666666666667,
+      "classical_mark_reveal": 0.775,
+      "quantum_exact_phases": 0.7750000000000004,
+      "quantum_pi_phases": 0.7259259259259263,
+      "quantum_sdp_exact_phase": 0.775000000045083,
+      "quantum_sdp_pi_phase": 0.7259259259813924
+    },
+    {
+      "q": 0.8,
+      "monty_host": 0.6428571428571429,
+      "classical_bit_query": 0.5666666666666667,
+      "classical_mark_reveal": 0.8,
+      "quantum_exact_phases": 0.8000000000000007,
+      "quantum_pi_phases": 0.7481481481481487,
+      "quantum_sdp_exact_phase": 0.8000000000544313,
+      "quantum_sdp_pi_phase": 0.7481481481218999
+    },
+    {
+      "q": 0.825,
+      "monty_host": 0.6460176991150443,
+      "classical_bit_query": 0.5791666666666667,
+      "classical_mark_reveal": 0.825,
+      "quantum_exact_phases": 0.8250000000000006,
+      "quantum_pi_phases": 0.7703703703703708,
+      "quantum_sdp_exact_phase": 0.8250000000617541,
+      "quantum_sdp_pi_phase": 0.7703703702905863
+    },
+    {
+      "q": 0.85,
+      "monty_host": 0.6491228070175439,
+      "classical_bit_query": 0.5916666666666667,
+      "classical_mark_reveal": 0.85,
+      "quantum_exact_phases": 0.8500000000000005,
+      "quantum_pi_phases": 0.792592592592593,
+      "quantum_sdp_exact_phase": 0.8500000000666349,
+      "quantum_sdp_pi_phase": 0.7925925925070552
+    },
+    {
+      "q": 0.875,
+      "monty_host": 0.6521739130434783,
+      "classical_bit_query": 0.6041666666666666,
+      "classical_mark_reveal": 0.875,
+      "quantum_exact_phases": 0.8750000000000004,
+      "quantum_pi_phases": 0.8148148148148153,
+      "quantum_sdp_exact_phase": 0.8750000000687261,
+      "quantum_sdp_pi_phase": 0.814814814760956
+    },
+    {
+      "q": 0.9,
+      "monty_host": 0.6551724137931034,
+      "classical_bit_query": 0.6166666666666667,
+      "classical_mark_reveal": 0.9,
+      "quantum_exact_phases": 0.9000000000000004,
+      "quantum_pi_phases": 0.8370370370370375,
+      "quantum_sdp_exact_phase": 0.9000000000677946,
+      "quantum_sdp_pi_phase": 0.8370370370302358
+    },
+    {
+      "q": 0.925,
+      "monty_host": 0.6581196581196581,
+      "classical_bit_query": 0.6291666666666667,
+      "classical_mark_reveal": 0.925,
+      "quantum_exact_phases": 0.9250000000000007,
+      "quantum_pi_phases": 0.8592592592592598,
+      "quantum_sdp_exact_phase": 0.9250000000637402,
+      "quantum_sdp_pi_phase": 0.8592592592981129
+    },
+    {
+      "q": 0.95,
+      "monty_host": 0.6610169491525424,
+      "classical_bit_query": 0.6416666666666667,
+      "classical_mark_reveal": 0.95,
+      "quantum_exact_phases": 0.9500000000000006,
+      "quantum_pi_phases": 0.8814814814814819,
+      "quantum_sdp_exact_phase": 0.9500000000566018,
+      "quantum_sdp_pi_phase": 0.8814814815388117
+    },
+    {
+      "q": 0.975,
+      "monty_host": 0.6638655462184874,
+      "classical_bit_query": 0.6541666666666667,
+      "classical_mark_reveal": 0.975,
+      "quantum_exact_phases": 0.9750000000000005,
+      "quantum_pi_phases": 0.9037037037037041,
+      "quantum_sdp_exact_phase": 0.9750000000074455,
+      "quantum_sdp_pi_phase": 0.9037037037615783
+    },
+    {
+      "q": 1.0,
+      "monty_host": 0.6666666666666666,
+      "classical_bit_query": 0.6666666666666666,
+      "classical_mark_reveal": 1.0,
+      "quantum_exact_phases": 1.0000000000000004,
+      "quantum_pi_phases": 0.9259259259259265,
+      "quantum_sdp_exact_phase": 0.9999999999583852,
+      "quantum_sdp_pi_phase": 0.9259259259851158
+    }
+  ]
+}
